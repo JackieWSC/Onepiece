@@ -1,0 +1,67 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 10px;
+    font-size: 12px;
+    color: #000;
+    line-height: 1.2;
+    background: #fff;
+    min-width: 300px;
+    font-family: 'Helvetica Neue', Arial, '微软雅黑', '黑体', 'Heiti TC', Helvetica, STHeiTi, sans-serif;
+}
+
+body a {
+    text-decoration: underline;
+    margin-left: 12px;
+    font-size: 12px;
+    color: #484849;
+}
+
+.colorText {
+    color: #666;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.inputtext input {
+    color: #777;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.selectBox select {
+    color: #777;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.status {
+    color: #fb5000;
+}
+
+.btn-org,
+.btn-org:link {
+    display: inline-block;
+    background: #fb5000;
+    background: -moz-linear-gradient(top, #fd7300, #f82c00);
+    background: -webkit-linear-gradient(top, #fd7300, #f82c00);
+    background: -o-linear-gradient(top, #fd7300, #f82c00);
+    background: -ms-linear-gradient(top, #fd7300, #f82c00);
+    background: linear-gradient(top, #fd7300, #f82c00);
+    color: #fff!important;
+    text-align: center;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    font-family: "TradeGothicW01-BoldaCn20 675334", '微软雅黑', '黑体', Helvetica, Arial, sans-serif
+}
+
+.btn146 {
+    width: 120px!important;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    margin: 0 auto
+}

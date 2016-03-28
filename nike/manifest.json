@@ -1,0 +1,49 @@
+{
+    // Required
+    "name": "Nike",
+    "manifest_version": 2,
+    "version": "1.5",
+
+    "icons": {
+        "48": "nike48.png",
+        "128": "nike128.png"
+    },
+
+    // Recommendeds
+    "description": "Nike Bot",
+
+    "browser_action": {
+        "default_icon": "nike.png",
+        "default_popup": "popup.html",
+        "default_title": "Click here!"
+    },
+
+    "options_ui": {
+        // Required.
+        "page": "options.html",
+        // Recommended.
+        "chrome_style": true
+            // Not recommended; only provided for backwards compatibility,
+            // and will be unsupported in a future version of Chrome (TBD).
+            //"open_in_tab": true
+    },
+
+    "content_scripts": [{
+        "matches": ["http://www.nike.com.hk/product/fair/*.htm*","http://www.nike.com.hk/product/*/detail.htm*"],
+        "js": ["autocart.js"],
+        "run_at": "document_end"
+    }, {
+        "matches": ["https://www.nike.com.hk/transaction/check/qs"],
+        "js": ["transaction.js"],
+        "run_at": "document_end"
+    }, {
+        "matches": ["http://www.nike.com.hk/errors/producterror.htm"],
+        "js": ["redirect.js"],
+        "run_at": "document_end"
+    }],
+
+    "permissions": [
+        "tabs", "http://www.nike.com.hk/product/*/detail.htm",
+        "storage"
+    ]
+}
