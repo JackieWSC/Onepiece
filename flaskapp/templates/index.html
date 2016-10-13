@@ -1,0 +1,416 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+<!--    <link rel="icon" href="../../favicon.ico">-->
+
+    <title>Start Learning</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
+    <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+<!--    <link href="theme.css" rel="stylesheet">-->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<!--    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+   
+<body role="document">
+    
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Start Learning</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#GIT">Git</a></li>
+<!--
+            <li><a href="#RPM">RPM</a></li>
+            <li><a href="#API">API</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+-->
+          </ul>
+        </div>
+          <!--/.nav-collapse -->
+      </div>
+    </nav>    
+    
+    <div class="container theme-showcase" role="main">      
+      <div class="page-header">
+        <h1 id="home">Git Command</h1>        
+      </div>
+        
+      <a href="#common"><button type="button" class="btn btn-primary">Common</button></a>
+      <a href="#branch"><button type="button" class="btn btn-primary">Branch</button></a>
+      <a href="#tag"><button type="button" class="btn btn-primary">Tag</button></a>
+      <a href="#rebase"><button type="button" class="btn btn-primary">Rebase</button></a>
+      <a href="#log"><button type="button" class="btn btn-primary">Log</button></a>
+      <a href="#config"><button type="button" class="btn btn-primary">Config</button></a>
+      <a href="#other"><button type="button" class="btn btn-primary">Other</button></a>
+      <a href="#example"><button type="button" class="btn btn-primary">Example</button></a>
+        
+      <div class="page-header">
+        <h1 id="common">Common
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">Show the current status</div>
+        <div class="panel-footer">
+            <p>git status</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+        <div class="panel-body">Stage the files</div>
+        <div class="panel-footer">
+            <p>git add version4.txt</p>
+            <p>git add .</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+        <div class="panel-body">Commit all changes and Add comment</div>
+        <div class="panel-footer">
+            <p>git commit -a ""</p>
+            <p>git commit -m "comment"</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+        <div class="panel-body">Discard change in working directory</div>
+        <div class="panel-footer">
+            <p>git checkout -- aaaa.txt</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+        <div class="panel-body">Remove the files</div>
+        <div class="panel-footer">
+            <p>git rm --cached</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Push to remote</div>
+        <div class="panel-footer">
+            <p>git push</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Diff the local change</div>
+        <div class="panel-footer">
+            <p>git diff --cached</p>
+        </div>
+      </div>
+      
+      <div class="page-header">
+        <h1 id="branch">Branch
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+        
+      <div class="panel panel-default">
+        <div class="panel-body">Check branch status</div>
+        <div class="panel-footer">
+            <p>git branch</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+        <div class="panel-body">Check all local/remote branch status</div>
+        <div class="panel-footer">
+            <p>git branch -r</p>
+        </div>
+      </div> 
+      
+      <div class="panel panel-default">
+      <div class="panel-body">Create new branch "temp"</div>
+        <div class="panel-footer">
+            <p>git branch temp</p>
+        </div>
+      </div>
+    
+      <div class="panel panel-default">
+      <div class="panel-body">Remove branch "temp"</div>
+        <div class="panel-footer">
+            <p>git branch -D temp</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Switch out branch</div>
+        <div class="panel-footer">
+            <p>git checkout temp</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Pull the code from remote branch</div>
+        <div class="panel-footer">
+            <p>git pull origin master</p>
+        </div>
+      </div> 
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Add new branch</div>
+        <div class="panel-footer">
+            <p>git checkout -b feature_branch_name</p>
+            <p>... edit files, add and commit ...</p>
+            <p>git push -u origin feature_branch_name</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Remove branch</div>
+        <div class="panel-footer">
+            <p>git branch -D bugfix</p>
+            <p>git push origin --delete branchName</p>
+        </div>
+      </div>
+        
+      <div class="page-header">
+        <h1 id="tag">Mark Tag
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Create tag</div>
+        <div class="panel-footer">
+            <p>git tag -a Build002 -m 'Build002'</p>
+            <p>git tag -a Build001 7c5f24d</p>
+            <p>git push origin Build002</p>
+            <p>git push origin --tags</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Remove tag</div>
+        <div class="panel-footer">
+            <p>git tag -d tagName</p>
+            <p>git push origin :refs/tags/tagName</p>
+        </div>
+      </div>
+      
+      <div class="page-header">
+        <h1 id="rebase">Rebase
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">rebase i example</div>
+        <div class="panel-footer">
+            <a>https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase-i</a>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">If the branch temp is different with master now</div>
+        <div class="panel-footer">
+            <p>git checkout temp</p>
+            <p>git rebase master</p>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+      <div class="panel-body">Update private feature branch to latest</div>
+        <div class="panel-footer">
+            <p>git pull --rebase origin master</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">If there is conflict, edit those conflict files and </div>
+        <div class="panel-footer">
+            <p>git rebase --continue</p>
+        </div>
+      </div>
+        
+      <div class="page-header">
+        <h1 id="log">Log
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">show log/show top 5 log</div>
+        <div class="panel-footer">
+            <p>git log</p>
+            <p>git log -5</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">show log detail</div>
+        <div class="panel-footer">
+            <p>git log</p>
+            <p>git log --stat -5</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">show hash and commit msg only</div>
+        <div class="panel-footer">
+            <p>git log --pretty=oneline -5</p>
+        </div>
+      </div>
+     
+      <div class="panel panel-default">
+      <div class="panel-body">show graph</div>
+        <div class="panel-footer">
+            <p>git log --graph -5</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">list the commited files in ac55.... commit</div>
+        <div class="panel-footer">
+            <p>git show --pretty="format:" --name-only ac55</p>
+        </div>
+      </div>
+        
+      <div class="page-header">
+        <h1 id="config">Config
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">show git config</div>
+        <div class="panel-footer">
+            <p>git config --list</p>
+        </div>
+      </div>
+        
+      <div class="page-header">
+        <h1 id="other">Other
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+      <div class="panel panel-default">
+      <div class="panel-body">cherry-pick</div>
+        <div class="panel-footer">
+            <p>git cherry-pick 7300a6</p>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+      <div class="panel-body">show clean up files listed</div>
+        <div class="panel-footer">
+            <p>git clean -n -d -x</p>
+            <p>git clean -n -d</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">review the differences with head</div>
+        <div class="panel-footer">
+            <p>git log HEAD..origin/master</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">unstage the files</div>
+        <div class="panel-footer">
+            <p>git reset HEAD...</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">Stashing</div>
+        <div class="panel-footer">
+            <p>git stash</p>
+            <p>git stash list</p>
+            <p>git stash apply</p>
+        </div>
+      </div>
+        
+      <div class="page-header">
+        <h1 id="example">Example
+        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+        </h1>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body"> Your branch and 'origin/master' have diverged, switch to new master</div>
+        <div class="panel-footer">
+            <p>git branch temp</p>
+            <p>git fetch origin</p>
+            <p>git reset --hard origin/master</p>
+            <p>git reset --hard HEAD~3</p>
+        </div>
+      </div>
+        
+      <div class="panel panel-default">
+      <div class="panel-body">branch practice</div>
+        <div class="panel-footer">
+            <p>git checkout master</p>
+            <p>git branch temp</p>
+            <p>git checkout temp</p>
+            <p>git add .</p>
+            <p>git commit -m "Jackie test"</p>
+        </div>
+      </div>
+         
+      <div class="panel panel-default">
+      <div class="panel-body">You need to create a local branch that tracks a remote branch. The following command will create a local branch named daves_branch, tracking the remote branch origin/daves_branch.</div>
+        <div class="panel-footer">
+            <p>git branch -r</p>
+            <p>git checkout --track origin/daves_branch</p>
+        </div>
+       </div>
+       
+    </div> <!-- /container -->
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
+<!--    <script src="{{ url_for('static',filename='js/docs.min.js')}}"></script>-->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+</body>
+</html>
