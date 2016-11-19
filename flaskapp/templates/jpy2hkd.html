@@ -9,7 +9,7 @@
     <meta name="author" content="">
 <!--    <link rel="icon" href="../../favicon.ico">-->
 
-    <title>JPD to HKD</title>
+    <title>JPY to HKD</title>
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
     <!-- Bootstrap theme -->
@@ -45,12 +45,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">JPD to HKD</a>
+          <a class="navbar-brand" href="#">JPY to HKD</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+          <!-- <ul class="nav navbar-nav">
             <li class="active"><a href="#GIT">Unit</a></li>
-<!--
+
             <li><a href="#RPM">RPM</a></li>
             <li><a href="#API">API</a></li>
             <li class="dropdown">
@@ -65,137 +65,94 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
--->
-          </ul>
+
+          </ul> -->
         </div>
           <!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container theme-showcase" role="main">      
+      <!-- <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <span class="input-group-addon">.00</span>
+      </div> -->
+
+      {% block body %}
+      <div class="col-lg-4">
+        <form method="post" action="{{ url_for('jpdTohkd') }}">
+          <div class="input-group">
+            <span class="input-group-addon">¥</span>
+            <input type="text" class="form-control" placeholder="{{ jpy }}" name="jpy_in">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="sumbmit">to HKD</button>
+            </span>
+          </div><!-- /input-group -->
+        </form><!-- /form -->
+      </div><!-- /.col-lg-4 -->
+
+      <div class="col-lg-4">
+        <form method="post" action="{{ url_for('jpdTohkd') }}">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" class="form-control" placeholder="{{ hkd }}" name="hkd_in">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="sumbmit">to JPY</button>
+            </span>            
+          </div><!-- /input-group -->
+        </form><!-- /form -->
+      </div><!-- /.col-lg-4 -->
+
+      <div class="col-lg-4">
+        <h5>100 JPY to {{ currentJPY }} HKD (updated:16-Nov-2016)</h5>
+      </div><!-- /.col-lg-6 -->
+
+
       <div class="page-header">
-        <h1 id="home">Unit</h1>        
+        <h1 id="home">Yen</h1>        
       </div>
-        
-      <a href="#100"><button type="button" class="btn btn-primary">100</button></a>
-      <a href="#1000"><button type="button" class="btn btn-primary">1000</button></a>
-      <a href="#10000"><button type="button" class="btn btn-primary">10000</button></a>
-        
+      
+      {% for group in main.GetGroup() %}
+      <a href="#{{ group }}"><button type="button" class="btn btn-primary">{{ group }}</button></a>
+      {% endfor %}
+
+      {% for group in main.GetGroup() %}
+
       <div class="page-header">
-        <h1 id="100">100
-        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
-        </h1>
+      <h1 id="{{ group }}">{{ group }}
+      <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
+      </h1>
       </div>
       <div class="panel panel-default">
         <table class="table table-bordered table-over">
           <thead>
             <tr>
-              <th>JPD</th>
+              <th>JPY</th>
               <th>HKD</th>
             </tr>
           </thead>
           <tbody>
+            {% for row in main.GetGroupMap(group).GetRowList() %}  
+            {% if row.bold %}
             <tr>
-              <td>100</td>
-              <td>7.5</td>
+              <td class="success">{{ row.jpd }}</td>
+              <td class="success">{{ row.hkd }}</td>
             </tr>
+            {% else %}
             <tr>
-              <td>200</td>
-              <td>15</td>
+              <td>{{ row.jpd }}</td>
+              <td>{{ row.hkd }}</td>
             </tr>
-            <tr>
-              <td>300</td>
-              <td>22.5</td>
-            </tr>
-            <tr>
-              <td>400</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>500</td>
-              <td>37.5</td>
-            </tr>
+            {% endif %}
+            {% endfor %}
           </tbody>  
         </table>
       </div>
         
-      <div class="page-header">
-        <h1 id="1000">1000
-        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
-        </h1>
-      </div>
-        
-      <div class="panel panel-default">
-        <table class="table table-bordered table-over">
-          <thead>
-            <tr>
-              <th>JPD</th>
-              <th>HKD</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1000</td>
-              <td>75</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>150</td>
-            </tr>
-            <tr>
-              <td>3000</td>
-              <td>225</td>
-            </tr>
-            <tr>
-              <td>4000</td>
-              <td>300</td>
-            </tr>
-            <tr>
-              <td>5000</td>
-              <td>375</td>
-            </tr>
-          </tbody>  
-        </table>
-      </div>
-        
-      <div class="page-header">
-        <h1 id="10000">10000
-        <a href="#home"><span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span></a>
-        </h1>
-      </div>
-        
-      <div class="panel panel-default">
-        <table class="table table-bordered table-over">
-          <thead>
-            <tr>
-              <th>JPD</th>
-              <th>HKD</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>10000</td>
-              <td>750</td>
-            </tr>
-            <tr>
-              <td>20000</td>
-              <td>1500</td>
-            </tr>
-            <tr>
-              <td>30000</td>
-              <td>2250</td>
-            </tr>
-            <tr>
-              <td>40000</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>50000</td>
-              <td>3750</td>
-            </tr>
-          </tbody>  
-        </table>
-      </div>
+      {% endfor %}
+
+      {% endblock %} 
     </div> <!-- /container -->
 
 
@@ -224,7 +181,7 @@
         © 2016 Scity
         </div>
         <div class="container">
-        version 0.0.1
+        version 0.0.3
         </div>
       </div>
   </footer>
