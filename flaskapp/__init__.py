@@ -2,6 +2,8 @@ import requests
 from flask import Flask, render_template, request
 import mockotfc
 import jpy2hkd
+import datetime
+from forex_python.converter import CurrencyRates
 
 otfc = mockotfc.OTFC()
 
@@ -17,8 +19,12 @@ def tdtools():
 
 @app.route('/jpy2hkd/', methods=['GET', 'POST'])
 def jpdTohkd():
-    # jpy2hkd
-    currentJPY = 0.07122
+    # get currency rate for JPY
+    # currentJPY = 0.07122
+    c = CurrencyRates()
+    currentJPY = c.get_rate('JPY','HKD')
+    datetimeStr = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
+
 
     g1 = jpy2hkd.Group("100", 100, 1000, 50, 100, currentJPY)
     g2 = jpy2hkd.Group("1000", 1000, 5000, 100, 1000, currentJPY)
@@ -32,8 +38,8 @@ def jpdTohkd():
     main.AddGroup("1000",g2)
     main.AddGroup("5000",g3)
 
-    jpy = 0
-    hkd = 0
+    jpy = 100
+    hkd = round(currentJPY * jpy,1)
     errors = []
 
     if request.method == "POST":
@@ -56,7 +62,12 @@ def jpdTohkd():
             errors.append("Unable to get URL.")
 
     disCurrnetJPY = round((currentJPY*100),2)
-    return render_template("jpy2hkd.html", main = main, jpy = jpy, hkd = hkd, currentJPY = disCurrnetJPY)
+    return render_template(
+        "jpy2hkd.html", 
+        main = main, 
+        jpy = jpy, hkd = hkd, 
+        currentJPY = disCurrnetJPY, 
+        datetimeStr = datetimeStr)
 
 if __name__ == "__main__":
     app.run()
