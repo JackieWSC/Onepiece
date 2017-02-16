@@ -3,7 +3,7 @@ var defaultSize1 = "7C";
 var defaultSize2 = "8C";
 var defaultSize3 = "9C";
 var infoLog = true
-var debugLog = false
+var debugLog = true
 
 function log(type,logStr){
     
@@ -39,7 +39,7 @@ function selectSize(size) {
     if (temp != undefined) {
         for (var i = 0; i < temp.childElementCount; i++) {
             tempSize = temp.children[i].innerText.trim();
-            log("debug",tempSize);
+            log("debug","Available size:" + tempSize);
             if (tempSize == size || tempSize == defaultSize1 || tempSize == defaultSize2 || tempSize == defaultSize3 ) {
                 temp.children[i].click();
                 addToCart();
@@ -52,9 +52,10 @@ function selectSize(size) {
         selectSize(newSize);
         //console(newSize);
 
-    } else {
-        setTimeout("selectSize()", 250, size);
     }
+    // else {
+        // setTimeout("selectSize()", 250, size);
+    // }
 }
 
 
@@ -63,8 +64,8 @@ function getSizeFromOption(callback) {
         selectedSize: defaultSize,
         selectedProductCode: 'code'
     }, function(items) {
-        log("debug",items.selectedSize);
-        log("debug",items.selectedProductCode);
+        log("debug","selectedSize:" + items.selectedSize);
+        log("debug","selectedProductCode:" + items.selectedProductCode);
         callback(items.selectedSize, items.selectedProductCode);
     });
 }
@@ -91,7 +92,7 @@ getSizeFromOption(function(selectedSize, selectedProductCode) {
     log("info","Running")
     if ( selectedProductCode == "" || selectedProductCode == "code" )
     {
-        log("info","Do not Select Product")
+        log("info","Do not define Product Code")
         selectSize(selectedSize)
         //setTimeout("selectSize()", 250, selectedSize);
     }

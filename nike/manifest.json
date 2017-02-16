@@ -2,7 +2,7 @@
     // Required
     "name": "Nike",
     "manifest_version": 2,
-    "version": "1.5",
+    "version": "1.6",
 
     "icons": {
         "48": "nike48.png",
