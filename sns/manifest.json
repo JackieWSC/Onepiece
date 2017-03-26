@@ -1,0 +1,49 @@
+{
+    // Required
+    "name": "Sns",
+    "manifest_version": 2,
+    "version": "1.0",
+
+    "icons": {
+        "48": "sns.png",
+        "128": "sns.png"
+    },
+
+    // Recommendeds
+    "description": "Sns Bot",
+    "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+    "browser_action": {
+        "default_icon": "sns.png",
+        "default_popup": "popup.html",
+        "default_title": "Click here!"
+    },
+
+    "options_ui": {
+        // Required.
+        "page": "options.html",
+        // Recommended.
+        "chrome_style": true
+            // Not recommended; only provided for backwards compatibility,
+            // and will be unsupported in a future version of Chrome (TBD).
+            //"open_in_tab": true
+    },
+    
+    "content_scripts": [{
+        "matches": ["http://www.sneakersnstuff.com/en/product/*/*"],
+        "js": ["autocart.js"],
+        "run_at": "document_end"
+    }, {
+        "matches": ["https://www.nike.com.hk/transaction/check/qs"],
+        "js": ["transaction.js"],
+        "run_at": "document_end"
+    }, {
+        "matches": ["http://www.nike.com.hk/errors/producterror.htm"],
+        "js": ["redirect.js"],
+        "run_at": "document_end"
+    }],
+
+    "permissions": [
+        "tabs", "http://m.sneakersnstuff.com/en/product/*",
+        "storage"
+    ]
+}
