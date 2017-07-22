@@ -1,0 +1,33 @@
+table.reportTable {
+  background-color: #CDCDCD;
+  /*font-family: arial;*/
+  font-family: Avenir;
+  margin: 10px 0pt 15px;
+  font-size: 10pt;
+  width: 100%;
+  /*width: expression( this.scrollWidth < 100 ? "100px" : "auto" );*/
+  text-align: left;
+}
+
+table.reportTable thead tr th {
+  background-color: #E6EEEE;
+  border: 1px solid #FFF;
+  font-size: 10pt;
+  padding: 10px;
+}
+
+table.reportTable tbody tr td {
+  background-color: #FFF;
+  color: #3D3D3D;
+  vertical-align: top;
+  padding: 10px;
+}
+
+table.reportTable td.reportTableMax {
+  color: #FF7F00;
+  font-size: 10pt;
+}
+
+table {
+  font-family: Avenir;
+}

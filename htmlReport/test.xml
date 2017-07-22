@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="test.xslt"?>
+<library>
+  <DVD id="1">
+    <title>title 1</title>
+    <format>Movie</format>
+    <genre>Classic</genre>
+  </DVD>
+  <DVD id="2">
+    <title>Contact</title>
+    <format>Movie</format>
+    <genre>Science fiction</genre>
+  </DVD>
+  <DVD id="3">
+    <title>House</title>
+    <format>TV Series</format>
+    <genre>Comedy</genre>
+  </DVD>
+</library>

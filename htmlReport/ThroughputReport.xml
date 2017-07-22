@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href=" ThroughputReport.xsl"?>
+<testCases>
+	<testCase>
+		<title>NormalCase</title>
+		<averageUsedTime>0</averageUsedTime>
+		<totalUpdateCount>0</totalUpdateCount>
+		<averageOutputPayloadSize>0</averageOutputPayloadSize>
+	</testCase>
+	<testCase>
+		<title>TestMBO2MBPThroughput</title>
+		<averageUsedTime>62</averageUsedTime>
+		<totalUpdateCount>800</totalUpdateCount>
+		<averageOutputPayloadSize>38</averageOutputPayloadSize>
+	</testCase>
+	<testCase>
+		<title>TestMBP</title>
+		<averageUsedTime>0</averageUsedTime>
+		<totalUpdateCount>0</totalUpdateCount>
+		<averageOutputPayloadSize>0</averageOutputPayloadSize>
+	</testCase>
+</testCases>
