@@ -2,7 +2,7 @@
     // Required
     "name": "Nike",
     "manifest_version": 2,
-    "version": "1.6",
+    "version": "1.7",
 
     "icons": {
         "48": "nike48.png",
@@ -29,7 +29,7 @@
     },
 
     "content_scripts": [{
-        "matches": ["http://www.nike.com.hk/product/fair/*.htm*","http://www.nike.com.hk/product/*/detail.htm*"],
+        "matches": ["https://www.nike.com.hk/product/fair/*.htm*","https://www.nike.com.hk/product/*/detail.htm*"],
         "js": ["autocart.js"],
         "run_at": "document_end"
     }, {
