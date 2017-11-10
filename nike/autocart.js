@@ -17,6 +17,15 @@ function log(type,logStr){
     }
 }
 
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+}
+
 function addToCart() {
     // click add to cart
     document.getElementsByClassName("btn-org block fLeft")[0].click();
