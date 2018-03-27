@@ -72,22 +72,22 @@ def stop():
 
 def forward():
     print 'Forward'
-    execute(False, True, True, False, 0.5)
+    execute(True, False, False, True, 0.5)
 
 
 def backward():
     print 'Backward'
-    execute(True, False, False, True, 0.5)
+    execute(False, True, True, False, 0.5)
 
 
 def left():
     print 'Left'
-    execute(False, True, False, True, 0.7)
+    execute(False, True, False, True, 0.2)
 
 
 def right():
     print 'Right'
-    execute(True, False, True, False, 0.7)
+    execute(True, False, True, False, 0.2)
 
 
 def run(command):
