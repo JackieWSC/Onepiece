@@ -1,0 +1,29 @@
+<!-- howdy/templates/menu.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title> Menu </title>
+    </head>
+    <body>
+        <h2>There are {{ foods|length }} foods today</h2>
+        {% for food in foods %}
+        
+        <h3>Food Idex: {{ forloop.counter }}</h3>
+        <ul>
+            <li> Food Name:{{ food.name }} </li>
+            <li> Food Price:{{ food.price }} </li>
+            <li> Food Comment: {{ food.comment }} </li>
+            <li> Is Spicy？ 
+                {% if food.is_spicy %}
+                    Spicy
+                {% else %}
+                    Not Spicy
+                {% endif %}
+            </li>
+        </ul>
+        {% empty %}
+        <p>No food!!</p>
+        {% endfor %}
+    </body>
+</html>
