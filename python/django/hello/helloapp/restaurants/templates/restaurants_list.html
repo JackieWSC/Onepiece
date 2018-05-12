@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Restaurants List</title>
+        <meta charset='utf-8'>
+    </head>
+    <body>
+        <h2>Restaurants List</h2>
+
+        <h3>Method 1</h3>
+        <form action="/restaurants/menu/" method="get">
+        <table>
+            <tr>
+                <th>Select</th>
+                <th>Shop Name</th>
+                <th>Tel</th>
+                <th>Address</th>
+            </tr>
+            {% for r in restaurants %}
+                <tr>
+                    <td> <input type="radio" name="id" value="{{r.id}}"> </td>
+                    <td> {{ r.name }} </td>
+                    <td> {{ r.phone_number }} </td>
+                    <td> {{ r.address }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Menu">
+        </form>
+
+        <h3>Method 2</h3>
+        <table>
+            <tr>
+                <th>Link</th>
+                <th>Shop Name</th>
+                <th>Tel</th>
+                <th>Address</th>
+            </tr>
+            {% for r in restaurants %}
+                <tr>
+                    <td> <a href="/restaurants/menu/?id={{r.id}}">menu</a> </td>
+                    <td> {{ r.name }} </td>
+                    <td> {{ r.phone_number }} </td>
+                    <td> {{ r.address }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Method 3</h3>
+        <table>
+            <tr>
+                <th>Link</th>
+                <th>Shop Name</th>
+                <th>Tel</th>
+                <th>Address</th>
+                <th>Comment</th>
+            </tr>
+            {% for r in restaurants %}
+                <tr>
+                    <td> <a href="/restaurants/menu/{{r.id}}">menu</a> </td>
+                    <td> {{ r.name }} </td>
+                    <td> {{ r.phone_number }} </td>
+                    <td> {{ r.address }} </td>
+                    <td> <a href="/restaurants/comment/{{r.id}}/"> comment </a> </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

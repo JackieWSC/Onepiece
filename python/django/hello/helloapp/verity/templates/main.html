@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+    <title>Employment Check</title>
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="page-header">
+        <h1 id="home">Employment Check</h1>        
+      </div>
+
+      <div>
+        <form class="needs-validation" novalidate method="post">
+          <h5 class="mb-3">Referees</h5>
+          
+          <!-- Referees - Row 1 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Details</label>
+            </div>              
+            <div class="col-md-9 mb-3">              
+              <input type="text" class="form-control" name="details" placeholder="" value="{{ referees.details }}" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>
+          
+          <!-- Referees - Row 2 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Actions</label>
+            </div>              
+            <div class="col-md-9 mb-3">              
+              <textarea class="form-control" name="actions" placeholder="" rows="5" required>{{ referees.actions }}</textarea>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>
+          
+           <!-- Referees - Row 3 -->
+          <div class="row">          
+            <div class="col-md-12 mb-3">              
+              <button type="submit" class="btn btn-outline-secondary" name="id_value" value="{{referees.id}}">Update</button>
+            </div>  
+          </div>
+          
+        </form>
+          
+        {% for rd in referees.refereesdetails_set.all %}
+        <form class="needs-validation" novalidate method="post">
+          <hr class="mb-4">
+          <div class="card border-secondary mb-3">
+            <div class="card-header">
+              Person #1
+            </div>
+            <div class="card-body">
+
+              <!-- Referees - Row 1 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">              
+                  <label for="lasttName">Person Name</label>
+                </div>              
+                <div class="col-md-9 mb-3">              
+                  <input type="text" class="form-control" id="lastName" placeholder="Ms. Polly Cheung" value="{{ rd.person_name }}" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>  
+              </div>
+
+              <!-- Referees - Row 1 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">              
+                  <label for="lasttName">Relationship</label>
+                </div>              
+                <div class="col-md-9 mb-3">              
+                  <input type="text" class="form-control" id="lastName" placeholder="Colleague at Woo Kwan Lee Lo" value="{{ rd.relationship }}" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>  
+              </div>
+
+              <!-- Referees - Row 2 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">              
+                  <label for="lasttName">Contact</label>
+                </div>              
+                <div class="col-md-9 mb-3">              
+                  <input type="text" class="form-control" id="lastName" placeholder="34230765" value="{{ rd.contact }}" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>  
+              </div>
+
+              <!-- Referees - Row 3 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="lasttName">Case Status</label>
+                </div>
+                <div class="col-md-9 mb-3">
+                  <table class="table table-sm">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      {% for cs in rd.casestatus_set.all %}
+                      <tr>
+                        <td>{{ cs.date_time|date:"d M" }}</td>
+                        <td>{{ cs.status }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Referees - Row 4 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                </div>
+                <div class="col-md-9 mb-3">
+                  <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04">
+                      <option selected>-- Select Action --</option>
+                      <option value="1">Send</option>
+                      <option value="2">Received</option>
+                      <option value="3">Call done</option>
+                    </select>
+                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" >
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Add Status</button>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+
+              <!-- Referees - Row 5 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">            
+                  <label for="lasttName">Result/Remark</label>
+                </div>
+                <div class="col-md-9 mb-3">              
+                  <textarea class="form-control" 
+                            placeholder="Verified - no discrepancy" value="todo" rows="6"></textarea>
+                </div>  
+              </div>
+
+              <div class="row">          
+                <div class="col-md-12 mb-3">              
+                  <button type="submit" class="btn btn-outline-secondary" name="id_value" value="{{rd.id}}">Update</button>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </form>
+
+        {% endfor %}
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+
+      </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2017-2018 Company Name</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
+    </script>
+  </body>
+
+
+
+</html>

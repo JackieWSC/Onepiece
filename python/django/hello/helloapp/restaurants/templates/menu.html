@@ -6,35 +6,33 @@
         <title> Menu </title>
     </head>
     <body>
-        {% for r in restaurants %}
-            <h2>{{ r.name }}</h2>
-            {% if r.food_set.all %}
-                <p>There are {{ r.food_set.all|length }} foods today</p>
-                <table>
-                    <tr>
-                        <th>Food Name</th>
-                        <th>Food Price</th>
-                        <th>Food Comment</th>
-                        <th>Is Spicy</th>
-                    </tr>
-                {% for food in r.food_set.all %}
-                    <tr>
-                        <td> {{ food.name }} </td>
-                        <td> {{ food.price }} </td>
-                        <td> {{ food.comment }} </td>
-                        <td> 
-                            {% if food.is_spicy %}
-                                Spicy
-                            {% else %}
-                                Not Spicy
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </table>
-            {% else %}
-                <p>No food for to sell!!</p>
-            {% endif %}
-        {% endfor %}
+        <h2>{{ r.name }} Menu</h2>
+        {% if r.food_set.all %}
+            <p>There are {{ r.food_set.all|length }} food(s) today</p>
+            <table>
+                <tr>
+                    <th>Food Name</th>
+                    <th>Food Price</th>
+                    <th>Food Comment</th>
+                    <th>Is Spicy</th>
+                </tr>
+            {% for food in r.food_set.all %}
+                <tr>
+                    <td> {{ food.name }} </td>
+                    <td> {{ food.price }} </td>
+                    <td> {{ food.comment }} </td>
+                    <td> 
+                        {% if food.is_spicy %}
+                            Spicy
+                        {% else %}
+                            Not Spicy
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            <p>No food for to sell!!</p>
+        {% endif %}
     </body>
 </html>

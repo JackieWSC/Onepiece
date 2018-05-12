@@ -18,4 +18,12 @@ class Food(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.PROTECT)
     
     def __str__(self):
-        return self.name    
+        return self.name
+
+
+class Comment(models.Model):
+    content = models.CharField(max_length=200)
+    user = models.CharField(max_length=20)
+    email = models.EmailField(max_length=20)
+    date_time = models.DateTimeField()
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.PROTECT)

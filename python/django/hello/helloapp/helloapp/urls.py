@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from helloapp.views import WelcomePageView
+from restaurants.views import RestaurantsListPageView
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     #path('', include('howdy.urls')),
-    path('restaurants/', include('restaurants.urls'))
+    path('welcome/', WelcomePageView.as_view()),
+    path('restaurants/', include('restaurants.urls')),
+    path('verity/', include('verity.urls')),
 ]
