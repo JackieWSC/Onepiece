@@ -1,2 +1,5 @@
 env/
+__pycache__/
 .pyc
+.DS_Store
+__init__.py
