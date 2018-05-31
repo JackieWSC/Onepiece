@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from verity.models import RefereesMain, RefereesDetails, CaseStatus
-from verity.forms import RefereesMainForm
+from verity.forms import RefereesMainForm, RefereesDetailsForm
 
 # class RefereesMainAdmin(admin.ModelAdmin):
 #     list_display = ('details', 'actions')
@@ -13,8 +13,9 @@ class RefereesMainAdmin(admin.ModelAdmin):
     form = RefereesMainForm
 
 class RefereesDetailsAdmin(admin.ModelAdmin):
-    list_display = ('person_name', 'relationship', 'contact')
-    fields = ('person_name','relationship','contact','main')
+    list_display = ('person_name', 'relationship', 'contact', 'remark')
+    fields = ('person_name','relationship','contact','remark','main')
+    form = RefereesDetailsForm
     search_fields = ('person_name',)
 
 

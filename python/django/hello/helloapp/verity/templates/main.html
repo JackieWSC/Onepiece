@@ -8,6 +8,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
+
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
 
@@ -49,13 +53,15 @@
             </div>  
           </div>
           
-           <!-- Referees - Row 3 -->
+          <!-- Referees - Row 3 -->
           <div class="row">          
             <div class="col-md-12 mb-3">              
               <button type="submit" class="btn btn-outline-secondary" name="id_value" value="{{referees.id}}">Update</button>
             </div>  
           </div>
-          
+
+          <!-- Referees - hidden -->
+          <input type="text" name="form_name" value="refereesMain" hidden>
         </form>
           
         {% for rd in referees.refereesdetails_set.all %}
@@ -73,7 +79,7 @@
                   <label for="lasttName">Person Name</label>
                 </div>              
                 <div class="col-md-9 mb-3">              
-                  <input type="text" class="form-control" id="lastName" placeholder="Ms. Polly Cheung" value="{{ rd.person_name }}" required>
+                  <input type="text" class="form-control" name="person_name" placeholder="Ms. Polly Cheung" value="{{ rd.person_name }}" required>
                   <div class="invalid-feedback">
                     Valid last name is required.
                   </div>
@@ -86,7 +92,7 @@
                   <label for="lasttName">Relationship</label>
                 </div>              
                 <div class="col-md-9 mb-3">              
-                  <input type="text" class="form-control" id="lastName" placeholder="Colleague at Woo Kwan Lee Lo" value="{{ rd.relationship }}" required>
+                  <input type="text" class="form-control" name="relationship" placeholder="Colleague at Woo Kwan Lee Lo" value="{{ rd.relationship }}" required>
                   <div class="invalid-feedback">
                     Valid last name is required.
                   </div>
@@ -99,7 +105,7 @@
                   <label for="lasttName">Contact</label>
                 </div>              
                 <div class="col-md-9 mb-3">              
-                  <input type="text" class="form-control" id="lastName" placeholder="34230765" value="{{ rd.contact }}" required>
+                  <input type="text" class="form-control" name="contact" placeholder="34230765" value="{{ rd.contact }}" required>
                   <div class="invalid-feedback">
                     Valid last name is required.
                   </div>
@@ -128,33 +134,57 @@
               </div>
 
               <!-- Referees - Row 4 -->
+              {% for cs in rd.casestatus_set.all %}
               <div class="row">
                 <div class="col-md-3 mb-3">
                 </div>
                 <div class="col-md-9 mb-3">
                   <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" value="{{ cs.date_time|date:"d M" }}">
                     <select class="custom-select" id="inputGroupSelect04">
-                      <option selected>-- Select Action --</option>
+                      <option selected>{{ cs.status }}</option>
                       <option value="1">Send</option>
                       <option value="2">Received</option>
                       <option value="3">Call done</option>
                     </select>
-                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" >
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Add Status</button>
+                      <button class="fas fa-edit" type="submit"></button>
+                    </div>
+                    <div class="input-group-append">
+                      <button class="fas fa-minus" type="submit"></button>
                     </div>
                   </div>
                 </div>
               </div>  
+              {% endfor %}
+
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                </div>
+                <div class="col-md-9 mb-3">
+                  <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" value="{{ cs.date_time|date:"d M" }}">
+                    <select class="custom-select" id="inputGroupSelect04">
+                      <option selected>{{ cs.status }}</option>
+                      <option value="1">Send</option>
+                      <option value="2">Received</option>
+                      <option value="3">Call done</option>
+                    </select>
+                    <button class="fas fa-plus" type="submit"></button>
+                  </div>
+                </div>
+              </div>
 
               <!-- Referees - Row 5 -->
               <div class="row">
-                <div class="col-md-3 mb-3">            
-                  <label for="lasttName">Result/Remark</label>
+                <div class="col-md-3 mb-3">
+                  <div class="input-group">           
+                    <label for="lasttName">Remark</label>
+                  </div>
                 </div>
                 <div class="col-md-9 mb-3">              
-                  <textarea class="form-control" 
-                            placeholder="Verified - no discrepancy" value="todo" rows="6"></textarea>
+                  <textarea class="form-control" name="remark"
+                            placeholder="" rows="6">{{ rd.remark }}</textarea>
                 </div>  
               </div>
 
@@ -165,6 +195,10 @@
               </div>
             </div>
           </div>
+
+          <!-- Referees - hidden -->
+          <input type="text" name="form_name" value="refereesDetails" hidden>
+          <input type="text" name="main" value="{{referees.id}}" hidden>
         </form>
 
         {% endfor %}
@@ -173,6 +207,35 @@
 
       </div>
     </div>
+
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <h1>Table Records</h1>
+              <table class="table table-sm table-hover" id="tableAddRow">
+                  <thead>
+                      <tr>
+                          <th>Date</th>
+                          <th>Status</th>
+                          <th style="width:10px">
+                            <i class="fas fa-plus addBtn" id="addBtn_0"></i>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr id="tr_0">
+                          <td><input type="text" id="email" class="form-control" value="02 May"/></td>
+                          <td><input type="text" id="password" class="form-control" value="Send"/></td>
+                          <td>
+                            <i class="fas fa-minus addBtnRemove" id="addBtnRemove_0"></i>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+        </div>
+    </div>
+
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
       <p class="mb-1">&copy; 2017-2018 Company Name</p>
@@ -189,8 +252,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
     </script>
+    <script>    
+      $(document).ready(function () {
+          $('.addBtn').on('click', function () 
+          {
+              //var trID;
+              //trID = $(this).closest('tr'); // table row ID 
+              addTableRow();
+          });
+
+          $('.addBtnRemove').click(function () 
+          {
+              $(this).closest('tr').remove();  
+          })
+
+          var i = 1;
+          function addTableRow()
+          {
+              var tempTr = $('<tr><td><input type="text" id="email_' + i + '" class="form-control" /></td><td><input type="text" id="password_' + i + '" class="form-control" /></td><td><i class="fas fa-minus addBtnRemove" id="addBtnRemove_' + i + '"></i></td></tr>').on('click', function () 
+              {
+                  $(this).closest('tr').remove(); 
+                  //$(document.body).on('click', '.TreatmentHistoryRemove', function (e) 
+                  //{
+                  //    $(this).closest('tr').remove();  
+                  //});
+              });
+
+              $("#tableAddRow").append(tempTr)
+              i++;
+          }
+      });
+    </script>
   </body>
-
-
-
 </html>
