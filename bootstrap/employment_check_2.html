@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+    <title>Employment Check</title>
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="page-header">
+        <h1 id="home">Employment Check</h1>        
+      </div>
+
+      <div>
+        <h4 class="mb-3">Subject Detail</h4>
+        <hr class="mb-4">
+        <form class="needs-validation" novalidate>
+          <!-- Row 1 -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Name in English</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="Yeung Pui" required>
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Name in Chinese</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="楊珮" required>
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>            
+          </div>
+
+          <!-- Row 3 -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="lasttName">ID No.</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" value="Z63XXXX" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="lasttName">DOB</label>
+              <input type="text" class="form-control" id="lastName" placeholder="17-Oct-87" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>             
+          </div>
+
+          <!-- Row 3 -->
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="lasttName">Address</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Flat 10A, Block 2, Hsin Kuang Cnetre, 10 Lung Cheung Road, Wong Tai Sin, Kowloon" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>
+
+          <h4 class="mb-3">Reference Check List</h4>          
+          <h5 class="mb-3">Educational background</h5>
+          <hr class="mb-4">
+          <!-- Education - Row 1 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label for="lasttName">Details</label>
+            </div>
+            <div class="col-md-9 mb-3">              
+              <input type="text" class="form-control" id="lastName" placeholder="Verify with the relevant institution" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>
+
+          <!-- Education - Row 2 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Actions</label>
+            </div>            
+            <div class="col-md-9 mb-3">              
+              <textarea class="form-control" 
+                        placeholder="Contact and send requests to all institutions
+Wait for verifications
+Follow-up calls if necessary 
+Turnaround time is ranging from 3 to 10 working days." rows="6"></textarea>
+            </div>  
+          </div>
+
+          <!-- Education - Row 3 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Institute names</label>
+            </div>              
+            <div class="col-md-9 mb-3">              
+              <input type="text" class="form-control" id="lastName" placeholder="University of Hong Kong" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>          
+
+          <!-- Education - Row 4 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Degree</label>
+            </div>              
+            <div class="col-md-9 mb-3">
+              <input type="text" class="form-control" id="lastName" placeholder="Postgraduate Certificate in Laws (Full Time)" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>
+
+          <!-- Education - Row 5 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">            
+              <label for="lasttName">Contact</label>
+            </div>
+            <div class="col-md-9 mb-3">
+              <input type="text" class="form-control" id="lastName" placeholder="ase@hku.hk" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Education - Row 6 -->
+          <h5 class="mb-3">Case Status</h5>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Add Status
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Sent</a>
+              <a class="dropdown-item" href="#">Received</a>
+              <a class="dropdown-item" href="#">Follow-up Call</a>
+              <a class="dropdown-item" href="#">Call done</a>
+              <a class="dropdown-item" href="#">Report done</a>
+              <a class="dropdown-item" href="#">Called but no answer</a>
+            </div>
+          </div>
+          
+          <table class="table table-borderless table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Day 1</td>
+                <td>Sent</td>
+              </tr>
+              <tr>
+                <td>Day 2</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Day 3</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Day 4</td>
+                <td>Folllow-up Call</td>
+              </tr>
+              <tr>
+                <td>Day 5</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Day 6</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Day 7</td>
+                <td>Received</td>
+              </tr>
+              <tr>
+                <td>Day 8</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Day 9</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Day 10</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Education - Row 7 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">            
+              <label for="lasttName">Result/Remark</label>
+            </div>
+            <div class="col-md-9 mb-3">              
+              <textarea class="form-control" 
+                        placeholder="Contact and send requests to all institutions
+Wait for verifications
+Follow-up calls if necessary 
+Turnaround time is ranging from 3 to 10 working days." rows="6"></textarea>
+            </div>  
+          </div>
+          
+          <h5 class="mb-3">Employment history</h5>
+          <hr class="mb-4">
+          <!-- Education - Row 1 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label for="lasttName">Details</label>
+            </div>
+            <div class="col-md-9 mb-3">              
+              <input type="text" class="form-control" id="lastName" placeholder="Verify with previous employers" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>
+
+          <!-- Education - Row 2 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Actions</label>
+            </div>            
+            <div class="col-md-9 mb-3">              
+              <textarea class="form-control" 
+                        placeholder="Contact and send requests to all companies
+Wait for verifications
+Follow-up calls if necessary
+Turnaround time is ranging from 3 to 10 working days." rows="6"></textarea>
+            </div>  
+          </div>
+
+          <!-- Education - Row 3 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Company</label>
+            </div>              
+            <div class="col-md-9 mb-3">              
+              <input type="text" class="form-control" id="lastName" placeholder="Ferrero Asia Limited/
+Ferrero International S.A" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>          
+
+          <!-- Education - Row 4 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">              
+              <label for="lasttName">Position</label>
+            </div>              
+            <div class="col-md-9 mb-3">
+              <input type="text" class="form-control" id="lastName" placeholder="Legal Counsel/
+Assistant Legal Counsel" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>  
+          </div>
+
+          <!-- Education - Row 5 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">            
+              <label for="lasttName">Contact</label>
+            </div>
+            <div class="col-md-9 mb-3">
+              <input type="text" class="form-control" id="lastName" placeholder="xxx@xxx.com" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Education - Row 6 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label for="lasttName">Case Status</label>
+            </div>
+            <div class="col-md-9 mb-3">
+              <table class="table table-sm">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>29 April</td>
+                    <td>Sent</td>
+                  </tr>
+                  <tr>
+                    <td>31 April</td>
+                    <td>Folllow-up Call</td>
+                  </tr>
+                  <tr>
+                    <td>3 May</td>
+                    <td>Received</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 mb-3">
+            </div>
+            <div class="col-md-9 mb-3">
+              <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04">
+                  <option selected>-- Select Action --</option>
+                  <option value="1">Send</option>
+                  <option value="2">Received</option>
+                  <option value="3">Call done</option>
+                </select>
+                <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" >
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">Add Status</button>
+                </div>
+              </div>
+            </div>
+          </div>  
+          
+          <!-- Education - Row 7 -->
+          <div class="row">
+            <div class="col-md-3 mb-3">            
+              <label for="lasttName">Result/Remark</label>
+            </div>
+            <div class="col-md-9 mb-3">              
+              <textarea class="form-control" 
+                        placeholder="Contact and send requests to all institutions
+Wait for verifications
+Follow-up calls if necessary 
+Turnaround time is ranging from 3 to 10 working days." rows="6"></textarea>
+            </div>  
+          </div>
+
+          <h5 class="mb-3">Referees</h5>
+          <hr class="mb-4">
+          <div class="card border-secondary mb-3">
+            <div class="card-header">
+              Person #1
+            </div>
+            <div class="card-body">
+              
+              <!-- Referees - Row 1 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">              
+                  <label for="lasttName">Person Name</label>
+                </div>              
+                <div class="col-md-9 mb-3">              
+                  <input type="text" class="form-control" id="lastName" placeholder="Ms. Polly Cheung" value="" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>  
+              </div>
+              
+              <!-- Referees - Row 1 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">              
+                  <label for="lasttName">Relationship</label>
+                </div>              
+                <div class="col-md-9 mb-3">              
+                  <input type="text" class="form-control" id="lastName" placeholder="Colleague at Woo Kwan Lee Lo" value="" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>  
+              </div>
+              
+              <!-- Referees - Row 2 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">              
+                  <label for="lasttName">Contact</label>
+                </div>              
+                <div class="col-md-9 mb-3">              
+                  <input type="text" class="form-control" id="lastName" placeholder="34230765" value="" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>  
+              </div>
+              
+              <!-- Referees - Row 3 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="lasttName">Case Status</label>
+                </div>
+                <div class="col-md-9 mb-3">
+                  <table class="table table-sm">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>29 April</td>
+                        <td>Call done</td>
+                      </tr>
+                      <tr>
+                        <td>31 April</td>
+                        <td>Report done</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              <!-- Referees - Row 4 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                </div>
+                <div class="col-md-9 mb-3">
+                  <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04">
+                      <option selected>-- Select Action --</option>
+                      <option value="1">Send</option>
+                      <option value="2">Received</option>
+                      <option value="3">Call done</option>
+                    </select>
+                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" >
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Add Status</button>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+
+              <!-- Referees - Row 5 -->
+              <div class="row">
+                <div class="col-md-3 mb-3">            
+                  <label for="lasttName">Result/Remark</label>
+                </div>
+                <div class="col-md-9 mb-3">              
+                  <textarea class="form-control" 
+                            placeholder="Verified - no discrepancy" rows="6"></textarea>
+                </div>  
+              </div>
+              
+              <div class="row">          
+                <div class="col-md-12 mb-3">              
+                  <button type="button" class="btn btn-outline-secondary">Update</button>
+                </div>  
+              </div>
+            </div>
+          </div>
+
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+
+        </form>
+      </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2017-2018 Company Name</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
+    </script>
+  </body>
+
+
+
+</html>
