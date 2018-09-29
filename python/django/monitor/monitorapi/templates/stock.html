@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2800.HK KD</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Tracker Fund of Hong Kong (2800.HK)</h1>
+  <p>KD Index (September)</p>
+</div>
+
+<div class="container">
+  <canvas id="myChart" width="400" height="200"></canvas>
+</div>
+
+<div class="container">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Close Price</th>
+        <th scope="col">K Value</th>
+        <th scope="col">D Value</th>
+      </tr>
+    </thead>
+    <tbody class="KValue">
+  </table>
+</div>
+
+<div class="container">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Price</th>
+        <th scope="col">K Value</th>
+        <th scope="col">%</th>
+      </tr>
+    </thead>
+    <tbody class="NextKValue">
+  </table>
+</div>
+
+<!-- debug -->
+<!--
+<div class="container">
+  <div class="row">
+      <p class="Testing"></p>1
+  </div>
+</div>
+-->
+
+<script>
+
+    function draw_line_chart(label, k_data, d_data) {
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'K Value',
+                    data: k_data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                },{
+                    label: 'D Value',
+                    data: d_data,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $.getJSON("kdindex" , function(result){
+            var date = []
+            var kValue = []
+            var dValue = []
+
+            $.each(result, function(i, field){
+                K = parseFloat(field.K)
+                K = K * 100
+                D = parseFloat(field.D)
+                D = D * 100
+
+                rowString = "<tr>"
+                rowString += "<td>" + field.Date + "</td>"
+                rowString += "<td>" + field.Close + "</td>"
+                rowString += "<td>" + K.toFixed(2) + "%</td>"
+                rowString += "<td>" + D.toFixed(2) + "%</td>"
+                rowString += "</tr>"
+
+                $('.KValue').append(rowString)
+
+                date.push(field.Date)
+                kValue.push(K.toFixed(2))
+                dValue.push(D.toFixed(2))
+            });
+
+            draw_line_chart(date, kValue, dValue)
+
+        });
+
+        $.getJSON("nextkdindex" , function(result){
+            $.each(result, function(i, field){
+                K = parseFloat(field.K)
+                K = K * 100
+
+                net = (field.Price - field.Close)/field.Close
+                net = net * 100
+
+                rowString = "<tr>"
+                rowString += "<td>" + field.Price + "</td>"
+                rowString += "<td>" + K.toFixed(2) + "%</td>"
+                rowString += "<td>" + net.toFixed(2) + "%</td>"
+                rowString += "</tr>"
+
+                $('.NextKValue').append(rowString)
+            });
+        });
+    });
+
+</script>
+
+</body>
+</html>
