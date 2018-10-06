@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="jumbotron text-center">
+<div class="jumbotron bg-dark text-center  text-white">
   <h1>Tracker Fund of Hong Kong (2800.HK)</h1>
   <p>KD Index (September)</p>
 </div>
@@ -24,13 +24,16 @@
 </div>
 
 <div class="container">
-  <table class="table table-striped table-bordered">
+  <h3>KD History (September)</h3>
+  <p>The stochastic oscillator is a momentum indicator that uses support and resistance levels.</p>
+  <p>What is KD? Find the <a target="_blank" href='https://www.moneydj.com/KMDJ/Wiki/WikiViewer.aspx?KeyID=76a316b6-c78e-4846-8cb3-89420e3ab819'>answer</a></p>
+  <table class="table table-dark table-striped table-sm table-bordered text-center">
     <thead>
       <tr>
         <th scope="col">Date</th>
-        <th scope="col">Close Price</th>
-        <th scope="col">K Value</th>
-        <th scope="col">D Value</th>
+        <th scope="col">Close Price ($)</th>
+        <th scope="col">K Value (%)</th>
+        <th scope="col">D Value (%)</th>
       </tr>
     </thead>
     <tbody class="KValue">
@@ -38,12 +41,15 @@
 </div>
 
 <div class="container">
-  <table class="table table-striped table-bordered">
+  <h3>KD Prediction </h3>
+  <p>The KD index for next trading day.</p>
+  <table class="table table-dark table-striped table-sm table-bordered text-center">
     <thead>
       <tr>
-        <th scope="col">Price</th>
-        <th scope="col">K Value</th>
-        <th scope="col">%</th>
+        <th scope="col">K Value (%)</th>
+        <th scope="col">Price ($)</th>
+        <th scope="col">Price ($)</th>
+        <th scope="col">K Value (%)</th>
       </tr>
     </thead>
     <tbody class="NextKValue">
@@ -131,22 +137,29 @@
     }
 
     $(document).ready(function() {
-        $.getJSON("kdindex" , function(result){
+        $.getJSON("kdindex" , function(result) {
             var date = []
             var kValue = []
             var dValue = []
 
-            $.each(result, function(i, field){
+            $.each(result, function(i, field) {
                 K = parseFloat(field.K)
                 K = K * 100
                 D = parseFloat(field.D)
                 D = D * 100
 
                 rowString = "<tr>"
+
+                if (K>80) {
+                  rowString = "<tr class=\"bg-danger\">"
+                } else if (K<20) {
+                  rowString = "<tr class=\"bg-success\">"
+                }
+
                 rowString += "<td>" + field.Date + "</td>"
                 rowString += "<td>" + field.Close + "</td>"
-                rowString += "<td>" + K.toFixed(2) + "%</td>"
-                rowString += "<td>" + D.toFixed(2) + "%</td>"
+                rowString += "<td>" + K.toFixed(2) + "</td>"
+                rowString += "<td>" + D.toFixed(2) + "</td>"
                 rowString += "</tr>"
 
                 $('.KValue').append(rowString)
@@ -160,22 +173,87 @@
 
         });
 
-        $.getJSON("nextkdindex" , function(result){
-            $.each(result, function(i, field){
+        $.getJSON("nextkdindex" , function(result) {
+            var down_price = new Array()
+            var up_price = new Array()
+
+            $.each(result, function(i, field) {
                 K = parseFloat(field.K)
                 K = K * 100
 
+                field.type
                 net = (field.Price - field.Close)/field.Close
                 net = net * 100
 
+                //rowString = "<tr>"
+                //rowString += "<td>" + field.Price + "</td>"
+                //rowString += "<td>" + K.toFixed(2) + "</td>"
+                //rowString += "<td>" + net.toFixed(2) + "</td>"
+                //rowString += "</tr>"
+
+                //$('.NextKValue').append(rowString)
+
+                let data = {
+                    price: field.Price,
+                    k: K,
+                    net: net
+                }
+
+                if (field.Type == 'DOWN') {
+                    down_price.push(data)
+                }
+
+                if (field.Type == 'UP') {
+                    up_price.push(data)
+                }
+            });
+
+            // only sort the down price is ok
+            down_price.sort(function(a, b){return b.price - a.price})
+
+            console.log("debug")
+            console.log(down_price)
+            for (i = 0; i < Math.max(up_price.length, down_price.length); i++) {
+                down = ""
+                up = ""
+
+                // get the data from array
+                if (i<down_price.length) {
+                    down = down_price[i]
+                    console.log("Down:" + down_price[i].price)
+                }
+
+                // get the data from array
+                if (i<up_price.length) {
+                    up = up_price[i]
+                    console.log("Up:" + up_price[i].price)
+                }
+
                 rowString = "<tr>"
-                rowString += "<td>" + field.Price + "</td>"
-                rowString += "<td>" + K.toFixed(2) + "%</td>"
-                rowString += "<td>" + net.toFixed(2) + "%</td>"
+
+                // fill the down price side
+                if (down != "") {
+                  rowString += "<td>" + down.k.toFixed(2) + "</td>"
+                  rowString += "<td>" + down.price + ' (' + down.net.toFixed(2) + '%)'+ "</td>"
+                } else {
+                  rowString += "<td></td>"
+                  rowString += "<td></td>"
+                }
+
+                // fill the up price side
+                if (up != "") {
+                  rowString += "<td>" + up.price + ' (+' + up.net.toFixed(2) + '%)'+ "</td>"
+                  rowString += "<td>" + up.k.toFixed(2) + "</td>"
+                } else {
+                  rowString += "<td></td>"
+                  rowString += "<td></td>"
+                }
+
                 rowString += "</tr>"
 
                 $('.NextKValue').append(rowString)
-            });
+            }
+
         });
     });
 

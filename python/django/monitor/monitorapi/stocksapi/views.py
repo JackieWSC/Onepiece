@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import requests
+from stocksapi.models import Visitor
 from bs4 import BeautifulSoup
+import datetime
 import pandas
 import pandas_datareader as datareader
 import re
-import datetime
+import requests
+import time
+
 
 log_level = 'debug'
 
@@ -254,12 +257,14 @@ def create_next_kd_index():
     Close_List = []
     Price_List = []
     K_list = []
+    type_list = []
 
     # first 1
     k = calculate_k(Cn, Hn, Ln, previous_K)
     Close_List.append(format(Cn, '.2f'))
-    Price_List.append(format(Cn, '.4f'))
+    Price_List.append(format(Cn, '.2f'))
     K_list.append(format(k, '.4f'))
+    type_list.append("START")
 
     # 20 tick
     for i in range(1, 10):
@@ -274,6 +279,7 @@ def create_next_kd_index():
         Close_List.append(format(Cn, '.2f'))
         Price_List.append(format(next_close, '.2f'))
         K_list.append(format(k, '.4f'))
+        type_list.append("UP")
 
     # 20 tick
     for i in range(1, 10):
@@ -288,13 +294,15 @@ def create_next_kd_index():
         Close_List.append(format(Cn, '.2f'))
         Price_List.append(format(next_close, '.2f'))
         K_list.append(format(k, '.4f'))
+        type_list.append("DOWN")
 
 
 
     data = {
             'Close': Close_List,
             'Price': Price_List,
-            'K': K_list
+            'K': K_list,
+            'Type': type_list
         }
 
     df = pandas.DataFrame(data=data)
@@ -302,8 +310,6 @@ def create_next_kd_index():
 
 
 df = ''
-def index(request):
-    return render(request, "stock.html")
 
 
 def threeday(request, district=None):
@@ -325,16 +331,38 @@ def threeday(request, district=None):
     return HttpResponse(json)
 
 
+def index(request):
+    return render(request, "stock.html")
+
+
 def kd_index(request):
     global df
+    start_time = time.time()
+
+    # main function
     create_kd_index()
     json = df.to_json(orient='records')
+
+    # calculate the latency
+    latency_ms = (time.time() - start_time) * 1000
+    visitor = Visitor(page='kd_index', latency=latency_ms)
+    visitor.save()
+
     return HttpResponse(json)
 
 
 def next_kd_index(request):
     global df
+    start_time = time.time()
+
+    # main function
     create_next_kd_index()
     json = df.to_json(orient='records')
+
+    # calculate the latency
+    latency_ms = (time.time() - start_time) * 1000
+    visitor = Visitor(page='next_kd_index', latency=latency_ms)
+    visitor.save()
+
     return HttpResponse(json)
 
