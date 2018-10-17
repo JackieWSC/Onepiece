@@ -16,7 +16,7 @@
 
 <div class="jumbotron bg-dark text-center  text-white">
   <h1>Tracker Fund of Hong Kong (2800.HK)</h1>
-  <p>KD Index (September)</p>
+  <p>KD Index</p>
 </div>
 
 <div class="container">
@@ -24,7 +24,7 @@
 </div>
 
 <div class="container">
-  <h3>KD History (September)</h3>
+  <h3>KD History (last 20 trading days)</h3>
   <p>The stochastic oscillator is a momentum indicator that uses support and resistance levels.</p>
   <p>What is KD? Find the <a target="_blank" href='https://www.moneydj.com/KMDJ/Wiki/WikiViewer.aspx?KeyID=76a316b6-c78e-4846-8cb3-89420e3ab819'>answer</a></p>
   <table class="table table-dark table-striped table-sm table-bordered text-center">
@@ -185,14 +185,7 @@
                 net = (field.Price - field.Close)/field.Close
                 net = net * 100
 
-                //rowString = "<tr>"
-                //rowString += "<td>" + field.Price + "</td>"
-                //rowString += "<td>" + K.toFixed(2) + "</td>"
-                //rowString += "<td>" + net.toFixed(2) + "</td>"
-                //rowString += "</tr>"
-
-                //$('.NextKValue').append(rowString)
-
+                // create the data structure
                 let data = {
                     price: field.Price,
                     k: K,

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2800.HK KD</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+</head>
+<body>
+
+<div class="jumbotron bg-dark text-center  text-white">
+  <h1>Tracker Fund of Hong Kong (2800.HK)</h1>
+  <p>History</p>
+</div>
+
+<div class="container">
+  <h3 class="Header_1"></h3>
+  <canvas id="myChart_1" width="400" height="300"></canvas>
+</div>
+
+<div class="container">
+  <h3 class="Header_2"></h3>
+  <canvas id="myChart_2" width="400" height="300"></canvas>
+</div>
+
+<div class="container">
+  <h3 class="Header_3"></h3>
+  <canvas id="myChart_3" width="400" height="300"></canvas>
+</div>
+
+<!-- debug -->
+<!--
+<div class="container">
+  <div class="row">
+      <p class="Testing"></p>1
+  </div>
+</div>
+-->
+
+<script>
+
+    function draw_chart(chartId, label, count) {
+        var ctx = document.getElementById(chartId).getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'Percentage',
+                    data: count,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    hoverBackgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    hoverBorderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+            }
+        });
+    }
+
+    function create_stock_history_chart(source, header_id, chart_id) {
+            $.getJSON(source , function(result) {
+            var price = []
+            var count = []
+            var percentage = []
+            var total = 0
+            var remark = ""
+
+            $.each(result, function(i, field) {
+
+                //rowString = "<tr>"
+                //rowString += "<td>" + field.price + "</td>"
+                //rowString += "<td>" + field.count + "</td>"
+                //rowString += "<td>" + field.percentage + "</td>"
+                //rowString += "</tr>"
+
+                //$('.History').append(rowString)
+
+                price.push(field.price)
+                count.push(field.count)
+                percentage.push(field.percentage)
+                total += field.count
+                remark = field.remark
+            });
+
+            $(header_id).append(remark+ " (" + total + " records)")
+            draw_chart(chart_id, price, percentage)
+        });
+    }
+
+    $(document).ready(function() {
+        create_stock_history_chart( "stockhistory/1/", ".Header_1", "myChart_1")
+        create_stock_history_chart( "stockhistory/3/", ".Header_2", "myChart_2")
+        create_stock_history_chart("stockhistory/10/", ".Header_3", "myChart_3")
+    });
+
+</script>
+
+</body>
+</html>

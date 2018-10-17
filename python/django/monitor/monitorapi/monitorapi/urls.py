@@ -20,8 +20,10 @@ from stocksapi import views
 urlpatterns = [
     path('', views.index),
     path('index', views.index),
-    path('threeday/<int:district>/', views.threeday),
-    path('kdindex', views.kd_index),
-    path('nextkdindex', views.next_kd_index),
+    path('history', views.stock_history),
+    path('stockhistory', views.get_stock_price_history),
+    path('stockhistory/<int:year>/', views.get_stock_price_history),
+    path('kdindex', views.get_kd_index),
+    path('nextkdindex', views.get_next_kd_index),
     path('admin/', admin.site.urls),
 ]

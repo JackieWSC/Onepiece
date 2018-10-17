@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from stocksapi.models import Visitor
+from stocksapi.models import StockPriceStatistics, Visitor
 from bs4 import BeautifulSoup
 import datetime
 import pandas
@@ -19,120 +19,16 @@ def log_trace(name, log):
         print(log)
 
 
-def days_map(weekdays):
-    days = {
-        "日": "Sun",
-        "－": "Mon",
-        "二": "Tue"
-    }
-    return days.get(weekdays)
-
-
-# Create your views here.
-def createDF(district):
-    global df
-    year3 = []
-    colspans = []
-    dates = []
-    days = []
-    url = 'https://www.cwb.gov.tw/V7/forecast/town368/3Hr/6301000.htm'
-
-    # handle first tr
-    today = datetime.datetime.now()
-    year3.append("%d" % today.year)
-    year3.append("%d" % (today + datetime.timedelta(days=1)).year)
-    year3.append("%d" % (today + datetime.timedelta(days=2)).year)
-
-    res = requests.get(url)
-    res.encoding = 'utf-8'
-    soup = BeautifulSoup(res.text, 'html.parser')
-    trs = soup.find_all('tr')
-    log_trace('first tr', trs[0])
-    tdall = trs[0].findAll('td')
-    log_trace('all td in first tr', tdall)
-
-    k = 0
-    for i in range(len(tdall)):
-        td = tdall[i]
-        if i > 0: # skip index 0
-            if td.has_attr('colspan'):
-                colspans.append(td.attrs['colspan'])
-            else:
-                colspans.append(1)
-            monthdate = re.findall('\d+', td.text)
-            log_trace('td text', td.text)
-            log_trace('month date', monthdate)
-
-            dates.append(year3[k] + '-' + monthdate[0] + '-' + monthdate[1])
-            log_trace('dates', dates)
-
-            days_tw = re.findall('[一|二|三|四|五|六|日]', td.text)
-            log_trace('days_tw', days_tw[0])
-            days.append(days_map(days_tw[0]))
-            log_trace('days', days)
-
-            k += 1
-
-
-    # handle 2nd tr
-    ts = []
-    weekdays = []
-    hours = trs[1].findAll('span')
-    k = 0
-    for i in range(0, len(colspans)):
-        for j in range(0, int(colspans[i])):
-            ts.append(dates[i] + ' ' + hours[k].text)
-            k += 1
-            weekdays.append(days[i])
-
-    df['DateTime'] = ts
-    df['Weekday'] = weekdays
-
-
-    # handle 3rd tr
-    wxs = []
-    for img in trs[2].findAll('img'):
-        wxs.append(img.attrs['alt'])
-    df['Weather'] = wxs
-
-    # handle 4 to 10
-    vals = []
-    for i in range(3, 10):
-        if i is not 8:
-            tdall = trs[i].findAll('td')
-            for j in range(len(tdall)):
-                td = tdall[j]
-                if j > 0:
-                    vals.append(td.text)
-
-            df.iloc[:,i] = vals
-            vals = []
-
-    # handle 9
-    pops = []
-    rep = 0
-    tdall = trs[8].findAll('td')
-    for i in range(len(tdall)):
-        td = tdall[i]
-        if i > 0 :
-            if td.has_attr('colspan'):
-                rep = int(td.attrs['colspan'])
-            else:
-                rep = 1
-
-            for j in range(0,rep):
-                pops.append(td.text)
-    df['RainingPops'] = pops
-
-
 def create_kd_index():
     global df
 
     # get the stock data from pandas_datareader
     stock_code = '2800.HK'
-    start = datetime.datetime(2018, 8, 22)
+    # start = datetime.datetime(2018, 8, 22)
     end = datetime.date.today()
+    start = datetime.date.today() - datetime.timedelta(days=50)
     stocks_df = datareader.get_data_yahoo(stock_code, start=start, end=end)
+    dispolay_trading_day = 20
 
     # temp variable
     num_of_row = len(stocks_df.index)
@@ -175,24 +71,26 @@ def create_kd_index():
         previous_D = today_D
 
         # add to lists
-        #print(date.strftime('%Y-%m-%d'))
-        #print("Date:{0} RSV:{1:0.4f} K:{2:0.4f} D:{3:0.4f}".format(date, RSV, today_K, today_D))
+        # print(date.strftime('%Y-%m-%d'))
+        # print("Date:{0} RSV:{1:0.4f} K:{2:0.4f} D:{3:0.4f}".format(date, RSV, today_K, today_D))
         date_list.append(date.strftime('%Y-%m-%d'))
         RSV_list.append(format(RSV, '.4f'))
         K_list.append(format(today_K, '.4f'))
         D_list.append(format(today_D, '.4f'))
         ClosePrice_List.append(format(Cn, '.2f'))
 
-
+    # define each column for the dataframe
     data = {
-            'Date': date_list,
-            'Close': ClosePrice_List,
-            'RSV': RSV_list,
-            'K': K_list,
-            'D': D_list
-        }
+        'Date': date_list,
+        'Close': ClosePrice_List,
+        'RSV': RSV_list,
+        'K': K_list,
+        'D': D_list
+    }
 
+    # create define trading day, no need to show all records
     df = pandas.DataFrame(data=data, index=date_list)
+    df = df.iloc[-dispolay_trading_day:]
 
 
 def calculate_k(Close, Hn, Ln, previous_K):
@@ -309,33 +207,86 @@ def create_next_kd_index():
     df.sort_values('Price', inplace=True)
 
 
+def create_stock_price_hsitory(year):
+    start = datetime.datetime(2008, 1, 1)
+    if year == 10:
+        start = datetime.datetime(2008, 1, 1)
+    elif year == 3:
+        start = datetime.datetime(2015, 1, 1)
+    elif year == 1:
+        start = datetime.datetime(2018, 1, 1)
+    else:
+        year = 10
+
+    end = datetime.date.today()
+    stock_code = '2800.HK'
+    write_to_db = False
+
+    # User pandas_reader.data.DataReader to load the desired data. As simple as that.
+    # df = data.get_data_yahoo('2800.hk', start_date, end_date)
+    # the early start day is 2007-12-31
+    stock_df = datareader.get_data_yahoo(stock_code, start=start, end=end)
+    no_of_record = len(stock_df.index)
+
+    # round the price to 1 decimal
+    stock_df['price'] = round(stock_df['Close'],1)
+
+    # create count column to count the price
+    history_df = stock_df.groupby(['price']) \
+            .size() \
+            .reset_index(name='count') \
+            .sort_values(['price'], ascending=True)
+
+    # create different column
+    #   percentage: calculate the distribution of the price
+    #   stock: the stock code
+    #   period: base on this year, 3, 5,10 years records
+    #   remark: show the day
+    history_df["percentage"] = round((history_df['count'] / no_of_record) * 100, 1)
+    history_df['stock'] = '2800.HK'
+    history_df['period'] = str(year)
+    history_df['remark'] = '{0} to {1}'.format(start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+    # print(history_df)
+
+    # write the data to database
+    if write_to_db:
+        entries = []
+        for entry in history_df.T.to_dict().values():
+            # print(entry)
+            entries.append(StockPriceStatistics(**entry))
+
+        StockPriceStatistics.objects.bulk_create(entries)
+
+    return history_df.to_json(orient='records')
+
+
 df = ''
-
-
-def threeday(request, district=None):
-    global df
-    columns = ['DateTime',
-               'Weekday',
-               'Weather',
-               'Temperature',
-               'Temperature 2',
-               'WindLevel',
-               'WindDirection',
-               'Humidity',
-               'RainingPops',
-               'Conform']
-
-    df = pandas.DataFrame(columns=columns)
-    createDF(district)
-    json = df.to_json(orient='records', force_ascii=False)
-    return HttpResponse(json)
 
 
 def index(request):
     return render(request, "stock.html")
 
 
-def kd_index(request):
+def stock_history(request):
+    return render(request, "stockhistory.html")
+
+
+def get_stock_price_history(request, year=10):
+    start_time = time.time()
+    print(year)
+
+    # main function
+    json = create_stock_price_hsitory(year)
+
+    # calculate the latency
+    latency_ms = (time.time() - start_time) * 1000
+    visitor = Visitor(page='stock_price_history', latency=latency_ms)
+    visitor.save()
+
+    return HttpResponse(json)
+
+
+def get_kd_index(request):
     global df
     start_time = time.time()
 
@@ -351,7 +302,7 @@ def kd_index(request):
     return HttpResponse(json)
 
 
-def next_kd_index(request):
+def get_next_kd_index(request):
     global df
     start_time = time.time()
 

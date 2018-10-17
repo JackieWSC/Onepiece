@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'monitorapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'testdb',
+        'NAME': 'herokulocaldb',
         'USER': 'Scity',
         'PASSWORD': '',
         'HOST': 'localhost',
