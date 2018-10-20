@@ -107,13 +107,38 @@ def calculate_k(Close, Hn, Ln, previous_K):
     return K
 
 
-def create_next_kd_index():
+def notify_line(send, date, close_price, k_value):
+    if send:
+        print('notify line - date:{0}, close_price:{1}, k_value:{2}'.format(
+            date, close_price, k_value))
+
+        IFTTT_WEBHOOKS_URL = 'https://maker.ifttt.com/trigger/{}/with/key/{}'
+        event = 'stockLine'
+        token = 'jSfmLiQN7-TxzISuY3kE6p-gusxDr3CTivpaHqNWFCG'
+
+        url_ifttt = IFTTT_WEBHOOKS_URL.format(event, token)
+        print(url_ifttt)
+
+        # playload
+        data = {
+            'value1': date.strftime('%Y-%m-%d'),
+            'value2': close_price,
+            'value3': format(k_value*100, '.2f')
+        }
+
+        # send the request
+        req = requests.post(url_ifttt, data)
+        print('The request text:' + req.text)
+
+
+def create_next_kd_index(send=False):
     global df
 
     # get the stock data from pandas_datareader
     stock_code = '2800.HK'
-    start = datetime.datetime(2018, 8, 22)
+    # start = datetime.datetime(2018, 8, 22)
     end = datetime.date.today()
+    start = datetime.date.today() - datetime.timedelta(days=50)
     stocks_df = datareader.get_data_yahoo(stock_code, start=start, end=end)
 
     # temp variable
@@ -163,6 +188,9 @@ def create_next_kd_index():
     Price_List.append(format(Cn, '.2f'))
     K_list.append(format(k, '.4f'))
     type_list.append("START")
+
+    # send the notification to line
+    notify_line(send, date, Cn, previous_K)
 
     # 20 tick
     for i in range(1, 10):
@@ -269,6 +297,24 @@ def index(request):
 
 def stock_history(request):
     return render(request, "stockhistory.html")
+
+
+def playground(request):
+    return render(request, "playground.html")
+
+
+def check_next_kd_index(request):
+    start_time = time.time()
+
+    # main function
+    create_next_kd_index(True)
+
+    # calculate the latency
+    latency_ms = (time.time() - start_time) * 1000
+    visitor = Visitor(page='check_next_kd_index', latency=latency_ms)
+    visitor.save()
+
+    return render(request, "index.html")
 
 
 def get_stock_price_history(request, year=10):

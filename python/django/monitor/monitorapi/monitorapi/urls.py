@@ -25,5 +25,7 @@ urlpatterns = [
     path('stockhistory/<int:year>/', views.get_stock_price_history),
     path('kdindex', views.get_kd_index),
     path('nextkdindex', views.get_next_kd_index),
+    path('checknextkdindex', views.check_next_kd_index),
+    path('playground/', views.playground),
     path('admin/', admin.site.urls),
 ]
