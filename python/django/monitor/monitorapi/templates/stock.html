@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>2800.HK KD</title>
+  <title>{{stock_code}} KD</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -14,8 +14,47 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Monitor</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="/kd" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          KD<span class="sr-only">(current)</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/kd/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/kd/HSI/">HSI</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          History
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/history/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/history/HSI/">HSI</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tools">Tools</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
 <div class="jumbotron bg-dark text-center  text-white">
-  <h1>Tracker Fund of Hong Kong (2800.HK)</h1>
+  <h1>{{stock_name}} ({{stock_code}})</h1>
   <p>KD Index</p>
 </div>
 
@@ -137,7 +176,7 @@
     }
 
     $(document).ready(function() {
-        $.getJSON("kdindex" , function(result) {
+        $.getJSON("/kdindex/{{stock_code}}/" , function(result) {
             var date = []
             var kValue = []
             var dValue = []
@@ -173,7 +212,7 @@
 
         });
 
-        $.getJSON("nextkdindex" , function(result) {
+        $.getJSON("/nextkdindex/{{stock_code}}/" , function(result) {
             var down_price = new Array()
             var up_price = new Array()
 

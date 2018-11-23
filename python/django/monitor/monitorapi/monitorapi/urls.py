@@ -18,13 +18,17 @@ from django.urls import path
 from stocksapi import views
 
 urlpatterns = [
-    path('', views.index),
-    path('index', views.index),
+    path('', views.stock_kd),
+    path('kd', views.stock_kd),
+    path('kd/<stock_code>/', views.stock_kd),
     path('history', views.stock_history),
-    path('stockhistory', views.get_stock_price_history),
-    path('stockhistory/<int:year>/', views.get_stock_price_history),
-    path('kdindex', views.get_kd_index),
-    path('nextkdindex', views.get_next_kd_index),
+    path('history/<stock_code>/', views.stock_history),
+    path('tools', views.playground),
+    # RESTFUL API
+    path('kdindex/<stock_code>/', views.get_kd_index),
+    path('nextkdindex/<stock_code>/', views.get_next_kd_index),
+    path('stockhistory/<stock_code>/<int:year>/', views.get_stock_price_history),
+    # Notification
     path('checknextkdindex', views.check_next_kd_index),
     path('playground/', views.playground),
     path('admin/', admin.site.urls),

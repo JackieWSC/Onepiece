@@ -12,6 +12,7 @@ import time
 
 log_level = 'debug'
 
+
 def log_trace(name, log):
     global log_level
     if log_level == 'debug':
@@ -19,16 +20,66 @@ def log_trace(name, log):
         print(log)
 
 
-def create_kd_index():
-    global df
+def get_decimal(stock_code):
+    stock_decimal = {
+        "2800.HK": 1,
+        "^HSI": -2,
+    }
 
+    return stock_decimal[stock_code]
+
+
+def check_stock_code(stock_code):
+    if stock_code == "HSI":
+        stock_code = "^HSI"
+    return stock_code
+
+
+def check_price_tick(stock_code):
+    stock_price_tick = {
+        "2800.HK": 0.1,
+        "^HSI": 100,
+    }
+
+    return stock_price_tick[stock_code]
+
+
+def check_start_date(year):
+    if year == 10:
+        start = datetime.datetime(2008, 1, 1)
+    elif year == 3:
+        start = datetime.datetime(2015, 1, 1)
+    elif year == 1:
+        start = datetime.datetime(2018, 1, 1)
+    else:
+        year = 10
+    return start, year
+
+
+def get_stock_name(stock_code):
+    stock_code = check_stock_code(stock_code)
+
+    link = "http://d.yimg.com/autoc.finance.yahoo.com/autoc?query={}&region=1&lang=en".format(stock_code)
+    result = requests.get(link).json()
+    stock_name = ""
+
+    for data in result['ResultSet']['Result']:
+        if data['symbol'] == stock_code:
+            stock_name = data['name']
+
+    return stock_name
+
+
+def create_kd_index(stock_code):
     # get the stock data from pandas_datareader
-    stock_code = '2800.HK'
+    # stock_code = '2800.HK'
     # start = datetime.datetime(2018, 8, 22)
+    stock_code = check_stock_code(stock_code)
+
     end = datetime.date.today()
     start = datetime.date.today() - datetime.timedelta(days=50)
     stocks_df = datareader.get_data_yahoo(stock_code, start=start, end=end)
-    dispolay_trading_day = 20
+    display_trading_day = 20
 
     # temp variable
     num_of_row = len(stocks_df.index)
@@ -89,8 +140,10 @@ def create_kd_index():
     }
 
     # create define trading day, no need to show all records
-    df = pandas.DataFrame(data=data, index=date_list)
-    df = df.iloc[-dispolay_trading_day:]
+    kd_df = pandas.DataFrame(data=data, index=date_list)
+    kd_df = kd_df.iloc[-display_trading_day:]
+
+    return kd_df.to_json(orient='records')
 
 
 def calculate_k(Close, Hn, Ln, previous_K):
@@ -109,8 +162,12 @@ def calculate_k(Close, Hn, Ln, previous_K):
 
 def notify_line(send, date, close_price, k_value):
     if send:
+        close_price = format(close_price, '.2f')
+        k_value = format(k_value * 100, '.2f')
+        date_str = date.strftime('%Y-%m-%d')
+
         print('notify line - date:{0}, close_price:{1}, k_value:{2}'.format(
-            date, close_price, k_value))
+            date_str, close_price, k_value))
 
         IFTTT_WEBHOOKS_URL = 'https://maker.ifttt.com/trigger/{}/with/key/{}'
         event = 'stockLine'
@@ -121,9 +178,9 @@ def notify_line(send, date, close_price, k_value):
 
         # playload
         data = {
-            'value1': date.strftime('%Y-%m-%d'),
+            'value1': date_str,
             'value2': close_price,
-            'value3': format(k_value*100, '.2f')
+            'value3': k_value
         }
 
         # send the request
@@ -131,11 +188,11 @@ def notify_line(send, date, close_price, k_value):
         print('The request text:' + req.text)
 
 
-def create_next_kd_index(send=False):
-    global df
+def create_next_kd_index(stock_code, sned_to_line=False):
+    stock_code = check_stock_code(stock_code)
 
     # get the stock data from pandas_datareader
-    stock_code = '2800.HK'
+    # stock_code = '2800.HK'
     # start = datetime.datetime(2018, 8, 22)
     end = datetime.date.today()
     start = datetime.date.today() - datetime.timedelta(days=50)
@@ -190,11 +247,13 @@ def create_next_kd_index(send=False):
     type_list.append("START")
 
     # send the notification to line
-    notify_line(send, date, Cn, previous_K)
+    notify_line(sned_to_line, date, Cn, previous_K)
 
-    # 20 tick
+    stock_price_tick = check_price_tick(stock_code)
+
+    # 20 tick for up price
     for i in range(1, 10):
-        next_close = Cn + (i * 0.1)
+        next_close = Cn + (i * stock_price_tick)
         k = calculate_k(next_close, Hn, Ln, previous_K)
 
         K_str = format(k, '.4f')
@@ -207,9 +266,10 @@ def create_next_kd_index(send=False):
         K_list.append(format(k, '.4f'))
         type_list.append("UP")
 
-    # 20 tick
+
+    # 20 tick for down priceß
     for i in range(1, 10):
-        next_close = Cn - (i * 0.1)
+        next_close = Cn - (i * stock_price_tick)
         k = calculate_k(next_close, Hn, Ln, previous_K)
 
         K_str = format(k, '.4f')
@@ -231,24 +291,16 @@ def create_next_kd_index(send=False):
             'Type': type_list
         }
 
-    df = pandas.DataFrame(data=data)
-    df.sort_values('Price', inplace=True)
+    kd_df = pandas.DataFrame(data=data)
+    kd_df.sort_values('Price', inplace=True)
+
+    return kd_df.to_json(orient='records')
 
 
-def create_stock_price_hsitory(year):
-    start = datetime.datetime(2008, 1, 1)
-    if year == 10:
-        start = datetime.datetime(2008, 1, 1)
-    elif year == 3:
-        start = datetime.datetime(2015, 1, 1)
-    elif year == 1:
-        start = datetime.datetime(2018, 1, 1)
-    else:
-        year = 10
-
+def create_stock_price_hsitory(stock_code, year):
+    start, year = check_start_date(year)
     end = datetime.date.today()
-    stock_code = '2800.HK'
-    write_to_db = False
+    stock_code = check_stock_code(stock_code)
 
     # User pandas_reader.data.DataReader to load the desired data. As simple as that.
     # df = data.get_data_yahoo('2800.hk', start_date, end_date)
@@ -256,8 +308,11 @@ def create_stock_price_hsitory(year):
     stock_df = datareader.get_data_yahoo(stock_code, start=start, end=end)
     no_of_record = len(stock_df.index)
 
+    print('create_stock_price_hsitory - no_of_record', no_of_record)
+
     # round the price to 1 decimal
-    stock_df['price'] = round(stock_df['Close'],1)
+    decimal = get_decimal(stock_code)
+    stock_df['price'] = round(stock_df['Close'], decimal)
 
     # create count column to count the price
     history_df = stock_df.groupby(['price']) \
@@ -271,11 +326,12 @@ def create_stock_price_hsitory(year):
     #   period: base on this year, 3, 5,10 years records
     #   remark: show the day
     history_df["percentage"] = round((history_df['count'] / no_of_record) * 100, 1)
-    history_df['stock'] = '2800.HK'
+    history_df['stock'] = stock_code
     history_df['period'] = str(year)
     history_df['remark'] = '{0} to {1}'.format(start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
     # print(history_df)
 
+    write_to_db = False
     # write the data to database
     if write_to_db:
         entries = []
@@ -288,26 +344,41 @@ def create_stock_price_hsitory(year):
     return history_df.to_json(orient='records')
 
 
-df = ''
+# Main View Page
+def stock_kd(request, stock_code="2800.HK"):
+    stock_name = get_stock_name(stock_code)
+    context = {
+        'stock_name': stock_name,
+        'stock_code': stock_code
+    }
+
+    return render(request, "stock.html", context)
 
 
-def index(request):
-    return render(request, "stock.html")
+def stock_history(request, stock_code="2800.HK"):
+    stock_name = get_stock_name(stock_code)
+    context = {
+        'stock_name': stock_name,
+        'stock_code': stock_code
+    }
 
-
-def stock_history(request):
-    return render(request, "stockhistory.html")
+    return render(request, "stockhistory.html", context)
 
 
 def playground(request):
     return render(request, "playground.html")
 
 
+# Line Notification
+
+
+# Call by IFTTT and send the message to LINE API
 def check_next_kd_index(request):
     start_time = time.time()
 
     # main function
-    create_next_kd_index(True)
+    send_to_line = True
+    create_next_kd_index(send_to_line)
 
     # calculate the latency
     latency_ms = (time.time() - start_time) * 1000
@@ -316,13 +387,18 @@ def check_next_kd_index(request):
 
     return render(request, "index.html")
 
+# RESTFUL API interface
 
-def get_stock_price_history(request, year=10):
+
+# Get the price history by stock code
+# It can get the 1, 3 and 10 years data
+def get_stock_price_history(request, stock_code="2800.HK", year=10):
+    print(stock_code, year)
+
     start_time = time.time()
-    print(year)
 
     # main function
-    json = create_stock_price_hsitory(year)
+    json = create_stock_price_hsitory(stock_code, year)
 
     # calculate the latency
     latency_ms = (time.time() - start_time) * 1000
@@ -332,13 +408,12 @@ def get_stock_price_history(request, year=10):
     return HttpResponse(json)
 
 
-def get_kd_index(request):
-    global df
+# Get the KD index in last 20 trading date
+def get_kd_index(request, stock_code="2800.HK"):
     start_time = time.time()
 
     # main function
-    create_kd_index()
-    json = df.to_json(orient='records')
+    json = create_kd_index(stock_code)
 
     # calculate the latency
     latency_ms = (time.time() - start_time) * 1000
@@ -348,13 +423,12 @@ def get_kd_index(request):
     return HttpResponse(json)
 
 
-def get_next_kd_index(request):
-    global df
+# Get the KD index of next trading date
+def get_next_kd_index(request, stock_code="2800.HK"):
     start_time = time.time()
 
     # main function
-    create_next_kd_index()
-    json = df.to_json(orient='records')
+    json = create_next_kd_index(stock_code)
 
     # calculate the latency
     latency_ms = (time.time() - start_time) * 1000
@@ -362,4 +436,3 @@ def get_next_kd_index(request):
     visitor.save()
 
     return HttpResponse(json)
-
