@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>  
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>
+  <script>
+  
+  	function SecondToTime(input)
+	{
+		if (typeof input === "undefined") {
+			return "N/A"
+		}
+		
+		var sec_num = parseInt(input, 10); // don't forget the second param
+		var hours   = Math.floor(sec_num / 3600);
+		var minutes = Math.floor((sec_num % 3600) / 60); 
+		var seconds = Math.floor(sec_num % 60);
+
+		if (hours   < 10) {hours   = "0"+hours;}
+		if (minutes < 10) {minutes = "0"+minutes;}
+		if (seconds < 10) {seconds = "0"+seconds;}
+		
+		return hours+':'+minutes+':'+seconds;
+	}
+	
+	function AddToRow(row, name, value)
+	{
+		if (typeof value === "undefined") {
+			value = "N/A"
+		}
+		
+		row.columnName += '<th>' + name + '</th>'
+		row.columnValue += '<td>' + value + '</td>'
+		
+		return row
+	}
+	
+    $(document).ready(function() {
+        $.ajax({
+            type: "GET",
+            url: "ETE_2JNMRM7_22b.xml",
+            dataType: "xml",
+            success: function(xml) {
+				var addHeader = false;
+                $(xml).find('Message').each(function(){
+					var itemSeqNum = $(this).find('ItemSeqNum').attr("value");                    
+                    var name = $(this).find('MsgBase').find('MsgKey').find('Name').attr("value");
+					var msgClass = $(this).find('MsgBase').find('MsgClass').attr("value");
+					var fid3517_bidtime = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='3517']").next().next().attr("value");					
+					var fid22_bid = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='22']").next().next().attr("value");					
+                    var fid30_bidsize = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='30']").next().next().attr("value");					
+					var fid3516_asktime = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='3516']").next().next().attr("value");					
+					var fid25_ask = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='25']").next().next().attr("value");					
+                    var fid31_asksize = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='31']").next().next().attr("value");				                    					
+																
+					var time = fid3517_bidtime;					
+					if (typeof fid3517_bidtime === "undefined") 				
+						time = SecondToTime(fid3516_asktime);	
+					else											
+						time = SecondToTime(fid3517_bidtime);		
+					
+					var row = {columnName:"", columnValue:""}
+					
+					row = AddToRow(row, "Seq", itemSeqNum);
+					row = AddToRow(row, "Ric Name", name);
+					row = AddToRow(row, "Msg Class", msgClass);
+					row = AddToRow(row, "Fid 3517 (bidtime)/Fid 3516 (asktime)", time);
+					row = AddToRow(row, "Fid 22 (bid)", fid22_bid);
+					row = AddToRow(row, "Fid 30 (bidsize)", fid30_bidsize);					
+					row = AddToRow(row, "Fid 25 (ask", fid25_ask);
+					row = AddToRow(row, "Fid 31 (asksize)", fid31_asksize);
+						
+					if (addHeader == false)
+					{
+						$('#chart1 > thead:first').append('<tr>'+ row.columnName +'</tr>');
+						addHeader = true;
+					}
+					
+                    $('#chart1 > tbody:last').append('<tr>'+ row.columnValue +'</tr>');
+                });     
+
+                $('#chart1').dataTable({
+					ordering: false
+				});  
+            }
+        });
+
+    });
+	
+	$(document).ready(function() {
+        $.ajax({
+            type: "GET",
+            url: "ETE_2JNMRM7_48a.xml",
+            dataType: "xml",
+            success: function(xml) {
+				var addHeader = false;
+                $(xml).find('Message').each(function(){
+					var itemSeqNum = $(this).find('ItemSeqNum').attr("value");                    
+                    var name = $(this).find('MsgBase').find('MsgKey').find('Name').attr("value");
+					var msgClass = $(this).find('MsgBase').find('MsgClass').attr("value");
+					var fid3517_bidtime = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='3517']").next().next().attr("value");					
+					var fid22_bid = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='22']").next().next().attr("value");					
+                    var fid30_bidsize = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='30']").next().next().attr("value");					
+					var fid3516_asktime = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='3516']").next().next().attr("value");					
+					var fid25_ask = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='25']").next().next().attr("value");					
+                    var fid31_asksize = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='31']").next().next().attr("value");				                    					
+					
+					var time = fid3517_bidtime;					
+					if (typeof fid3517_bidtime === "undefined") 				
+						time = SecondToTime(fid3516_asktime);	
+					else											
+						time = SecondToTime(fid3517_bidtime);	
+					
+					var row = {columnName:"", columnValue:""}
+					
+					row = AddToRow(row, "Seq", itemSeqNum);
+					row = AddToRow(row, "Ric Name", name);
+					row = AddToRow(row, "Msg Class", msgClass);
+					row = AddToRow(row, "Fid 3517 (bidtime)/Fid 3516 (asktime)", time);
+					row = AddToRow(row, "Fid 22 (bid)", fid22_bid);
+					row = AddToRow(row, "Fid 30 (bidsize)", fid30_bidsize);					
+					row = AddToRow(row, "Fid 25 (ask", fid25_ask);
+					row = AddToRow(row, "Fid 31 (asksize)", fid31_asksize);
+						
+					if (addHeader == false)
+					{
+						$('#chart2 > thead:first').append('<tr>'+ row.columnName +'</tr>');
+						addHeader = true;
+					}
+					
+                    $('#chart2 > tbody:last').append('<tr>'+ row.columnValue +'</tr>');
+                });     
+
+                $('#chart2').dataTable({
+					ordering: false
+				});  
+            }
+        });
+
+    });
+
+  </script>
+</head>
+<body>
+    ETE_2JNMRM7_22b.xml
+    <table id="chart1" class="display" cellspacing="0" width="100%">
+        <thead>
+		<!-- generate by javascript-->
+        </thead>
+        <tbody>
+		<!-- generate by javascript-->
+        </tbody>
+    </table>
+	
+	ETE_2JNMRM7_48a.xml
+	<table id="chart2" class="display" cellspacing="0" width="100%">
+        <thead>
+		<!-- generate by javascript-->
+        </thead>
+        <tbody>
+		<!-- generate by javascript-->
+        </tbody>
+    </table>
+</body>
+</html>
+

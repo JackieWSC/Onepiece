@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>  
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>
+  <script>
+
+    function ConvertOrderId(orderId) {
+		var word = "";
+		var binValue = "";
+		var output = "";
+		
+		for (i = 0; i < orderId.length; i=i+2) {
+			word = orderId[i] + orderId[i+1]
+			binValue = parseInt(word, 16)    
+			output += String.fromCharCode(binValue)
+		}
+		
+		return output
+	}
+	
+	function AddToRow(row, name, value)
+	{
+		if (typeof value === "undefined") {
+			value = "N/A"
+		}
+		
+		row.columnName += '<th>' + name + '</th>'
+		row.columnValue += '<td>' + value + '</td>'
+		
+		return row
+	}	
+	
+    $(document).ready(function() {
+        $.ajax({
+            type: "GET",
+            url: "ETE_sdm.xml",
+            dataType: "xml",
+            success: function(xml) {
+				var addHeader = false;
+                $(xml).find('Message').each(function(){
+					
+					
+                    var fid6370_seqNum = $(this).find('MsgBase').find('Map').find('EncSummaryData').find('FieldList').find('FieldEntry').find("FieldID[value='6370']").next().next().attr("value");					
+					
+					var msgKey = $(this).find('MsgBase').find('MsgKey').find('Name').attr("value");
+					var domainType = $(this).find('MsgBase').find('DomainType').attr("value");
+					var ContainerType = $(this).find('MsgBase').find('ContainerType').attr("value");										
+					
+					var fid8636_msgType = $(this).find('MsgBase').find('Map').find('EncSummaryData').find('FieldList').find('FieldEntry').find("FieldID[value='8636']").next().next().attr("value");																	
+					var fid14281_ingestNS = $(this).find('MsgBase').find('Map').find('EncSummaryData').find('FieldList').find('FieldEntry').find("FieldID[value='14281']").next().next().attr("value");																				
+					
+					var fid3426_orderId = $(this).find('MsgBase').find('Map').find('MapEntry').find('FieldList').find('FieldEntry').find("FieldID[value='3426']").next().next().attr("value");					
+					var fid3428_orderSide = $(this).find('MsgBase').find('Map').find('MapEntry').find('FieldList').find('FieldEntry').find("FieldID[value='3428']").next().next().attr("value");					
+					var fid3427_orderPrice = $(this).find('MsgBase').find('Map').find('MapEntry').find('FieldList').find('FieldEntry').find("FieldID[value='3427']").next().next().attr("value");					
+					var fid3429_orderSize = $(this).find('MsgBase').find('Map').find('MapEntry').find('FieldList').find('FieldEntry').find("FieldID[value='3429']").next().next().attr("value");					
+					
+					// find the data in feild list
+					if (typeof fid6370_seqNum == "undefined") {
+					    fid6370_seqNum = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='6370']").next().next().attr("value");											
+					}	
+
+					if (typeof fid14281_ingestNS == "undefined") {
+					    fid14281_ingestNS = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='14281']").next().next().attr("value");											
+					}	
+					fid14281_ingestNS = "'" + fid14281_ingestNS
+					
+					if (typeof fid8636_msgType == "undefined") {
+					    fid8636_msgType = $(this).find('MsgBase').find('FieldList').find('FieldEntry').find("FieldID[value='8636']").next().next().attr("value");											
+					}
+					
+					
+					if (typeof fid8636_msgType != "undefined") {
+					    fid8636_msgType = parseInt(fid8636_msgType, 16)
+						fid8636_msgType = String.fromCharCode(fid8636_msgType)
+					}	
+
+					if (typeof fid3428_orderSide != "undefined") {
+					    if (fid3428_orderSide == "1")
+							fid3428_orderSide = "Bid"
+						else
+							fid3428_orderSide = "Ask"
+					}						
+					
+					if (typeof fid3426_orderId != "undefined") {
+						fid3426_orderId = ConvertOrderId(fid3426_orderId)
+					}
+					                    
+										
+					var row = {columnName:"", columnValue:""}
+					
+					row = AddToRow(row, "Seq#", fid6370_seqNum);
+					row = AddToRow(row, "MsgKey", msgKey);
+					row = AddToRow(row, "Ingest (NS)", fid14281_ingestNS);
+					row = AddToRow(row, "Domain Type", domainType);
+					row = AddToRow(row, "ContainerType", ContainerType);
+					row = AddToRow(row, "MsgType (fid8636)", fid8636_msgType);
+					row = AddToRow(row, "OrderId (fid3426)", fid3426_orderId);					
+					row = AddToRow(row, "OrderSide (fid3428)", fid3428_orderSide);
+					row = AddToRow(row, "OrderPrice (fid3427)", fid3427_orderPrice);
+					row = AddToRow(row, "OrderSize (fid3429)", fid3429_orderSize);					     
+				
+					if (addHeader == false)
+					{
+						$('#chart1 > thead:first').append('<tr>'+ row.columnName +'</tr>');
+						addHeader = true;
+					}
+					
+                    $('#chart1 > tbody:last').append('<tr>'+ row.columnValue +'</tr>');
+                });     
+
+                $('#chart1').dataTable({
+					ordering: false,
+					paging: false
+				});  
+            }
+        });
+
+    });
+		
+
+  </script>
+</head>
+<body>
+    ETE_sdm.xml
+    <table id="chart1" class="display" cellspacing="0" width="100%">
+        <thead>
+		<!-- generate by javascript-->
+        </thead>
+        <tbody>
+		<!-- generate by javascript-->
+        </tbody>
+    </table>	
+</body>
+</html>
+

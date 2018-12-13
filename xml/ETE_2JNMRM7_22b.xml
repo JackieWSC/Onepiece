@@ -1,0 +1,5024 @@
+<?xml version="1.0"?>
+<Traffic>
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035943280500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533330"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468247"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533330"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468247"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240579"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468247"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="224"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108667"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035943281"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25619"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="220"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25620"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="216"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25621"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="211"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25622"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="208"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25623"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="202"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25624"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="194"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25625"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="192"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25626"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="191"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25627"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="190"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25628"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468994"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="188"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25629"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468995"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468995"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="187"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25630"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468995"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468995"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="184"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25631"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468998"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19468998"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="174"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25632"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469087"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469087"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="179"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25633"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035949126000"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533333"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469088"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533333"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469088"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240583"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="58455"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469088"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="3"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="176"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108668"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035949126"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25634"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035970559500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533344"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469088"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533344"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469088"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240595"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="214335"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469088"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="11"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="165"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108669"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035970560"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25635"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469116"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469116"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="160"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25636"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469116"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469116"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="165"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25637"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469165"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469165"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="179"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25638"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469217"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19469217"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="174"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25639"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035972508000"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533345"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470126"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533345"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470126"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240596"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19466"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470126"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="173"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108670"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035972508"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25640"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035988096000"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533353"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533353"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240605"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="155880"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19468"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="8"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="165"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108671"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035988096"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25641"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035990044500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533354"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533354"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240607"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108672"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035990045"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25642"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035991993000"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533355"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533355"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240608"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19469"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="163"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108673"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035991993"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25643"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035993941500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533356"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533356"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240609"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470371"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="162"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108674"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1035993942"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25644"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036001735500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533360"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533360"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240613"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="77940"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="4"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="158"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108675"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036001736"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25645"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036003684000"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533361"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533361"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240615"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="157"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108676"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036003684"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25646"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036005632500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533362"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533362"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240616"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="156"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108677"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036005633"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25647"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036013426500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533366"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533366"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240620"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="77940"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19470775"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="4"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="152"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108678"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036013427"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25648"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036015375000"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533367"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471493"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533367"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471493"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240621"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471493"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="315"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="164"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="151"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108679"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036015375"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16542"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="9"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25649"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471546"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471546"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="156"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25650"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471611"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471611"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="166"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25651"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471611"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471611"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="176"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25652"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471902"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4147"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19471902"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3516"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="31"/>
+          <DataType value="Integer"/>
+          <Data value="591"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="267"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19471"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="25"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19490"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25653"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="25"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19490"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="31"/>
+          <DataType value="Integer"/>
+          <Data value="590"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25654"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Response"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="963"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19170"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4147"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19479363"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19479367"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="67"/>
+          <DataType value="Date"/>
+          <Data value="2017-06-09"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="259"/>
+          <DataType value="UInt"/>
+          <Data value="114"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="60"/>
+          <DataType value="Real"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="16"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="63"/>
+          <DataType value="Real"/>
+          <Data format="14" value="17870"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3263"/>
+          <DataType value="UInt"/>
+          <Data value="4967"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="79"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-09"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="62"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19540"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="61"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19470"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1709"/>
+          <DataType value="UInt"/>
+          <Data value="113"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="7480"/>
+          <DataType value="Real"/>
+          <Data format="14" value="500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="351"/>
+          <DataType value="Date"/>
+          <Data value="2016-11-22"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8311"/>
+          <DataType value="Buffer"/>
+          <Data value="2E4E323235"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="12"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19510"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11"/>
+          <DataType value="Real"/>
+          <Data format="14" value="320"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="10"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4782"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "15423"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19490"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="344"/>
+          <DataType value="Buffer"/>
+          <Data value=""/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="53"/>
+          <DataType value="UInt"/>
+          <Data value="0"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="380"/>
+          <DataType value="UInt"/>
+          <Data value="4"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6768"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-02"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2"/>
+          <DataType value="UInt"/>
+          <Data value="97"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6401"/>
+          <DataType value="UInt"/>
+          <Data value="4152"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3814"/>
+          <DataType value="Buffer"/>
+          <Data value="2E4E323235"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="347"/>
+          <DataType value="Buffer"/>
+          <Data value="43"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="56"/>
+          <DataType value="Real"/>
+          <Data format="12" value="167"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4400"/>
+          <DataType value="Date"/>
+          <Data value="2017-06-09"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="286"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "15423"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4465"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6615"/>
+          <DataType value="UInt"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="116"/>
+          <DataType value="Integer"/>
+          <Data value="87"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="19"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19340"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6517"/>
+          <DataType value="Buffer"/>
+          <Data value=""/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6614"/>
+          <DataType value="UInt"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9912"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="18"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3580"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-10"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1"/>
+          <DataType value="UInt"/>
+          <Data value="4886"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32"/>
+          <DataType value="Integer"/>
+          <Data value="533383"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9994"/>
+          <DataType value="Real"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="7084"/>
+          <DataType value="Integer"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4756"/>
+          <DataType value="Buffer"/>
+          <Data value="31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="100"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036046556"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3852"/>
+          <DataType value="Buffer"/>
+          <Data value="3234"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2163"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="379"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3364"/>
+          <DataType value="UInt"/>
+          <Data value="0"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3719"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "85501"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2162"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="869"/>
+          <DataType value="UInt"/>
+          <Data value="26"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3854"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19479358"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3516"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8300"/>
+          <DataType value="Buffer"/>
+          <Data value=""/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19479367"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3"/>
+          <DataType value="Buffer"/>
+          <Data value="4D204E323235204A554E37"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6769"/>
+          <DataType value="Date"/>
+          <Data value="2016-11-22"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="350"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-02"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3404"/>
+          <DataType value="Real"/>
+          <Data format="10" value="194240641"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4200"/>
+          <DataType value="Buffer"/>
+          <Data value="4E4B3232354D"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="21"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19170"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3899"/>
+          <DataType value="Integer"/>
+          <Data value="500"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="118"/>
+          <DataType value="UInt"/>
+          <Data value="0"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1379"/>
+          <DataType value="Real"/>
+          <Data format="14" value="116940"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4267"/>
+          <DataType value="Buffer"/>
+          <Data value="3023324A4E4D523A"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="287"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "2"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4466"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="7085"/>
+          <DataType value="Integer"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4"/>
+          <DataType value="UInt"/>
+          <Data value="113"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="198"/>
+          <DataType value="Real"/>
+          <Data format="14" value="100"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="375"/>
+          <DataType value="Time"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8927"/>
+          <DataType value="UInt"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2161"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1067"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1063"/>
+          <DataType value="Integer"/>
+          <Data value="87"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="267"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="11809"/>
+          <DataType value="Buffer"/>
+          <Data value=""/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6210"/>
+          <DataType value="Real"/>
+          <Data format="14" value="5"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="41"/>
+          <DataType value="Buffer"/>
+          <Data value="4A554E37"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3694"/>
+          <DataType value="Buffer"/>
+          <Data value="3139"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1704"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6480"/>
+          <DataType value="Buffer"/>
+          <Data value="2E5B5350534F5344484630354D4C31"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8635"/>
+          <DataType value="Buffer"/>
+          <Data value=""/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="78"/>
+          <DataType value="Buffer"/>
+          <Data value="313632303630303139202020"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="197"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="2164"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19477"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="14260"/>
+          <DataType value="Time"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3912"/>
+          <DataType value="Real"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="728"/>
+          <DataType value="Buffer"/>
+          <Data value="2E4E323235"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="25"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19490"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19479"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="178"/>
+          <DataType value="Integer"/>
+          <Data value="6"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="13416"/>
+          <DataType value="UInt"/>
+          <Data value="18"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3864"/>
+          <DataType value="Integer"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4467"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6258"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "85501051"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3862"/>
+          <DataType value="Integer"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8743"/>
+          <DataType value="Buffer"/>
+          <Data value="4E4B3232354D"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="13"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19300"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8745"/>
+          <DataType value="Buffer"/>
+          <Data value="4655545F4E4B3232354D5F31373036"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="15"/>
+          <DataType value="UInt"/>
+          <Data value="392"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8493"/>
+          <DataType value="Buffer"/>
+          <Data value="584A5058"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32743"/>
+          <DataType value="UInt"/>
+          <Data value="533383"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="54"/>
+          <DataType value="UInt"/>
+          <Data value="18"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="77"/>
+          <DataType value="Integer"/>
+          <Data value="108686"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32741"/>
+          <DataType value="Real"/>
+          <Data format="14" value="1036046556000"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1080"/>
+          <DataType value="UInt"/>
+          <Data value="7305"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="14214"/>
+          <DataType value="Time"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="285"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "85501"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1352"/>
+          <DataType value="Buffer"/>
+          <Data value="1B6F467C37500F3232351B6F255F254B200F31372D3036"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="32489"/>
+          <DataType value="UInt"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6619"/>
+          <DataType value="Time"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6618"/>
+          <DataType value="Date"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="5357"/>
+          <DataType value="Integer"/>
+          <Data value="4852"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="31"/>
+          <DataType value="Integer"/>
+          <Data value="588"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6259"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "15423978"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4468"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="8647"/>
+          <DataType value="Buffer"/>
+          <Data value="415F5A41524142415F45"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="14"/>
+          <DataType value="UInt"/>
+          <Data value="1"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="9258"/>
+          <DataType value="Date"/>
+          <Data value="#BLANK#"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="6260"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "2279"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4469"/>
+          <DataType value="Buffer"/>
+          <Data value="20"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4783"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "2"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="7"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19490"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+    <Mask value="638"/>
+    <ResponseTypeNum value="1"/>
+    <ResponseAction value="0"/>
+    <ItemState>
+      <Mask value="0"/>
+      <StreamState value="1"/>
+      <DataState value="1"/>
+      <StateCode value="0"/>
+      <StateText value=""/>
+      <ItemGroupID value=""/>
+      <ItemGroupSeqNum value="0"/>
+    </ItemState>
+    <PermissionInfo>
+      <Mask value="1"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25655"/>
+    <ExchangeID value=""/>
+    <ProviderID value="4152"/>
+    <ContextID value="0"/>
+    <PartNum value="0"/>
+    <ConstitNum value="1"/>
+    <ConstitFilter value="0"/>
+    <FieldListNum value="71"/>
+  </Message> 
+  <Message>
+    <MsgBase>
+      <SetID value="30"/>
+      <StreamID value="0"/>
+      <MsgClass value="Update"/>
+      <ContainerType value="FieldList"/>
+      <MsgKey>
+        <Mask value="0"/>
+        <DomainType value="MarketPrice"/>
+        <NameType value="1"/>
+        <NameEncodingType value="2"/>
+        <Name value="2JNMRM7"/>
+        <Qos value="10"/>
+        <ServiceID value="0"/>
+        <Opaque value=""/>
+      </MsgKey>
+      <FieldList>
+        <Mask value="0"/>
+        <FieldEntry>
+          <FieldID value="3386"/>
+          <DataType value="Date"/>
+          <Data value="2017-03-13"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3855"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19481842"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="4150"/>
+          <DataType value="Time"/>
+          <Data format="1" value = "19481842"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="1025"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19481"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="266"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19481"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="3517"/>
+          <DataType value="Time"/>
+          <Data format="0" value = "19481"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="30"/>
+          <DataType value="Integer"/>
+          <Data value="192"/>
+        </FieldEntry>
+        <FieldEntry>
+          <FieldID value="22"/>
+          <DataType value="Real"/>
+          <Data format="14" value="19485"/>
+        </FieldEntry>
+      </FieldList>
+    </MsgBase>
+    <Mask value="16414"/>
+    <DataState value="1"/>
+    <UpdateTypeNum value="1"/>
+    <PermissionInfo>
+      <Mask value="0"/>
+      <PE value="4886"/>
+      <Data value=""/>
+    </PermissionInfo>
+    <ItemSeqNum value="25656"/>
+    <ExchangeID value=""/>
+    <ConstitNum value="1"/>
+    <ConfCount value="0"/>
+    <ConfTime value="0"/>
+    <ReplayItemSeqNum value="0"/>
+  </Message> 
+</Traffic>
