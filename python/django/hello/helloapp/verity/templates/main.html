@@ -118,60 +118,33 @@
                   <label for="lasttName">Case Status</label>
                 </div>
                 <div class="col-md-9 mb-3">
-                  <table class="table table-sm">
+                  <table class="table table-sm table-hover" id="tableAddRow">
                     <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th style="width:10px">
+                          <i class="fas fa-plus addBtn" id="addBtn_0"></i>
+                        </th>
+                      </tr>
                     </thead>
                     <tbody>
                       {% for cs in rd.casestatus_set.all %}
                       <tr>
-                        <td>{{ cs.date_time|date:"d M" }}</td>
-                        <td>{{ cs.status }}</td>
+                        <td><input type="text" id="email" class="form-control" value="{{ cs.date_time|date:"d M" }}"/></td>
+                        <td><select class="custom-select">
+                          <option selected>{{ cs.status }}</option>
+                          <option value="1">Send</option>
+                          <option value="2">Received</option>
+                          <option value="3">Call done</option>
+                        </select></td>
+                        <td>
+                          <i class="fas fa-minus addBtnRemove" id="addBtnRemove_0"></i>
+                        </td>
                       </tr>
                       {% endfor %}
                     </tbody>
                   </table>
-                </div>
-              </div>
-
-              <!-- Referees - Row 4 -->
-              {% for cs in rd.casestatus_set.all %}
-              <div class="row">
-                <div class="col-md-3 mb-3">
-                </div>
-                <div class="col-md-9 mb-3">
-                  <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" value="{{ cs.date_time|date:"d M" }}">
-                    <select class="custom-select" id="inputGroupSelect04">
-                      <option selected>{{ cs.status }}</option>
-                      <option value="1">Send</option>
-                      <option value="2">Received</option>
-                      <option value="3">Call done</option>
-                    </select>
-                    <div class="input-group-append">
-                      <button class="fas fa-edit" type="submit"></button>
-                    </div>
-                    <div class="input-group-append">
-                      <button class="fas fa-minus" type="submit"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>  
-              {% endfor %}
-
-              <div class="row">
-                <div class="col-md-3 mb-3">
-                </div>
-                <div class="col-md-9 mb-3">
-                  <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="4 May" value="{{ cs.date_time|date:"d M" }}">
-                    <select class="custom-select" id="inputGroupSelect04">
-                      <option selected>{{ cs.status }}</option>
-                      <option value="1">Send</option>
-                      <option value="2">Received</option>
-                      <option value="3">Call done</option>
-                    </select>
-                    <button class="fas fa-plus" type="submit"></button>
-                  </div>
                 </div>
               </div>
 
@@ -208,35 +181,6 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-          <div class="col-lg-12">
-              <h1>Table Records</h1>
-              <table class="table table-sm table-hover" id="tableAddRow">
-                  <thead>
-                      <tr>
-                          <th>Date</th>
-                          <th>Status</th>
-                          <th style="width:10px">
-                            <i class="fas fa-plus addBtn" id="addBtn_0"></i>
-                          </th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr id="tr_0">
-                          <td><input type="text" id="email" class="form-control" value="02 May"/></td>
-                          <td><input type="text" id="password" class="form-control" value="Send"/></td>
-                          <td>
-                            <i class="fas fa-minus addBtnRemove" id="addBtnRemove_0"></i>
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-        </div>
-    </div>
-
-
     <footer class="my-5 pt-5 text-muted text-center text-small">
       <p class="mb-1">&copy; 2017-2018 Company Name</p>
       <ul class="list-inline">
@@ -256,30 +200,25 @@
       $(document).ready(function () {
           $('.addBtn').on('click', function () 
           {
-              //var trID;
-              //trID = $(this).closest('tr'); // table row ID 
-              addTableRow();
+              addTableRow2();
           });
 
-          $('.addBtnRemove').click(function () 
-          {
-              $(this).closest('tr').remove();  
-          })
+          $('#tableAddRow').on('click', '.addBtnRemove', function(e){
+              e.preventDefault();
+              $(this).closest('tr').remove();
+          });
 
           var i = 1;
-          function addTableRow()
+          function addTableRow2()
           {
-              var tempTr = $('<tr><td><input type="text" id="email_' + i + '" class="form-control" /></td><td><input type="text" id="password_' + i + '" class="form-control" /></td><td><i class="fas fa-minus addBtnRemove" id="addBtnRemove_' + i + '"></i></td></tr>').on('click', function () 
-              {
-                  $(this).closest('tr').remove(); 
-                  //$(document.body).on('click', '.TreatmentHistoryRemove', function (e) 
-                  //{
-                  //    $(this).closest('tr').remove();  
-                  //});
-              });
+              //var tempTr = $('<tr><td><input type="text" id="email_' + i + '" class="form-control" /></td><td><input type="text" id="password_' + i + '" class="form-control" /></td><td><i class="fas fa-minus addBtnRemove" id="addBtnRemove_' + i + '"></i></td></tr>');
+              var today = new Date();
+              var dd =today.getDate();
 
-              $("#tableAddRow").append(tempTr)
-              i++;
+              var tempTr = $('<tr><td><input type="text" id="email_' + i + '" class="form-control" value="'+today+'"/></td><td><select class="custom-select"><option selected>Send</option><option value="1">Send</option><option value="2">Received</option><option value="3">Call done</option></select></td><td><i class="fas fa-minus addBtnRemove" id="addBtnRemove_' + i + '"></i></td></tr>');
+
+                $("#tableAddRow").append(tempTr);
+                i++;   
           }
       });
     </script>
