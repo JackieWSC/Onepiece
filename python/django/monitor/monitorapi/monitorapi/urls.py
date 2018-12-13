@@ -30,6 +30,7 @@ urlpatterns = [
     path('stockhistory/<stock_code>/<int:year>/', views.get_stock_price_history),
     # Notification
     path('checknextkdindex', views.check_next_kd_index),
+    # Utility
     path('playground/', views.playground),
     path('admin/', admin.site.urls),
 ]
