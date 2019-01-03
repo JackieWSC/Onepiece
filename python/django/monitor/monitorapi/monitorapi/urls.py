@@ -24,10 +24,16 @@ urlpatterns = [
     path('history', views.stock_history),
     path('history/<stock_code>/', views.stock_history),
     path('tools', views.playground),
+    path('checker', views.checker),
     # RESTFUL API
     path('kdindex/<stock_code>/', views.get_kd_index),
     path('nextkdindex/<stock_code>/', views.get_next_kd_index),
     path('stockhistory/<stock_code>/<int:year>/', views.get_stock_price_history),
+    path('dbdata/<stock_code>/', views.get_db_data),
+    path('dbkddata/<stock_code>/', views.get_db_kd_data),
+    # MANAGEABILITY
+    path('create_api_data_to_db/<stock_code>/', views.create_api_data_to_db),
+    path('create_kd_data_to_db/<stock_code>/', views.create_kd_data_to_db),
     # Notification
     path('checknextkdindex', views.check_next_kd_index),
     # Utility

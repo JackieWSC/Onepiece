@@ -63,6 +63,10 @@
 </div>
 
 <div class="container">
+  <canvas id="priceChart" width="400" height="200"></canvas>
+</div>
+
+<div class="container">
   <h3>KD History (last 20 trading days)</h3>
   <p>The stochastic oscillator is a momentum indicator that uses support and resistance levels.</p>
   <p>What is KD? Find the <a target="_blank" href='https://www.moneydj.com/KMDJ/Wiki/WikiViewer.aspx?KeyID=76a316b6-c78e-4846-8cb3-89420e3ab819'>answer</a></p>
@@ -175,17 +179,64 @@
         });
     }
 
+  function draw_price_chart(label, price) {
+        var ctx = document.getElementById("priceChart").getContext('2d');
+        var priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'Close Price',
+                    data: price,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: 'start',
+                    steppedLine: true
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:false
+                        }
+                    }]
+                },
+            }
+        });
+    }
+
     $(document).ready(function() {
         $.getJSON("/kdindex/{{stock_code}}/" , function(result) {
             var date = []
             var kValue = []
             var dValue = []
+            var priceValue = []
 
             $.each(result, function(i, field) {
-                K = parseFloat(field.K)
+                K = parseFloat(field.k)
                 K = K * 100
-                D = parseFloat(field.D)
+                D = parseFloat(field.d)
                 D = D * 100
+                price = parseFloat(field.close)
 
                 rowString = "<tr>"
 
@@ -195,20 +246,22 @@
                   rowString = "<tr class=\"bg-success\">"
                 }
 
-                rowString += "<td>" + field.Date + "</td>"
-                rowString += "<td>" + field.Close + "</td>"
+                rowString += "<td>" + field.date + "</td>"
+                rowString += "<td>" + field.close + "</td>"
                 rowString += "<td>" + K.toFixed(2) + "</td>"
                 rowString += "<td>" + D.toFixed(2) + "</td>"
                 rowString += "</tr>"
 
                 $('.KValue').append(rowString)
 
-                date.push(field.Date)
+                date.push(field.date)
                 kValue.push(K.toFixed(2))
                 dValue.push(D.toFixed(2))
+                priceValue.push(price)
             });
 
             draw_line_chart(date, kValue, dValue)
+            draw_price_chart(date, priceValue)
 
         });
 
@@ -217,25 +270,25 @@
             var up_price = new Array()
 
             $.each(result, function(i, field) {
-                K = parseFloat(field.K)
+                K = parseFloat(field.k)
                 K = K * 100
 
                 field.type
-                net = (field.Price - field.Close)/field.Close
+                net = (field.price - field.close)/field.close
                 net = net * 100
 
                 // create the data structure
                 let data = {
-                    price: field.Price,
+                    price: field.price,
                     k: K,
                     net: net
                 }
 
-                if (field.Type == 'DOWN') {
+                if (field.type == 'DOWN') {
                     down_price.push(data)
                 }
 
-                if (field.Type == 'UP') {
+                if (field.type == 'UP') {
                     up_price.push(data)
                 }
             });

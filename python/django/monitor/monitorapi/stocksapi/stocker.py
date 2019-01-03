@@ -2,7 +2,7 @@ import datetime
 import pandas
 import pandas_datareader as datareader
 import requests
-from stocksapi.models import StockPriceStatistics
+from stocksapi.models import StockPriceStatistics, StockDailyInfo, StockKDInfo
 from stocksapi.utilities import Logger, get_line_number
 
 
@@ -27,10 +27,6 @@ class Stocker:
             stock_code = "^HSI"
         return stock_code
 
-    @classmethod
-    def check_price_tick(cls, stock_code):
-        return cls.stock_price_tick[stock_code]
-
     @staticmethod
     def check_start_date(year):
         if year == 10:
@@ -42,6 +38,45 @@ class Stocker:
         else:
             year = 10
         return start, year
+
+    @staticmethod
+    def get_close_price(stock_code):
+        end_date = datetime.date.today()
+        start_date = datetime.date.today()
+        stocks_df = datareader.get_data_yahoo(stock_code, start=start_date, end=end_date)
+        stocks_df.rename(str.lower, axis='columns', inplace=True)
+        close_price = stocks_df['close']
+        return close_price
+
+    @staticmethod
+    def calculate_price_tick(close_price):
+        if close_price > 1000:
+            price_tick = 100
+        elif close_price > 100:
+            price_tick = 1
+        elif close_price > 10:
+            price_tick = 0.1
+        elif close_price > 5:
+            price_tick = 0.05
+        elif close_price > 1:
+            price_tick = 0.01
+        else:
+            price_tick = 0.005
+
+        return price_tick
+
+    def check_price_tick(self, stock_code):
+        if stock_code in self.stock_price_tick:
+            price_tick = self.stock_price_tick[stock_code]
+        else:
+            # use the today close price to calculate the price tick
+            close_price_str = self.get_close_price(stock_code)
+            close_price = float(close_price_str)
+            price_tick = self.calculate_price_tick(close_price)
+
+        log = 'Price Tick for {0} is {1}'.format(stock_code, price_tick)
+        Logger.log_trace('L2', 'check_price_tick', get_line_number(), log)
+        return price_tick
 
     def get_stock_name(self, stock_code):
         stock_code = self.check_stock_code(stock_code)
@@ -56,12 +91,71 @@ class Stocker:
 
         return stock_name
 
-    def get_stock_dataframe(self, stock_code):
+    def get_stock_dataframe(self, stock_code, start_date=None):
         stock_code = self.check_stock_code(stock_code)
         end_date = datetime.date.today()
-        start_date = end_date - datetime.timedelta(days=50)
+        if start_date is None:
+            start_date = end_date - datetime.timedelta(days=50)
         stocks_df = datareader.get_data_yahoo(stock_code, start=start_date, end=end_date)
+        stocks_df.rename(str.lower, axis='columns', inplace=True)
+        print(stocks_df.columns)
+
+        log = "Yahoo API Start Date:{0} ".format(start_date.strftime('%Y-%m-%d'))
+        Logger.log_trace('L2', 'get_stock_dataframe', get_line_number(), log)
+
         return stock_code, stocks_df
+
+    def get_stock_dataframe_from_db(self, stock_code, start_date=None):
+        stock_code = self.check_stock_code(stock_code)
+        # all_entries = StockDailyInfo.objects.all()
+        # for entry in all_entries:
+        #     log = "{0} {1} {2} {3}".format(entry.date, entry.high, entry.low, entry.close)
+        #     Logger.log_trace('L2', 'get_stock_dataframe_from_db', get_line_number(), log)
+
+        db_data = StockDailyInfo.objects.filter(
+            stock=stock_code
+        ).order_by('date')
+
+        temp_df = pandas.DataFrame.from_records(db_data.values())
+
+        # print(temp_df.columns)
+        # Rename the column to Date, High, Low, Close which match yahoo api
+        # temp_df.rename(inplace=True, columns={
+        #     'date': 'Date',
+        #     'stock': 'Stock',
+        #     'high': 'High',
+        #     'low': 'Low',
+        #     'close': 'Close'
+        # })
+        # print(temp_df.columns)
+
+        return stock_code, temp_df
+
+    def get_kd_dataframe_from_db(self, stock_code, start_date=None):
+        stock_code = self.check_stock_code(stock_code)
+        # all_entries = StockDailyInfo.objects.all()
+        # for entry in all_entries:
+        #     log = "{0} {1} {2} {3}".format(entry.date, entry.high, entry.low, entry.close)
+        #     Logger.log_trace('L2', 'get_stock_dataframe_from_db', get_line_number(), log)
+
+        db_data = StockKDInfo.objects.filter(
+            stock=stock_code
+        ).order_by('date')
+
+        temp_df = pandas.DataFrame.from_records(db_data.values())
+
+        # print(temp_df.columns)
+        # Rename the column to Date, High, Low, Close which match yahoo api
+        # temp_df.rename(inplace=True, columns={
+        #     'date': 'Date',
+        #     'stock': 'Stock',
+        #     'high': 'High',
+        #     'low': 'Low',
+        #     'close': 'Close'
+        # })
+        # print(temp_df.columns)
+
+        return stock_code, temp_df
 
     @staticmethod
     def calculate_today_k(previous_k, today_rsv):
@@ -95,11 +189,11 @@ class Stocker:
 
             # calculate the RSV
             date = stocks_df.index[i]
-            highest_price = df_max['High']
-            lowest_price = df_min['Low']
-            high_price = stocks_df.iloc[i]['High']
-            low_price = stocks_df.iloc[i]['Low']
-            close_price = stocks_df.iloc[i]['Close']
+            high_price = float(stocks_df.iloc[i]['high'])
+            low_price = float(stocks_df.iloc[i]['low'])
+            close_price = float(stocks_df.iloc[i]['close'])
+            highest_price = float(df_max['high'])
+            lowest_price = float(df_min['low'])
             today_rsv = (close_price - lowest_price) / (highest_price - lowest_price)
 
             # calculate the KD value
@@ -121,13 +215,15 @@ class Stocker:
                                                                  today_k,
                                                                  today_d)
 
-            data['Date'].append(date.strftime('%Y-%m-%d'))
-            data['HighN'].append(format(highest_price, '.2f'))
-            data['LowN'].append(format(lowest_price, '.2f'))
-            data['Close'].append(format(close_price, '.2f'))
-            data['RSV'].append(format(today_rsv, '.4f'))
-            data['K'].append(format(today_k, '.4f'))
-            data['D'].append(format(today_d, '.4f'))
+            data['date'].append(date.strftime('%Y-%m-%d'))
+            data['high'].append(format(high_price, '.2f'))
+            data['low'].append(format(low_price, '.2f'))
+            data['close'].append(format(close_price, '.2f'))
+            data['highest'].append(format(highest_price, '.2f'))
+            data['lowest'].append(format(lowest_price, '.2f'))
+            data['rsv'].append(format(today_rsv, '.4f'))
+            data['k'].append(format(today_k, '.4f'))
+            data['d'].append(format(today_d, '.4f'))
 
         Logger.log_trace('L2', 'calculate_kd_with_data', get_line_number(), log)
         return data
@@ -140,19 +236,21 @@ class Stocker:
         display_trading_day = 20
 
         reference_data = {
-            'Date': [],
-            'HighN': [],
-            'LowN': [],
-            'Close': [],
-            'RSV': [],
-            'K': [],
-            'D': []
+            'date': [],
+            'high': [],
+            'low': [],
+            'close': [],
+            'highest': [],
+            'lowest': [],
+            'rsv': [],
+            'k': [],
+            'd': []
         }
 
         reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
 
         # not show all records in json only create last 20 trading day (display_trading_day)
-        kd_df = pandas.DataFrame(data=reference_data, index=reference_data['Date'])
+        kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
         kd_df = kd_df.iloc[-display_trading_day:]
 
         return kd_df.to_json(orient='records')
@@ -175,10 +273,10 @@ class Stocker:
     def predict_next_k(self, reference_data, stock_code, direction, num_of_date, data):
         # get the price tick with stock code
         stock_price_tick = self.check_price_tick(stock_code)
-        close_price = float(reference_data['Close'][-1])
-        highest_price = float(reference_data['HighN'][-1])
-        lowest_price = float(reference_data['LowN'][-1])
-        previous_k = float(reference_data['K'][-1])
+        close_price = float(reference_data['close'][-1])
+        highest_price = float(reference_data['highest'][-1])
+        lowest_price = float(reference_data['lowest'][-1])
+        previous_k = float(reference_data['k'][-1])
         log = ''
         if direction in 'UP':
             price_direction = 1
@@ -190,13 +288,13 @@ class Stocker:
             k = self.predict_k(next_close, highest_price, lowest_price, previous_k)
 
             k_str = format(k, '.4f')
-            if data['K'][-1] == k_str:
+            if data['k'][-1] == k_str:
                 break
 
-            data['Close'].append(format(close_price, '.2f'))
-            data['Price'].append(format(next_close, '.2f'))
-            data['K'].append(k_str)
-            data['Type'].append(direction)
+            data['close'].append(format(close_price, '.2f'))
+            data['price'].append(format(next_close, '.2f'))
+            data['k'].append(k_str)
+            data['type'].append(direction)
 
             log += "Type:{0} Next Close:{1} K:{2}\n".format(direction,
                                                             format(next_close, '.2f'),
@@ -242,35 +340,37 @@ class Stocker:
         stock_code, stocks_df = self.get_stock_dataframe(stock_code)
 
         reference_data = {
-            'Date': [],
-            'HighN': [],
-            'LowN': [],
-            'Close': [],
-            'RSV': [],
-            'K': [],
-            'D': []
+            'date': [],
+            'high': [],
+            'low': [],
+            'close': [],
+            'highest': [],
+            'lowest': [],
+            'rsv': [],
+            'k': [],
+            'd': []
         }
 
         reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
-        date = reference_data['Date'][-1]
-        close_price = float(reference_data['Close'][-1])
-        highest_price = float(reference_data['HighN'][-1])
-        lowest_price = float(reference_data['LowN'][-1])
-        previous_k = float(reference_data['K'][-1])
+        date = reference_data['date'][-1]
+        close_price = float(reference_data['close'][-1])
+        highest_price = float(reference_data['highest'][-1])
+        lowest_price = float(reference_data['lowest'][-1])
+        previous_k = float(reference_data['k'][-1])
 
         data = {
-            'Close': [],
-            'Price': [],
-            'K': [],
-            'Type': []
+            'close': [],
+            'price': [],
+            'k': [],
+            'type': []
         }
 
         # first 1
         k = self.predict_k(close_price, highest_price, lowest_price, previous_k)
-        data['Close'].append(format(close_price, '.2f'))
-        data['Price'].append(format(close_price, '.2f'))
-        data['K'].append(format(k, '.4f'))
-        data['Type'].append("START")
+        data['close'].append(format(close_price, '.2f'))
+        data['price'].append(format(close_price, '.2f'))
+        data['k'].append(format(k, '.4f'))
+        data['type'].append("START")
 
         # send the notification to line
         self.notify_line(send_to_line, date, close_price, previous_k)
@@ -280,7 +380,7 @@ class Stocker:
         self.predict_next_k(reference_data, stock_code, "DOWN", 10, data)
 
         kd_df = pandas.DataFrame(data=data)
-        kd_df.sort_values('Price', inplace=True)
+        kd_df.sort_values('price', inplace=True)
 
         return kd_df.to_json(orient='records')
 
@@ -293,13 +393,14 @@ class Stocker:
         # df = data.get_data_yahoo('2800.hk', start_date, end_date)
         # the early start day is 2007-12-31
         stock_df = datareader.get_data_yahoo(stock_code, start=start, end=end)
+        stock_df.rename(str.lower, axis='columns', inplace=True)
         no_of_record = len(stock_df.index)
 
         print('create_stock_price_history - no_of_record', no_of_record)
 
         # round the price to 1 decimal
         decimal = self.get_decimal(stock_code)
-        stock_df['price'] = round(stock_df['Close'], decimal)
+        stock_df['price'] = round(stock_df['close'], decimal)
 
         # create count column to count the price
         history_df = stock_df.groupby(['price']) \
@@ -329,3 +430,135 @@ class Stocker:
             StockPriceStatistics.objects.bulk_create(entries)
 
         return history_df.to_json(orient='records')
+
+    def get_db_data(self, stock_code):
+        # get the stock data from pandas_datareader
+        #   e.g. stock_code = '2800.HK'
+        #   e.g. start = datetime.datetime(2018, 8, 22)
+        stock_code, stocks_df = self.get_stock_dataframe_from_db(stock_code)
+
+        stocks_df['date'] = stocks_df['date'].map('{:%Y-%m-%d}'.format)
+
+        # remove useless column
+        stocks_df.drop(['id'], axis=1, inplace=True)
+
+        return stocks_df.to_json(orient='records')
+
+    def get_db_kd_data(self, stock_code):
+        # get the stock data from pandas_datareader
+        #   e.g. stock_code = '2800.HK'
+        #   e.g. start = datetime.datetime(2018, 8, 22)
+        stock_code, stocks_df = self.get_kd_dataframe_from_db(stock_code)
+
+        # stocks_df.reset_index(inplace=True)
+        stocks_df['date'] = stocks_df['date'].map('{:%Y-%m-%d}'.format)
+
+        # remove useless column
+        stocks_df.drop(['id'], axis=1, inplace=True)
+
+        return stocks_df.to_json(orient='records')
+
+    # use the yahoo api data to create the raw data to database for subsequence calculation
+    # key: date + stock
+    # fields:
+    # - date
+    # - stock
+    # - high
+    # - low
+    # - close
+    def create_api_data_to_db(self, stock_code):
+        # get the stock data from pandas_datareader
+        #   e.g. stock_code = '2800.HK'
+        #   e.g. start = datetime.datetime(2018, 8, 22)
+        stock_code, stocks_df = self.get_stock_dataframe(stock_code, datetime.datetime(2018, 1, 2))
+
+        stocks_df.reset_index(inplace=True)
+        stocks_df['date'] = stocks_df['date'].dt.strftime('%Y-%m-%d')
+        stocks_df['high'] = stocks_df['high'].map('{:.2f}'.format)
+        stocks_df['low'] = stocks_df['low'].map('{:.2f}'.format)
+        stocks_df['open'] = stocks_df['open'].map('{:.2f}'.format)
+        stocks_df['close'] = stocks_df['close'].map('{:.2f}'.format)
+        stocks_df['volume'] = stocks_df['volume'].map('{:.2f}'.format)
+        stocks_df['adj close'] = stocks_df['adj close'].map('{:.2}'.format)
+        stocks_df['stock'] = stock_code
+
+        write_to_db = False
+
+        # write the data to database
+        if write_to_db:
+            # create the another dataframe from stocks dataframe and save to database
+            # temp_df = pandas.DataFrame({
+            #     "date": stocks_df['date'],
+            #     "high": stocks_df['high'],
+            #     "low": stocks_df['low'],
+            #     "close": stocks_df['close'],
+            #     "stock": stock_code
+            # })
+
+            entries = []
+            # for entry in stocks_df.T.to_dict().values():
+            for entry in stocks_df.to_dict('records'):
+                # print(entry)
+                entries.append(StockDailyInfo(**entry))
+
+            StockDailyInfo.objects.bulk_create(entries)
+
+        return stocks_df.to_json(orient='records')
+
+    def create_kd_data_to_db(self, stock_code):
+        # get the data from db
+        # calculate the KD
+        # save to db
+        # get the stock data from pandas_datareader
+        #   e.g. stock_code = '2800.HK'
+        #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
+        stock_code, stocks_df = self.get_stock_dataframe_from_db(stock_code)
+
+        # stocks_df['Date'] = stocks_df['Date'].map('{:%Y-%m-%d}'.format)
+        stocks_df.set_index('date', inplace=True)
+
+        reference_data = {
+            'date': [],
+            'high': [],
+            'low': [],
+            'close': [],
+            'highest': [],
+            'lowest': [],
+            'rsv': [],
+            'k': [],
+            'd': []
+        }
+
+        reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
+
+        kd_df = pandas.DataFrame(data=reference_data, index=reference_data['Date'])
+        kd_df.reset_index(inplace=True)
+        kd_df["stock"] = stock_code
+
+        write_to_db = False
+
+        # write the data to database
+        if write_to_db:
+            # create the another dataframe from stocks dataframe and save to database
+            # temp_df = pandas.DataFrame({
+            #     "date": kd_df['Date'],
+            #     "stock": stock_code,
+            #     "high": kd_df['High'],
+            #     "low": kd_df['Low'],
+            #     "close": kd_df['Close'],
+            #     "highest": kd_df['Highest'],
+            #     "lowest": kd_df['Lowest'],
+            #     "rsv": kd_df['RSV'],
+            #     "k": kd_df['K'],
+            #     "d": kd_df['D'],
+            # })
+
+            entries = []
+            # for entry in stocks_df.T.to_dict().values():
+            for entry in kd_df.to_dict('records'):
+                # print(entry)
+                entries.append(StockKDInfo(**entry))
+
+            StockKDInfo.objects.bulk_create(entries)
+
+        return kd_df.to_json(orient='records')

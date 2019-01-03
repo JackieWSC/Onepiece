@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{stock_code}} Checker</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Monitor</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/kd" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          KD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/kd/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/kd/HSI/">HSI</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          History
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/history/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/history/HSI/">HSI</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/tools">Tools<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="jumbotron bg-dark text-center  text-white">
+  <h1>{{stock_name}} ({{stock_code}})</h1>
+  <p>KD Index</p>
+</div>
+
+<div class="container">
+  <h3>Missing RAW Data</h3>
+  <p>The raw data may be missing in database</p>
+  <table class="table table-striped table-sm table-bordered text-center">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody class="MissingValue">
+  </table>
+</div>
+
+<div class="container">
+  <h3>Database RAW Data</h3>
+  <p>The raw data get from database</p>
+  <table class="table table-striped table-sm table-bordered text-center">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">High ($)</th>
+        <th scope="col">Low ($)</th>
+        <th scope="col">Close Price ($)</th>
+      </tr>
+    </thead>
+    <tbody class="RawValue">
+  </table>
+</div>
+
+<div class="container">
+  <h3>Database KD Data</h3>
+  <p>The calculate data get from database</p>
+  <table class="table table-striped table-sm table-bordered text-center">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">High</th>
+        <th scope="col">Low</th>
+        <th scope="col">Close Price ($)</th>
+        <th scope="col">Highest</th>
+        <th scope="col">Lowest</th>
+        <th scope="col">RSV</th>
+        <th scope="col">K Value (%)</th>
+        <th scope="col">D Value (%)</th>
+      </tr>
+    </thead>
+    <tbody class="KValue">
+  </table>
+</div>
+
+<!-- debug -->
+<!--
+<div class="container">
+  <div class="row">
+      <p class="Testing"></p>1
+  </div>
+</div>
+-->
+
+<script>
+    var getDaysArray = function(start, end) {
+        for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+            arr.push(new Date(dt));
+        }
+        return arr;
+    }
+
+    // todo
+    function checkMissingDate(datelist) {
+        console.log("checkMissingDate")
+
+        var daylist = getDaysArray(new Date("2018-05-01"),new Date("2018-07-01"));
+        //daylist.map((v)=>v.toISOString().slice(0,10)).join("")
+
+        for (var i in daylist) {
+            console.log("List:" + daylist[i])
+        }
+    }
+
+    $(document).ready(function() {
+        $.getJSON("/dbdata/{{stock_code}}/" , function(result) {
+            last_date_day = 0
+            $.each(result, function(i, field) {
+                date = new Date(field.date)
+
+                rowString = "<tr>"
+                rowString += "<td>" + field.date + " (" + date.getDay() + ")</td>"
+                rowString += "<td>" + field.high + "</td>"
+                rowString += "<td>" + field.low + "</td>"
+                rowString += "<td>" + field.close + "</td>"
+                rowString += "</tr>"
+
+                $('.RawValue').append(rowString)
+                if ( (date.getDay() - last_date_day != 1) &&
+                     ((last_date_day != 5) || (date.getDay() != 1 )) ) {
+                    missing_data_row_str = "<tr>"
+                    missing_data_row_str += "<td>" + field.date + " (" + date.getDay() + ")</td>"
+                    missing_data_row_str += "</tr>"
+
+                    $('.MissingValue').append(missing_data_row_str)
+                }
+
+                last_date_day = date.getDay()
+            });
+        });
+
+        $.getJSON("/dbkddata/{{stock_code}}/" , function(result) {
+            $.each(result, function(i, field) {
+                K = parseFloat(field.k)
+                K = K * 100
+                D = parseFloat(field.d)
+                D = D * 100
+                price = parseFloat(field.close)
+
+                rowString = "<tr>"
+
+                if (K>80) {
+                  rowString = "<tr class=\"bg-danger\">"
+                } else if (K<20) {
+                  rowString = "<tr class=\"bg-success\">"
+                }
+
+                rowString += "<td>" + field.date + "</td>"
+                rowString += "<td>" + field.high + "</td>"
+                rowString += "<td>" + field.low + "</td>"
+                rowString += "<td>" + field.close + "</td>"
+                rowString += "<td>" + field.highest + "</td>"
+                rowString += "<td>" + field.lowest + "</td>"
+                rowString += "<td>" + field.rsv + "</td>"
+                rowString += "<td>" + K.toFixed(2) + "</td>"
+                rowString += "<td>" + D.toFixed(2) + "</td>"
+                rowString += "</tr>"
+
+                $('.KValue').append(rowString)
+            });
+        });
+    });
+
+</script>
+
+</body>
+</html>
