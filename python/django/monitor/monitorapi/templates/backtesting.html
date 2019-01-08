@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{stock_code}} Backtesting</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Monitor</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/kd" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          KD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/kd/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/kd/HSI/">HSI</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          History
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/history/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/history/HSI/">HSI</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/backtesting">Backtesting<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="jumbotron bg-dark text-center  text-white">
+  <h1>{{stock_name}} ({{stock_code}})</h1>
+  <p>Backtesting</p>
+</div>
+
+{% if not is_mobile %}
+<div class="container">
+  <canvas id="kdChart" width="400" height="100"></canvas>
+</div>
+
+<div class="container">
+  <canvas id="priceChart" width="400" height="100"></canvas>
+</div>
+{% endif %}
+
+<div class="container">
+  <h3>K Value Backtesting</h3>
+  <form id="check_k" class="form-inline" action="">
+    <label for="stock" class="mr-sm-2">Stock:</label>
+    <input type="text" class="form-control mb-2 mr-sm-2" id="stock" value="2800.HK" readonly>
+
+    <label for="bottom_k" class="mr-sm-2">Buy the Order when K value < :</label>
+    <select class="custom-select orm-control mb-2 mr-sm-2" id="bottom_k">
+    </select>
+
+    <label for="upper_k" class="mr-sm-2">Sell the Order when K value > :</label>
+    <select class="custom-select orm-control mb-2 mr-sm-2" id="upper_k">
+    </select>
+
+    <button type="submit" class="btn btn-primary mb-2">Backtesting in 2018</button>
+  </form>
+  <div class="alert alert-success">
+      <strong id="back_testing_result"></strong>
+  </div>
+  <p id="backtesting_description"></p>
+  <table class="table table-striped table-sm table-bordered text-center">
+    <thead>
+      <tr>
+        <th scope="col">Buy Date</th>
+        <th scope="col">Sell Date</th>
+        <th scope="col">Buy K value (%)</th>
+        <th scope="col">Sell K Value (%)</th>
+        <th scope="col">Buy Price ($)</th>
+        <th scope="col">Sell Price ($)</th>
+        <th scope="col">Profit ($)</th>
+        <th scope="col">Profit (%)</th>
+        <th scope="col">Acc Profit ($)</th>
+        <th scope="col">Acc Profit (%)</th>
+      </tr>
+    </thead>
+    <tbody id="backtesting_table">
+  </table>
+</div>
+
+<div class="container">
+  <h3 id="k_result_header"></h3>
+  <p>The data within the defined K Value range:</p>
+  <table class="table table-striped table-sm table-bordered text-center">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">High</th>
+        <th scope="col">Low</th>
+        <th scope="col">Close Price ($)</th>
+        <th scope="col">Highest</th>
+        <th scope="col">Lowest</th>
+        <th scope="col">RSV</th>
+        <th scope="col">K Value (%)</th>
+        <th scope="col">D Value (%)</th>
+      </tr>
+    </thead>
+    <tbody id="k_result_table" class="TestValue">
+  </table>
+</div>
+
+<!--<div class="container">-->
+  <!--<h3>2018 KD Data</h3>-->
+  <!--<p>The KD value is calculate in (9,3,3) formula:</p>-->
+  <!--<table class="table table-striped table-sm table-bordered text-center">-->
+    <!--<thead>-->
+      <!--<tr>-->
+        <!--<th scope="col">Date</th>-->
+        <!--<th scope="col">High</th>-->
+        <!--<th scope="col">Low</th>-->
+        <!--<th scope="col">Close Price ($)</th>-->
+        <!--<th scope="col">Highest</th>-->
+        <!--<th scope="col">Lowest</th>-->
+        <!--<th scope="col">RSV</th>-->
+        <!--<th scope="col">K Value (%)</th>-->
+        <!--<th scope="col">D Value (%)</th>-->
+      <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody class="KValue">-->
+  <!--</table>-->
+<!--</div>-->
+
+<!-- debug -->
+<!--
+<div class="container">
+  <div class="row">
+      <p class="Testing"></p>1
+  </div>
+</div>
+-->
+
+<script>
+    function draw_kd_chart(label, k_data, d_data) {
+        var ctx = document.getElementById("kdChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'K Value',
+                    data: k_data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                },{
+                    label: 'D Value',
+                    data: d_data,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+            }
+        });
+    }
+
+    function draw_price_chart(label, price) {
+        var ctx = document.getElementById("priceChart").getContext('2d');
+        var priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'Close Price',
+                    data: price,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: 'start',
+                    steppedLine: true
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:false
+                        }
+                    }]
+                },
+            }
+        });
+    }
+
+    var getDaysArray = function(start, end) {
+        for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+            arr.push(new Date(dt));
+        }
+        return arr;
+    }
+
+    // todo
+    function checkMissingDate(datelist) {
+        console.log("checkMissingDate")
+
+        var daylist = getDaysArray(new Date("2018-05-01"),new Date("2018-07-01"));
+        //daylist.map((v)=>v.toISOString().slice(0,10)).join("")
+
+        for (var i in daylist) {
+            console.log("List:" + daylist[i])
+        }
+    }
+
+    function set_k_result_header(bottom_k, upper_k) {
+        $("#k_result_header").html("K Value < " + bottom_k + "% or K Value > " + upper_k + "%" + " in 2018")
+        $('#backtesting_description').html("Buy the order when K value < " + bottom_k + "% and " +
+                                           "Sell the order when K value > " + upper_k + "%. " +
+                                           "Assume you buy and sell 1000 shares each time.")
+    }
+
+    function set_backtesting_result(acc_profile, acc_profit_percent) {
+        $('#back_testing_result').html("Backtesting Result: $" + acc_profile +
+                                       " (" +  acc_profit_percent + "%) for each 1000 shares")
+    }
+
+    function set_k_select_option(default_bottom_k, default_upper_k) {
+
+        // buy k select
+        selectValues = {}
+
+        for (i = 5; i<=45; i+=5) {
+            selectValues[i] = i + '%'
+        }
+
+        $.each(selectValues, function(key, value) {
+             $('#bottom_k').append($("<option></option>")
+                        .attr("value",key)
+                        .text(value));
+        });
+
+        $('#bottom_k').val(default_bottom_k)
+
+        // sell k select
+        selectValues = {}
+
+        for (i = 55; i<=95; i+=5) {
+            selectValues[i] = i + '%'
+        }
+
+        $.each(selectValues, function(key, value) {
+             $('#upper_k').append($("<option></option>")
+                         .attr("value",key)
+                         .text(value));
+        });
+
+        $('#upper_k').val(default_upper_k)
+
+    }
+
+    function create_test_value_row(K, D, field, bottom_k, upper_k) {
+        rowString = "<tr>"
+
+        if (K >= upper_k) {
+            rowString = "<tr class=\"bg-danger\">"
+        } else if (K <= bottom_k) {
+            rowString = "<tr class=\"bg-success\">"
+        }
+
+        rowString += "<td>" + field.date + "</td>"
+        rowString += "<td>" + field.high + "</td>"
+        rowString += "<td>" + field.low + "</td>"
+        rowString += "<td>" + field.close + "</td>"
+        rowString += "<td>" + field.highest + "</td>"
+        rowString += "<td>" + field.lowest + "</td>"
+        rowString += "<td>" + field.rsv + "</td>"
+        rowString += "<td>" + K.toFixed(2) + "</td>"
+        rowString += "<td>" + D.toFixed(2) + "</td>"
+        rowString += "</tr>"
+
+        if ( (K <= bottom_k) || (K >= upper_k) ) {
+            $('.TestValue').append(rowString)
+            // console.log('k:' + K + ', bottom_k:' + bottom_k + ', sel_k:' + upper_k)
+        }
+    }
+
+    function create_profit_row(K, D, field, bottom_k, upper_k, profit_ctx) {
+        if (K >= upper_k) {
+
+            if (profit_ctx.is_buy) {
+                sell_price = field.close
+                sell_date = field.date
+                sell_k = K.toFixed(2)
+                profit_ctx.is_buy = false
+
+                profit = (sell_price * 1000) - (profit_ctx.buy_price * 1000)
+                profit_ctx.acc_profile += profit
+                profit = profit.toFixed(2)
+                acc_profile_str = profit_ctx.acc_profile.toFixed(2)
+
+                profit_percent = (profit / (profit_ctx.buy_price * 1000)) * 100
+                profit_ctx.acc_profit_percent += profit_percent
+                profit_percent = profit_percent.toFixed(2)
+                acc_profit_percent_str = profit_ctx.acc_profit_percent.toFixed(2)
+
+                rowString = "<tr>"
+                rowString += "<td>" + profit_ctx.buy_date + "</td>"
+                rowString += "<td>" + sell_date + "</td>"
+                rowString += "<td>" + profit_ctx.buy_k + "</td>"
+                rowString += "<td>" + sell_k + "</td>"
+                rowString += "<td>" + profit_ctx.buy_price + "</td>"
+                rowString += "<td>" + sell_price + "</td>"
+                rowString += "<td>" + profit + "</td>"
+                rowString += "<td>" + profit_percent + "</td>"
+                rowString += "<td>" + acc_profile_str + "</td>"
+                rowString += "<td>" + acc_profit_percent_str + "</td>"
+                rowString += "</tr>"
+
+                $('#backtesting_table').append(rowString)
+            }
+
+        } else if (K <= bottom_k) {
+
+            if (!profit_ctx.is_buy) {
+                profit_ctx.buy_price = field.close
+                profit_ctx.buy_date = field.date
+                profit_ctx.buy_k = K.toFixed(2)
+                profit_ctx.is_buy = true
+            }
+        }
+    }
+
+    function calculate_the_profit(bottom_k, upper_k) {
+        set_k_result_header(bottom_k, upper_k)
+
+        $.getJSON("/dbkddata/{{stock_code}}/" , function(result) {
+            $('#k_result_table tr').remove()
+            $('#backtesting_table tr').remove()
+
+            profit_ctx = {
+                is_buy: false,
+                acc_profile: 0.0,
+                acc_profit_percent: 0.0,
+                buy_date: '',
+                buy_price: 0.0,
+                buy_k: 0.0
+            }
+
+            $.each(result, function(i, field) {
+                K = parseFloat(field.k)
+                K = K * 100
+                D = parseFloat(field.d)
+                D = D * 100
+                price = parseFloat(field.close)
+
+                create_test_value_row(K, D, field, bottom_k, upper_k)
+                create_profit_row(K, D, field, bottom_k, upper_k, profit_ctx)
+            });
+
+            set_backtesting_result(profit_ctx.acc_profile.toFixed(2),
+                                   profit_ctx.acc_profit_percent.toFixed(2))
+        });
+    }
+
+    $("#check_k").submit(function(event) {
+        bottom_k = parseFloat($("#bottom_k").val())
+        upper_k = parseFloat($("#upper_k").val())
+
+        calculate_the_profit(bottom_k, upper_k)
+
+        event.preventDefault()
+    });
+
+    $(document).ready(function() {
+        bottom_k = 20.00
+        upper_k = 80.00
+
+        set_k_select_option(bottom_k, upper_k)
+        calculate_the_profit(bottom_k, upper_k)
+
+        {% if not is_mobile %}
+        $.getJSON("/dbkddata/{{stock_code}}/" , function(result) {
+            var date = []
+            var kValue = []
+            var dValue = []
+            var priceValue = []
+
+            $.each(result, function(i, field) {
+                K = parseFloat(field.k)
+                K = K * 100
+                D = parseFloat(field.d)
+                D = D * 100
+                price = parseFloat(field.close)
+
+                //rowString = "<tr>"
+
+                //if (K >= upper_k) {
+                //  rowString = "<tr class=\"bg-danger\">"
+                //} else if (K <= bottom_k) {
+                //  rowString = "<tr class=\"bg-success\">"
+                //}
+
+                //rowString += "<td>" + field.date + "</td>"
+                //rowString += "<td>" + field.high + "</td>"
+                //rowString += "<td>" + field.low + "</td>"
+                //rowString += "<td>" + field.close + "</td>"
+                //rowString += "<td>" + field.highest + "</td>"
+                //rowString += "<td>" + field.lowest + "</td>"
+                //rowString += "<td>" + field.rsv + "</td>"
+                //rowString += "<td>" + K.toFixed(2) + "</td>"
+                //rowString += "<td>" + D.toFixed(2) + "</td>"
+                //rowString += "</tr>"
+
+                //$('.KValue').append(rowString)
+
+                date.push(field.date)
+                kValue.push(K.toFixed(2))
+                dValue.push(D.toFixed(2))
+                priceValue.push(price)
+            });
+
+            draw_kd_chart(date, kValue, dValue)
+            draw_price_chart(date, priceValue)
+        });
+        {% endif %}
+    });
+
+</script>
+
+</body>
+</html>

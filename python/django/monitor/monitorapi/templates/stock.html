@@ -23,7 +23,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" href="/kd" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           KD<span class="sr-only">(current)</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -43,7 +43,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tools">Tools</a>
+        <a class="nav-link" href="/backtesting">Backtesting</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -53,13 +53,13 @@
   </div>
 </nav>
 
-<div class="jumbotron bg-dark text-center  text-white">
+<div class="jumbotron bg-dark text-center text-white">
   <h1>{{stock_name}} ({{stock_code}})</h1>
   <p>KD Index</p>
 </div>
 
 <div class="container">
-  <canvas id="myChart" width="400" height="200"></canvas>
+  <canvas id="kdChart" width="400" height="200"></canvas>
 </div>
 
 <div class="container">
@@ -110,8 +110,8 @@
 
 <script>
 
-    function draw_line_chart(label, k_data, d_data) {
-        var ctx = document.getElementById("myChart").getContext('2d');
+    function draw_kd_chart(label, k_data, d_data) {
+        var ctx = document.getElementById("kdChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -260,7 +260,7 @@
                 priceValue.push(price)
             });
 
-            draw_line_chart(date, kValue, dValue)
+            draw_kd_chart(date, kValue, dValue)
             draw_price_chart(date, priceValue)
 
         });

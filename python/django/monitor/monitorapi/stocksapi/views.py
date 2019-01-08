@@ -1,4 +1,5 @@
 import time
+import re
 from django.shortcuts import render
 from django.http import HttpResponse
 from stocksapi.models import Visitor
@@ -6,6 +7,17 @@ from stocksapi.stocker import Stocker
 from stocksapi.utilities import Logger, get_line_number
 
 stocker = Stocker()
+
+
+# Return True if the request comes from a mobile device.
+def mobile(request):
+
+    MOBILE_AGENT_RE = re.compile(r".*(iphone|mobile|androidtouch)", re.IGNORECASE)
+
+    if MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT']):
+        return True
+    else:
+        return False
 
 
 # Main View Page
@@ -27,6 +39,14 @@ def stock_history(request, stock_code="2800.HK"):
     }
 
     return render(request, "stockhistory.html", context)
+
+
+def backtesting(request, stock_code="2800.HK"):
+    stock_name = stocker.get_stock_name(stock_code)
+    is_mobile = mobile(request)
+    context = dict(stock_name=stock_name, stock_code=stock_code, is_mobile=is_mobile)
+
+    return render(request, "backtesting.html", context)
 
 
 def playground(request):

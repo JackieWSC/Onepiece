@@ -305,33 +305,34 @@ class Stocker:
     @staticmethod
     def notify_line(send, date, close_price, k_value):
         if send:
-            k_value = format(k_value * 100, '.0f')
+            if k_value < 0.25 or k_value > 0.65:
+                k_value = format(k_value * 100, '.0f')
 
-            log = "notify line - date:{0}, close_price:{1}, k_value:{2}".format(
-                    date,
-                    close_price,
-                    k_value)
-            Logger.log_trace('L2', 'notify_line', get_line_number(), log)
+                log = "notify line - date:{0}, close_price:{1}, k_value:{2}".format(
+                        date,
+                        close_price,
+                        k_value)
+                Logger.log_trace('L2', 'notify_line', get_line_number(), log)
 
-            IFTTT_WEBHOOKS_URL = 'https://maker.ifttt.com/trigger/{}/with/key/{}'
-            event = 'stockLine'
-            token = 'jSfmLiQN7-TxzISuY3kE6p-gusxDr3CTivpaHqNWFCG'
+                IFTTT_WEBHOOKS_URL = 'https://maker.ifttt.com/trigger/{}/with/key/{}'
+                event = 'stockLine'
+                token = 'jSfmLiQN7-TxzISuY3kE6p-gusxDr3CTivpaHqNWFCG'
 
-            url_ifttt = IFTTT_WEBHOOKS_URL.format(event, token)
-            log = "IFTTT URL:{0}".format(url_ifttt);
-            Logger.log_trace('L2', 'notify_line', get_line_number(), log)
+                url_ifttt = IFTTT_WEBHOOKS_URL.format(event, token)
+                log = "IFTTT URL:{0}".format(url_ifttt);
+                Logger.log_trace('L2', 'notify_line', get_line_number(), log)
 
-            # payload
-            data = {
-                'value1': date,
-                'value2': close_price,
-                'value3': k_value
-            }
+                # payload
+                data = {
+                    'value1': date,
+                    'value2': close_price,
+                    'value3': k_value
+                }
 
-            # send the request
-            req = requests.post(url_ifttt, data)
-            log = 'Request Text:{0}'.format(req.text)
-            Logger.log_trace('L2', 'notify_line', get_line_number(), log)
+                # send the request
+                req = requests.post(url_ifttt, data)
+                log = 'Request Text:{0}'.format(req.text)
+                Logger.log_trace('L2', 'notify_line', get_line_number(), log)
 
     def create_next_kd_index(self, stock_code, send_to_line=False):
         # get the stock data from pandas_datareader

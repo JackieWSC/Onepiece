@@ -24,6 +24,7 @@ urlpatterns = [
     path('history', views.stock_history),
     path('history/<stock_code>/', views.stock_history),
     path('tools', views.playground),
+    path('backtesting', views.backtesting),
     path('checker', views.checker),
     # RESTFUL API
     path('kdindex/<stock_code>/', views.get_kd_index),
