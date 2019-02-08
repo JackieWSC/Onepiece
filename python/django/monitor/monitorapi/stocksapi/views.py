@@ -9,7 +9,7 @@ from stocksapi.utilities import Logger, get_line_number
 stocker = Stocker()
 
 
-# Return True if the request comes from a mobile device.
+# helper - Return True if the request comes from a mobile device.
 def mobile(request):
 
     MOBILE_AGENT_RE = re.compile(r".*(iphone|mobile|androidtouch)", re.IGNORECASE)
@@ -18,6 +18,45 @@ def mobile(request):
         return True
     else:
         return False
+
+
+def get_from_cookie(request, function_name, stock_code, load_from_cookie=True):
+    create_session_data = False
+    json = {}
+
+    if load_from_cookie:
+        if function_name in request.session:
+            Logger.log_trace('Info', 'check_cookie', get_line_number(),
+                             'Found {} session file in Request'.format(function_name))
+            kd_index_json_map = request.session[function_name]
+
+            if stock_code in kd_index_json_map:
+                json = kd_index_json_map[stock_code]
+            else:
+                create_session_data = True
+
+        else:
+            create_session_data = True
+
+    else:
+        create_session_data = True
+
+    return create_session_data, json
+
+
+def save_to_cookie(request, function_name, stock_code, json):
+    json_map = {stock_code: json}
+    request.session[function_name] = json_map
+    request.session.set_expiry(300)
+
+
+def check_latency(page_name, start_time):
+    latency_ms = (time.time() - start_time) * 1000
+    visitor = Visitor(page=page_name, latency=latency_ms)
+    visitor.save()
+
+    log = "Latency for {0}: {1}".format(page_name, format(latency_ms, '.2f'))
+    Logger.log_trace('Info', 'check_latency', get_line_number(), log)
 
 
 # Main View Page
@@ -71,9 +110,7 @@ def check_next_kd_index(request, stock_code="2800.HK"):
     stocker.create_next_kd_index(stock_code, send_to_line)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='check_next_kd_index', latency=latency_ms)
-    visitor.save()
+    check_latency('check_next_kd_index', start_time)
 
     return render(request, "index.html")
 
@@ -92,9 +129,7 @@ def get_stock_price_history(request, stock_code="2800.HK", year=10):
     json = stocker.create_stock_price_history(stock_code, year)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='stock_price_history', latency=latency_ms)
-    visitor.save()
+    check_latency('stock_price_history', start_time)
 
     return HttpResponse(json)
 
@@ -104,36 +139,18 @@ def get_kd_index(request, stock_code="2800.HK"):
     start_time = time.time()
 
     # main function
-    kd_index_json_map = {}
-    create_session_data = False
-    if 'kd_index_json' in request.session:
-        Logger.log_trace('Info', 'get_kd_index', get_line_number(),
-                         'Found kd_index_json session file in Request')
-        kd_index_json_map = request.session['kd_index_json']
-
-        if stock_code in kd_index_json_map:
-            json = kd_index_json_map[stock_code]
-        else:
-            create_session_data = True
-
-    else:
-        create_session_data = True
+    create_session_data, json = get_from_cookie(request, 'kd_index_json', stock_code)
 
     if create_session_data:
         Logger.log_trace('Info', 'get_kd_index', get_line_number(),
                          'Create kd_index_json session file to Request')
         json = stocker.create_kd_index(stock_code)
-        kd_index_json_map[stock_code] = json
-        request.session['kd_index_json'] = kd_index_json_map
-        request.session.set_expiry(300)
+
+        # add to cookies
+        save_to_cookie(request, 'kd_index_json', stock_code, json)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='kd_index', latency=latency_ms)
-    visitor.save()
-
-    log = "Latency: {0}".format(format(latency_ms, '.2f'))
-    Logger.log_trace('Info', 'get_kd_index', get_line_number(), log)
+    check_latency('get_kd_index', start_time)
 
     return HttpResponse(json)
 
@@ -143,36 +160,18 @@ def get_next_kd_index(request, stock_code="2800.HK"):
     start_time = time.time()
 
     # main function
-    next_kd_index_json_map = {}
-    create_session_data = False
-    if 'next_kd_index_json' in request.session:
-        Logger.log_trace('Info', 'next_kd_index_json', get_line_number(),
-                         'Found next_kd_index_json session file in Request')
-        next_kd_index_json_map = request.session['next_kd_index_json']
-
-        if stock_code in next_kd_index_json_map:
-            json = next_kd_index_json_map[stock_code]
-        else:
-            create_session_data = True
-
-    else:
-        create_session_data = True
+    create_session_data, json = get_from_cookie(request, 'next_kd_index_json', stock_code, False)
 
     if create_session_data:
-        Logger.log_trace('Info', 'next_kd_index_json', get_line_number(),
-                         'Create next_kd_index_json session file to Request')
+        Logger.log_trace('Info', 'get_next_kd_index', get_line_number(),
+                         'Found next_kd_index_json session file in Request')
         json = stocker.create_next_kd_index(stock_code)
-        next_kd_index_json_map[stock_code] = json
-        request.session['next_kd_index_json'] = next_kd_index_json_map
-        request.session.set_expiry(300)
+
+        # add to cookies
+        save_to_cookie(request, 'next_kd_index_json', stock_code, json)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='next_kd_index', latency=latency_ms)
-    visitor.save()
-
-    log = "Latency: {0}".format(format(latency_ms, '.2f'))
-    Logger.log_trace('Info', 'get_next_kd_index', get_line_number(), log)
+    check_latency('get_next_kd_index', start_time)
 
     return HttpResponse(json)
 
@@ -184,12 +183,7 @@ def get_db_data(request, stock_code="2800.hk"):
     json = stocker.get_db_data(stock_code)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='get_db_data', latency=latency_ms)
-    visitor.save()
-
-    log = "Latency: {0}".format(format(latency_ms, '.2f'))
-    Logger.log_trace('Info', 'get_db_data', get_line_number(), log)
+    check_latency('get_db_data', start_time)
 
     return HttpResponse(json)
 
@@ -201,12 +195,7 @@ def get_db_kd_data(request, stock_code="2800.hk"):
     json = stocker.get_db_kd_data(stock_code)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='get_db_kd_data', latency=latency_ms)
-    visitor.save()
-
-    log = "Latency: {0}".format(format(latency_ms, '.2f'))
-    Logger.log_trace('Info', 'get_db_kd_data', get_line_number(), log)
+    check_latency('get_db_kd_data', start_time)
 
     return HttpResponse(json)
 
@@ -218,12 +207,7 @@ def create_api_data_to_db(request, stock_code="2800.hk"):
     json = stocker.create_api_data_to_db(stock_code)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='create_db_from_api_data', latency=latency_ms)
-    visitor.save()
-
-    log = "Latency: {0}".format(format(latency_ms, '.2f'))
-    Logger.log_trace('Info', 'create_db_from_api_data', get_line_number(), log)
+    check_latency('create_db_from_api_data', start_time)
 
     return HttpResponse(json)
 
@@ -235,11 +219,6 @@ def create_kd_data_to_db(request, stock_code="2800.hk"):
     json = stocker.create_kd_data_to_db(stock_code)
 
     # calculate the latency
-    latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page='create_kd_data_to_db', latency=latency_ms)
-    visitor.save()
-
-    log = "Latency: {0}".format(format(latency_ms, '.2f'))
-    Logger.log_trace('Info', 'create_kd_data_to_db', get_line_number(), log)
+    check_latency('create_kd_data_to_db', start_time)
 
     return HttpResponse(json)

@@ -305,34 +305,36 @@ class Stocker:
     @staticmethod
     def notify_line(send, date, close_price, k_value):
         if send:
-            if k_value < 0.25 or k_value > 0.65:
-                k_value = format(k_value * 100, '.0f')
+            is_weekday = datetime.datetime.today().weekday() < 5
+            if is_weekday:
+                if k_value < 0.25 or k_value > 0.65:
+                    k_value = format(k_value * 100, '.0f')
 
-                log = "notify line - date:{0}, close_price:{1}, k_value:{2}".format(
-                        date,
-                        close_price,
-                        k_value)
-                Logger.log_trace('L2', 'notify_line', get_line_number(), log)
+                    log = "notify line - date:{0}, close_price:{1}, k_value:{2}".format(
+                            date,
+                            close_price,
+                            k_value)
+                    Logger.log_trace('L2', 'notify_line', get_line_number(), log)
 
-                IFTTT_WEBHOOKS_URL = 'https://maker.ifttt.com/trigger/{}/with/key/{}'
-                event = 'stockLine'
-                token = 'jSfmLiQN7-TxzISuY3kE6p-gusxDr3CTivpaHqNWFCG'
+                    IFTTT_WEBHOOKS_URL = 'https://maker.ifttt.com/trigger/{}/with/key/{}'
+                    event = 'stockLine'
+                    token = 'jSfmLiQN7-TxzISuY3kE6p-gusxDr3CTivpaHqNWFCG'
 
-                url_ifttt = IFTTT_WEBHOOKS_URL.format(event, token)
-                log = "IFTTT URL:{0}".format(url_ifttt);
-                Logger.log_trace('L2', 'notify_line', get_line_number(), log)
+                    url_ifttt = IFTTT_WEBHOOKS_URL.format(event, token)
+                    log = "IFTTT URL:{0}".format(url_ifttt);
+                    Logger.log_trace('L2', 'notify_line', get_line_number(), log)
 
-                # payload
-                data = {
-                    'value1': date,
-                    'value2': close_price,
-                    'value3': k_value
-                }
+                    # payload
+                    data = {
+                        'value1': date,
+                        'value2': close_price,
+                        'value3': k_value
+                    }
 
-                # send the request
-                req = requests.post(url_ifttt, data)
-                log = 'Request Text:{0}'.format(req.text)
-                Logger.log_trace('L2', 'notify_line', get_line_number(), log)
+                    # send the request
+                    req = requests.post(url_ifttt, data)
+                    log = 'Request Text:{0}'.format(req.text)
+                    Logger.log_trace('L2', 'notify_line', get_line_number(), log)
 
     def create_next_kd_index(self, stock_code, send_to_line=False):
         # get the stock data from pandas_datareader
@@ -355,9 +357,9 @@ class Stocker:
         reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
         date = reference_data['date'][-1]
         close_price = float(reference_data['close'][-1])
-        highest_price = float(reference_data['highest'][-1])
-        lowest_price = float(reference_data['lowest'][-1])
         previous_k = float(reference_data['k'][-1])
+        highest_price = float(max(reference_data['high'][-9:]))
+        lowest_price = float(min(reference_data['low'][-9:]))
 
         data = {
             'close': [],
@@ -365,6 +367,19 @@ class Stocker:
             'k': [],
             'type': []
         }
+
+        highest_price_list = reference_data['high'][-9:]
+        lowest_price_list = reference_data['low'][-9:]
+
+        log = 'highest_price_list: {}, lowest_price_list:{}'.format(
+            highest_price_list,
+            lowest_price_list)
+        Logger.log_trace('L2', 'calculate_kd_with_data', get_line_number(), log)
+
+        log = 'highest_price: {}, lowest_price:{}'.format(
+            highest_price,
+            lowest_price)
+        Logger.log_trace('L2', 'calculate_kd_with_data', get_line_number(), log)
 
         # first 1
         k = self.predict_k(close_price, highest_price, lowest_price, previous_k)
