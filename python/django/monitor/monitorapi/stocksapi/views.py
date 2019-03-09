@@ -92,9 +92,9 @@ def playground(request):
     return render(request, "playground.html")
 
 
-def checker(request, stock_code="2800.HK"):
+def checker(request, stock_code="2800.HK", year=2018):
     stock_name = stocker.get_stock_name(stock_code)
-    context = dict(stock_name=stock_name, stock_code=stock_code)
+    context = dict(stock_name=stock_name, stock_code=stock_code, year=year)
 
     return render(request, "checker.html", context)
 
@@ -176,11 +176,11 @@ def get_next_kd_index(request, stock_code="2800.HK"):
     return HttpResponse(json)
 
 
-def get_db_data(request, stock_code="2800.hk"):
+def get_db_data(request, stock_code="2800.HK", year=2018):
     start_time = time.time()
 
     # main function
-    json = stocker.get_db_data(stock_code)
+    json = stocker.get_db_data(stock_code, year)
 
     # calculate the latency
     check_latency('get_db_data', start_time)
@@ -188,11 +188,11 @@ def get_db_data(request, stock_code="2800.hk"):
     return HttpResponse(json)
 
 
-def get_db_kd_data(request, stock_code="2800.hk"):
+def get_db_kd_data(request, stock_code="2800.HK", year=2018):
     start_time = time.time()
 
     # main function
-    json = stocker.get_db_kd_data(stock_code)
+    json = stocker.get_db_kd_data(stock_code, year)
 
     # calculate the latency
     check_latency('get_db_kd_data', start_time)
@@ -200,11 +200,11 @@ def get_db_kd_data(request, stock_code="2800.hk"):
     return HttpResponse(json)
 
 
-def create_api_data_to_db(request, stock_code="2800.hk"):
+def create_api_data_to_db(request, stock_code="2800.HK", year=2018, input_type="default"):
     start_time = time.time()
 
     # main function
-    json = stocker.create_api_data_to_db(stock_code)
+    json = stocker.create_api_data_to_db(stock_code, year, input_type)
 
     # calculate the latency
     check_latency('create_db_from_api_data', start_time)
@@ -212,11 +212,11 @@ def create_api_data_to_db(request, stock_code="2800.hk"):
     return HttpResponse(json)
 
 
-def create_kd_data_to_db(request, stock_code="2800.hk"):
+def create_kd_data_to_db(request, stock_code="2800.HK", input_type="default"):
     start_time = time.time()
 
     # main function
-    json = stocker.create_kd_data_to_db(stock_code)
+    json = stocker.create_kd_data_to_db(stock_code, input_type)
 
     # calculate the latency
     check_latency('create_kd_data_to_db', start_time)

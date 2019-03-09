@@ -91,11 +91,15 @@ class Stocker:
 
         return stock_name
 
-    def get_stock_dataframe(self, stock_code, start_date=None):
+    def get_stock_dataframe(self, stock_code, start_date=None, end_date=None):
         stock_code = self.check_stock_code(stock_code)
-        end_date = datetime.date.today()
+
+        if end_date is None:
+            end_date = datetime.date.today()
+
         if start_date is None:
             start_date = end_date - datetime.timedelta(days=50)
+
         stocks_df = datareader.get_data_yahoo(stock_code, start=start_date, end=end_date)
         stocks_df.rename(str.lower, axis='columns', inplace=True)
         print(stocks_df.columns)
@@ -105,16 +109,23 @@ class Stocker:
 
         return stock_code, stocks_df
 
-    def get_stock_dataframe_from_db(self, stock_code, start_date=None):
+    def get_stock_dataframe_from_db(self, stock_code, year, all_data=False):
         stock_code = self.check_stock_code(stock_code)
         # all_entries = StockDailyInfo.objects.all()
         # for entry in all_entries:
         #     log = "{0} {1} {2} {3}".format(entry.date, entry.high, entry.low, entry.close)
         #     Logger.log_trace('L2', 'get_stock_dataframe_from_db', get_line_number(), log)
 
-        db_data = StockDailyInfo.objects.filter(
-            stock=stock_code
-        ).order_by('date')
+        if all_data:
+            db_data = StockDailyInfo.objects.filter(
+                stock=stock_code
+            ).order_by('date')
+
+        else:
+            db_data = StockDailyInfo.objects.filter(
+                stock=stock_code,
+                date__year=year,
+            ).order_by('date')
 
         temp_df = pandas.DataFrame.from_records(db_data.values())
 
@@ -131,7 +142,7 @@ class Stocker:
 
         return stock_code, temp_df
 
-    def get_kd_dataframe_from_db(self, stock_code, start_date=None):
+    def get_kd_dataframe_from_db(self, stock_code, year):
         stock_code = self.check_stock_code(stock_code)
         # all_entries = StockDailyInfo.objects.all()
         # for entry in all_entries:
@@ -139,7 +150,8 @@ class Stocker:
         #     Logger.log_trace('L2', 'get_stock_dataframe_from_db', get_line_number(), log)
 
         db_data = StockKDInfo.objects.filter(
-            stock=stock_code
+            stock=stock_code,
+            date__year=year,
         ).order_by('date')
 
         temp_df = pandas.DataFrame.from_records(db_data.values())
@@ -447,30 +459,35 @@ class Stocker:
 
         return history_df.to_json(orient='records')
 
-    def get_db_data(self, stock_code):
+    def get_db_data(self, stock_code, year):
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)
-        stock_code, stocks_df = self.get_stock_dataframe_from_db(stock_code)
+        stock_code, stocks_df = self.get_stock_dataframe_from_db(stock_code, year)
 
-        stocks_df['date'] = stocks_df['date'].map('{:%Y-%m-%d}'.format)
+        log = "year:{0} \n  stocks_df size:{1}".format(year, stocks_df.size)
+        Logger.log_trace('L2', 'get_db_data', get_line_number(), log)
 
-        # remove useless column
-        stocks_df.drop(['id'], axis=1, inplace=True)
+        if not stocks_df.empty:
+            stocks_df['date'] = stocks_df['date'].map('{:%Y-%m-%d}'.format)
+
+            # remove useless column
+            stocks_df.drop(['id'], axis=1, inplace=True)
 
         return stocks_df.to_json(orient='records')
 
-    def get_db_kd_data(self, stock_code):
+    def get_db_kd_data(self, stock_code, year):
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)
-        stock_code, stocks_df = self.get_kd_dataframe_from_db(stock_code)
+        stock_code, stocks_df = self.get_kd_dataframe_from_db(stock_code, year)
 
-        # stocks_df.reset_index(inplace=True)
-        stocks_df['date'] = stocks_df['date'].map('{:%Y-%m-%d}'.format)
+        if not stocks_df.empty:
+            # stocks_df.reset_index(inplace=True)
+            stocks_df['date'] = stocks_df['date'].map('{:%Y-%m-%d}'.format)
 
-        # remove useless column
-        stocks_df.drop(['id'], axis=1, inplace=True)
+            # remove useless column
+            stocks_df.drop(['id'], axis=1, inplace=True)
 
         return stocks_df.to_json(orient='records')
 
@@ -482,14 +499,20 @@ class Stocker:
     # - high
     # - low
     # - close
-    def create_api_data_to_db(self, stock_code):
+    def create_api_data_to_db(self, stock_code, year, input_type):
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)
-        stock_code, stocks_df = self.get_stock_dataframe(stock_code, datetime.datetime(2018, 1, 2))
+        stock_code, stocks_df = self.get_stock_dataframe(stock_code,
+                                                         datetime.datetime(year, 1, 2),
+                                                         datetime.datetime(year, 12, 31))
 
         stocks_df.reset_index(inplace=True)
-        stocks_df['date'] = stocks_df['date'].dt.strftime('%Y-%m-%d')
+
+        log = "Columns:{0} ".format(stocks_df.columns)
+        Logger.log_trace('L2', 'create_api_data_to_db', get_line_number(), log)
+
+        stocks_df['date'] = stocks_df['Date'].dt.strftime('%Y-%m-%d')
         stocks_df['high'] = stocks_df['high'].map('{:.2f}'.format)
         stocks_df['low'] = stocks_df['low'].map('{:.2f}'.format)
         stocks_df['open'] = stocks_df['open'].map('{:.2f}'.format)
@@ -497,23 +520,28 @@ class Stocker:
         stocks_df['volume'] = stocks_df['volume'].map('{:.2f}'.format)
         stocks_df['adj close'] = stocks_df['adj close'].map('{:.2}'.format)
         stocks_df['stock'] = stock_code
+        # remove useless column
+        stocks_df.drop(['Date'], axis=1, inplace=True)
 
-        write_to_db = False
+        write_to_db = (input_type == "jackie")
+
+        log = "write_to_db:{0} \n  input_type:{1}".format(write_to_db, input_type)
+        Logger.log_trace('L2', 'create_api_data_to_db', get_line_number(), log)
 
         # write the data to database
         if write_to_db:
             # create the another dataframe from stocks dataframe and save to database
-            # temp_df = pandas.DataFrame({
-            #     "date": stocks_df['date'],
-            #     "high": stocks_df['high'],
-            #     "low": stocks_df['low'],
-            #     "close": stocks_df['close'],
-            #     "stock": stock_code
-            # })
+            temp_df = pandas.DataFrame({
+                "date": stocks_df['date'],
+                "high": stocks_df['high'],
+                "low": stocks_df['low'],
+                "close": stocks_df['close'],
+                "stock": stock_code
+            })
 
             entries = []
             # for entry in stocks_df.T.to_dict().values():
-            for entry in stocks_df.to_dict('records'):
+            for entry in temp_df.to_dict('records'):
                 # print(entry)
                 entries.append(StockDailyInfo(**entry))
 
@@ -521,14 +549,14 @@ class Stocker:
 
         return stocks_df.to_json(orient='records')
 
-    def create_kd_data_to_db(self, stock_code):
+    def create_kd_data_to_db(self, stock_code, input_type):
         # get the data from db
         # calculate the KD
         # save to db
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
-        stock_code, stocks_df = self.get_stock_dataframe_from_db(stock_code)
+        stock_code, stocks_df = self.get_stock_dataframe_from_db(stock_code, "", True)
 
         # stocks_df['Date'] = stocks_df['Date'].map('{:%Y-%m-%d}'.format)
         stocks_df.set_index('date', inplace=True)
@@ -547,11 +575,17 @@ class Stocker:
 
         reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
 
-        kd_df = pandas.DataFrame(data=reference_data, index=reference_data['Date'])
+        kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
         kd_df.reset_index(inplace=True)
         kd_df["stock"] = stock_code
 
-        write_to_db = False
+        # remove useless column
+        kd_df.drop(['index'], axis=1, inplace=True)
+
+        write_to_db = (input_type == "jackie")
+
+        log = "write_to_db:{0} \n  input_type:{1}".format(write_to_db, input_type)
+        Logger.log_trace('L2', 'create_kd_data_to_db', get_line_number(), log)
 
         # write the data to database
         if write_to_db:
@@ -570,7 +604,6 @@ class Stocker:
             # })
 
             entries = []
-            # for entry in stocks_df.T.to_dict().values():
             for entry in kd_df.to_dict('records'):
                 # print(entry)
                 entries.append(StockKDInfo(**entry))

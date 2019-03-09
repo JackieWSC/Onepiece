@@ -58,7 +58,19 @@
   <p>KD Index</p>
 </div>
 
+
 <div class="container">
+  <form id="check_data" class="form-inline" action="">
+    <label for="stock" class="mr-sm-2">Stock:</label>
+    <input type="text" class="form-control mb-2 mr-sm-2" id="stock" value="2800.HK" readonly>
+
+    <label for="bottom_year" class="mr-sm-2">Year :</label>
+    <select class="custom-select orm-control mb-2 mr-sm-2" id="bottom_year">
+    </select>
+
+    <button type="submit" class="btn btn-primary mb-2">Check</button>
+  </form>
+
   <h3>Missing RAW Data</h3>
   <p>The raw data may be missing in database</p>
   <table class="table table-striped table-sm table-bordered text-center">
@@ -137,8 +149,34 @@
         }
     }
 
-    $(document).ready(function() {
-        $.getJSON("/dbdata/{{stock_code}}/" , function(result) {
+    function set_year_select_option(default_bottom_year) {
+
+        // year select
+        selectValues = {}
+
+        for (i = 2017; i<=2018; i+=1) {
+            selectValues[i] = i
+        }
+
+        $.each(selectValues, function(key, value) {
+             $('#bottom_year').append($("<option></option>")
+                        .attr("value", key)
+                        .text(value));
+        });
+
+        $('#bottom_year').val(default_bottom_year)
+    }
+
+    function show_db_data(year)
+    {
+        $('.MissingValue tr').remove()
+        $('.RawValue tr').remove()
+
+        json_link = "/dbdata/{{stock_code}}/" + year + "/"
+
+        console.log("json_link:" + json_link)
+
+        $.getJSON(json_link , function(result) {
             last_date_day = 0
             $.each(result, function(i, field) {
                 date = new Date(field.date)
@@ -164,7 +202,10 @@
             });
         });
 
-        $.getJSON("/dbkddata/{{stock_code}}/" , function(result) {
+        $('.KValue tr').remove()
+
+        json_link = "/dbkddata/{{stock_code}}/" + year
+        $.getJSON(json_link , function(result) {
             $.each(result, function(i, field) {
                 K = parseFloat(field.k)
                 K = K * 100
@@ -194,6 +235,22 @@
                 $('.KValue').append(rowString)
             });
         });
+    }
+
+    $("#check_data").submit(function(event) {
+        year = $("#bottom_year").val()
+
+        show_db_data(year)
+
+        event.preventDefault()
+    });
+
+    $(document).ready(function() {
+        year = {{year}}
+
+        set_year_select_option(year)
+
+        show_db_data(year)
     });
 
 </script>

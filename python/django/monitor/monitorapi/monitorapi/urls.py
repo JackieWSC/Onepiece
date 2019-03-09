@@ -30,11 +30,11 @@ urlpatterns = [
     path('kdindex/<stock_code>/', views.get_kd_index),
     path('nextkdindex/<stock_code>/', views.get_next_kd_index),
     path('stockhistory/<stock_code>/<int:year>/', views.get_stock_price_history),
-    path('dbdata/<stock_code>/', views.get_db_data),
-    path('dbkddata/<stock_code>/', views.get_db_kd_data),
+    path('dbdata/<stock_code>/<int:year>/', views.get_db_data),
+    path('dbkddata/<stock_code>/<int:year>/', views.get_db_kd_data),
     # MANAGEABILITY
-    path('create_api_data_to_db/<stock_code>/', views.create_api_data_to_db),
-    path('create_kd_data_to_db/<stock_code>/', views.create_kd_data_to_db),
+    path('create_api_data_to_db/<stock_code>/<int:year>/<input_type>/', views.create_api_data_to_db),
+    path('create_kd_data_to_db/<stock_code>/<input_type>/', views.create_kd_data_to_db),
     # Notification
     path('checknextkdindex', views.check_next_kd_index),
     # Utility
