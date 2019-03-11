@@ -103,8 +103,12 @@ class Stocker:
         stocks_df = datareader.get_data_yahoo(stock_code, start=start_date, end=end_date)
         stocks_df.rename(str.lower, axis='columns', inplace=True)
         print(stocks_df.columns)
+        num_of_row = len(stocks_df.index)
 
-        log = "Yahoo API Start Date:{0} ".format(start_date.strftime('%Y-%m-%d'))
+        log = "Yahoo API Start Date:{0} Stock:{1} Dataframe Size:{2} ".format(
+            start_date.strftime('%Y-%m-%d'),
+            stock_code,
+            num_of_row)
         Logger.log_trace('L2', 'get_stock_dataframe', get_line_number(), log)
 
         return stock_code, stocks_df
@@ -245,7 +249,6 @@ class Stocker:
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
         stock_code, stocks_df = self.get_stock_dataframe(stock_code)
-        display_trading_day = 20
 
         reference_data = {
             'date': [],
@@ -263,6 +266,8 @@ class Stocker:
 
         # not show all records in json only create last 20 trading day (display_trading_day)
         kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
+
+        display_trading_day = 20
         kd_df = kd_df.iloc[-display_trading_day:]
 
         return kd_df.to_json(orient='records')
@@ -348,6 +353,46 @@ class Stocker:
                     log = 'Request Text:{0}'.format(req.text)
                     Logger.log_trace('L2', 'notify_line', get_line_number(), log)
 
+    @staticmethod
+    def stock_list_notify_line(send, date, data):
+
+        text = "{}\n".format(date)
+
+        for i in range(0, len(data['Price'])):
+            k_value = format(data['K'][i] * 100, '.0f')
+            d_value = format(data['D'][i] * 100, '.0f')
+
+            text += '{} ${:>5} KD({}% {}%)\n'.format(
+                data['Stock'][i],
+                data['Price'][i],
+                k_value,
+                d_value)
+
+        log = text
+        Logger.log_trace('L2', 'stock_list_notify_line', get_line_number(), log)
+
+        if send:
+            is_weekday = datetime.datetime.today().weekday() < 5
+            if is_weekday:
+
+                IFTTT_WEBHOOKS_URL = 'https://maker.ifttt.com/trigger/{}/with/key/{}'
+                event = 'stocklistLine'
+                token = 'jSfmLiQN7-TxzISuY3kE6p-gusxDr3CTivpaHqNWFCG'
+
+                url_ifttt = IFTTT_WEBHOOKS_URL.format(event, token)
+                log = "IFTTT URL:{0}".format(url_ifttt)
+                Logger.log_trace('L2', 'stock_list_notify_line', get_line_number(), log)
+
+                # payload
+                data = {
+                    'value1': text
+                }
+
+                # send the request
+                req = requests.post(url_ifttt, data)
+                log = 'Request Text:{0}'.format(req.text)
+                Logger.log_trace('L2', 'stock_list_notify_line', get_line_number(), log)
+
     def create_next_kd_index(self, stock_code, send_to_line=False):
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
@@ -386,12 +431,12 @@ class Stocker:
         log = 'highest_price_list: {}, lowest_price_list:{}'.format(
             highest_price_list,
             lowest_price_list)
-        Logger.log_trace('L2', 'calculate_kd_with_data', get_line_number(), log)
+        Logger.log_trace('L2', 'create_next_kd_index', get_line_number(), log)
 
         log = 'highest_price: {}, lowest_price:{}'.format(
             highest_price,
             lowest_price)
-        Logger.log_trace('L2', 'calculate_kd_with_data', get_line_number(), log)
+        Logger.log_trace('L2', 'create_next_kd_index', get_line_number(), log)
 
         # first 1
         k = self.predict_k(close_price, highest_price, lowest_price, previous_k)
@@ -411,6 +456,64 @@ class Stocker:
         kd_df.sort_values('price', inplace=True)
 
         return kd_df.to_json(orient='records')
+
+    @staticmethod
+    def get_monitor_stock_list():
+        # read the list from database
+        stock_list = [
+            "2800.HK",
+            "2833.HK",
+            "3115.HK",
+            "3140.HK",
+            "3019.HK"
+        ]
+
+        return stock_list
+
+    def calculate_stock_list_kd(self, send_to_line):
+        # get the stock_list from database
+        stock_list = self.get_monitor_stock_list()
+
+        result = {
+            'Stock': [],
+            'Price': [],
+            'K': [],
+            'D': []
+        }
+
+        # get the latest record
+        for stock in stock_list:
+            stock_code, stocks_df = self.get_stock_dataframe(stock)
+
+            reference_data = {
+                'date': [],
+                'high': [],
+                'low': [],
+                'close': [],
+                'highest': [],
+                'lowest': [],
+                'rsv': [],
+                'k': [],
+                'd': []
+            }
+
+            reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
+            close_price = float(reference_data['close'][-1])
+            k_value = float(reference_data['k'][-1])
+            d_value = float(reference_data['d'][-1])
+
+            result['Stock'].append(stock_code)
+            result['Price'].append(close_price)
+            result['K'].append(k_value)
+            result['D'].append(d_value)
+
+            log = 'Check KD of stock: {}\n' \
+                  '  Price:{}, K:{}, D:{}'.format(stock, close_price, k_value, d_value)
+            Logger.log_trace('L2', 'calculate_stock_list_kd', get_line_number(), log)
+
+        # save the kd of each stock to database
+        date = reference_data['date'][-1]
+        self.stock_list_notify_line(send_to_line, date, result)
 
     def create_stock_price_history(self, stock_code, year):
         start, year = self.check_start_date(year)

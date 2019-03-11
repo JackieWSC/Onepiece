@@ -37,6 +37,7 @@ urlpatterns = [
     path('create_kd_data_to_db/<stock_code>/<input_type>/', views.create_kd_data_to_db),
     # Notification
     path('checknextkdindex', views.check_next_kd_index),
+    path('checkstocklistkdindex', views.check_stock_list_kd_index),
     # Utility
     path('playground/', views.playground),
     path('admin/', admin.site.urls),

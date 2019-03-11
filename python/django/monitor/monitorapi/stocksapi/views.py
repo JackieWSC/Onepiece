@@ -89,6 +89,12 @@ def backtesting(request, stock_code="2800.HK"):
 
 
 def playground(request):
+    start_time = time.time()
+    stocker.calculate_stock_list_kd()
+
+    # calculate the latency
+    check_latency('playground', start_time)
+
     return render(request, "playground.html")
 
 
@@ -111,6 +117,19 @@ def check_next_kd_index(request, stock_code="2800.HK"):
 
     # calculate the latency
     check_latency('check_next_kd_index', start_time)
+
+    return render(request, "index.html")
+
+
+def check_stock_list_kd_index(request):
+    start_time = time.time()
+
+    # main function
+    send_to_line = True
+    stocker.calculate_stock_list_kd(send_to_line)
+
+    # calculate the latency
+    check_latency('check_stock_list_kd_index', start_time)
 
     return render(request, "index.html")
 
