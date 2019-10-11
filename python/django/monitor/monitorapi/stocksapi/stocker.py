@@ -4,7 +4,7 @@ import pandas_datareader as datareader
 import requests
 from stocksapi.models import StockPriceStatistics, StockDailyInfo, StockKDInfo
 from stocksapi.utilities import Logger, get_line_number
-
+import decimal
 
 class Stocker:
     stock_decimal = {
@@ -64,6 +64,21 @@ class Stocker:
             price_tick = 0.005
 
         return price_tick
+
+    @staticmethod
+    def get_reference_data():
+        reference_data = {
+            'date': [],
+            'high': [],
+            'low': [],
+            'close': [],
+            'highest': [],
+            'lowest': [],
+            'rsv': [],
+            'k': [],
+            'd': []
+        }
+        return reference_data
 
     def check_price_tick(self, stock_code):
         if stock_code in self.stock_price_tick:
@@ -244,25 +259,61 @@ class Stocker:
         Logger.log_trace('L2', 'calculate_kd_with_data', get_line_number(), log)
         return data
 
+    def calculate_kd_with_db_data(self, stocks_df, today_stocks_df, data):
+        num_of_row = len(stocks_df.index)
+
+        # get the data from last row
+        highest_price_in_last_8_day = stocks_df.loc[num_of_row - 8:num_of_row - 1, 'high'].max()
+        lowest_price_in_last_8_day = stocks_df.loc[num_of_row - 8:num_of_row - 1, 'low'].max()
+        previous_k = float(stocks_df.loc[num_of_row - 1, 'k'])
+        previous_d = float(stocks_df.loc[num_of_row - 1, 'd'])
+
+        # calculate the RSV
+        date = today_stocks_df.index[0]
+        high_price = float(today_stocks_df.iloc[0]['high'])
+        low_price = float(today_stocks_df.iloc[0]['low'])
+        close_price = float(today_stocks_df.iloc[0]['close'])
+        highest_price = max(high_price, float(highest_price_in_last_8_day))
+        lowest_price = min(low_price, float(lowest_price_in_last_8_day))
+
+        today_rsv = (close_price - lowest_price) / (highest_price - lowest_price)
+
+        # calculate the KD value
+        today_k = self.calculate_today_k(previous_k, today_rsv)
+        today_d = self.calculate_today_d(previous_d, today_k)
+
+        # add to lists
+        log = "Date:{0} High:{1:0.2f} Low:{2:0.2f} Close:{3:0.2f} Highest(N):{4:0.2f} Lowest(N):{5:0.2f} " \
+              "RSV:{6:0.4f} K:{7:0.4f} D:{8:0.4f}\n".format(date.strftime('%Y-%m-%d'),
+                                                            high_price,
+                                                            low_price,
+                                                            close_price,
+                                                            highest_price,
+                                                            lowest_price,
+                                                            today_rsv,
+                                                            today_k,
+                                                            today_d)
+        Logger.log_trace('L2', 'calculate_kd_with_db_data', get_line_number(), log)
+
+        data['date'].append(date.strftime('%Y-%m-%d'))
+        data['high'].append(format(high_price, '.2f'))
+        data['low'].append(format(low_price, '.2f'))
+        data['close'].append(format(close_price, '.2f'))
+        data['highest'].append(format(highest_price, '.2f'))
+        data['lowest'].append(format(lowest_price, '.2f'))
+        data['rsv'].append(format(today_rsv, '.4f'))
+        data['k'].append(format(today_k, '.4f'))
+        data['d'].append(format(today_d, '.4f'))
+
+        return data
+
     def create_kd_index(self, stock_code):
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
         stock_code, stocks_df = self.get_stock_dataframe(stock_code)
 
-        reference_data = {
-            'date': [],
-            'high': [],
-            'low': [],
-            'close': [],
-            'highest': [],
-            'lowest': [],
-            'rsv': [],
-            'k': [],
-            'd': []
-        }
-
-        reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
+        reference_data = self.calculate_kd_with_data(stocks_df, self.get_reference_data())
 
         # not show all records in json only create last 20 trading day (display_trading_day)
         kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
@@ -271,6 +322,37 @@ class Stocker:
         kd_df = kd_df.iloc[-display_trading_day:]
 
         return kd_df.to_json(orient='records')
+
+    def calculate_kd_index_with_db_and_api_data(self, stock_code):
+        # get the stock data from pandas_datareader
+        #   e.g. stock_code = '2800.HK'
+        #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
+        year = 2019
+        stock_code, stocks_df = self.get_kd_dataframe_from_db(stock_code, year)
+
+        if not stocks_df.empty:
+            log = "Dataframe ({0}). \n {1}.".format(stock_code, stocks_df)
+            Logger.log_trace('L2', 'get_kd_index_with_db', get_line_number(), log)
+
+            last_record_date_str = stocks_df['date'].iloc[-1]
+
+            log = "Get the toady data from API:\n  " \
+                  "Last record date in database:{0}. \n  " \
+                  "Today:{1}.".format(last_record_date_str, datetime.datetime.today().date())
+            Logger.log_trace('L2', 'get_kd_index_with_db', get_line_number(), log)
+
+            # get today date from api
+            stock_code, today_stocks_df = self.get_stock_dataframe(stock_code,
+                                                                   datetime.datetime.today().date())
+
+            reference_data = self.get_reference_data()
+            kd_df = pandas.DataFrame()
+
+            if not today_stocks_df.empty:
+                reference_data = self.calculate_kd_with_db_data(stocks_df, today_stocks_df, reference_data)
+                kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
+
+            return kd_df
 
     def predict_k(self, close_price, highest_price, lowest_price, previous_k):
         if close_price < lowest_price:
@@ -399,19 +481,7 @@ class Stocker:
         #   e.g. start = datetime.datetime(2018, 8, 22)
         stock_code, stocks_df = self.get_stock_dataframe(stock_code)
 
-        reference_data = {
-            'date': [],
-            'high': [],
-            'low': [],
-            'close': [],
-            'highest': [],
-            'lowest': [],
-            'rsv': [],
-            'k': [],
-            'd': []
-        }
-
-        reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
+        reference_data = self.calculate_kd_with_data(stocks_df, self.get_reference_data())
         date = reference_data['date'][-1]
         close_price = float(reference_data['close'][-1])
         previous_k = float(reference_data['k'][-1])
@@ -462,15 +532,12 @@ class Stocker:
         # read the list from database
         stock_list = [
             "2800.HK",
-            "2833.HK",
-            "3115.HK",
-            "3140.HK",
-            "3019.HK"
+            "^HSI"
         ]
 
         return stock_list
 
-    def calculate_stock_list_kd(self, send_to_line):
+    def get_stock_list_kd(self, send_to_line):
         # get the stock_list from database
         stock_list = self.get_monitor_stock_list()
 
@@ -483,36 +550,23 @@ class Stocker:
 
         # get the latest record
         for stock in stock_list:
-            stock_code, stocks_df = self.get_stock_dataframe(stock)
-
-            reference_data = {
-                'date': [],
-                'high': [],
-                'low': [],
-                'close': [],
-                'highest': [],
-                'lowest': [],
-                'rsv': [],
-                'k': [],
-                'd': []
-            }
-
-            reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
+            reference_data = self.calculate_kd_index_with_db_and_api_data(stock)
             close_price = float(reference_data['close'][-1])
             k_value = float(reference_data['k'][-1])
             d_value = float(reference_data['d'][-1])
 
-            result['Stock'].append(stock_code)
+            result['Stock'].append(stock)
             result['Price'].append(close_price)
             result['K'].append(k_value)
             result['D'].append(d_value)
 
-            log = 'Check KD of stock: {}\n' \
+            log = 'Get KD of stock: {}\n' \
                   '  Price:{}, K:{}, D:{}'.format(stock, close_price, k_value, d_value)
             Logger.log_trace('L2', 'calculate_stock_list_kd', get_line_number(), log)
 
         # save the kd of each stock to database
         date = reference_data['date'][-1]
+
         self.stock_list_notify_line(send_to_line, date, result)
 
     def create_stock_price_history(self, stock_code, year):
@@ -595,7 +649,9 @@ class Stocker:
         return stocks_df.to_json(orient='records')
 
     # use the yahoo api data to create the raw data to database for subsequence calculation
+    # Bulk creation
     # key: date + stock
+    # table: StockDailyInfo
     # fields:
     # - date
     # - stock
@@ -631,54 +687,267 @@ class Stocker:
         log = "write_to_db:{0} \n  input_type:{1}".format(write_to_db, input_type)
         Logger.log_trace('L2', 'create_api_data_to_db', get_line_number(), log)
 
-        # write the data to database
+        # create the another dataframe from stocks dataframe and save to database
+        temp_df = pandas.DataFrame({
+            "date": stocks_df['date'],
+            "high": stocks_df['high'],
+            "low": stocks_df['low'],
+            "close": stocks_df['close'],
+            "stock": stock_code
+        })
+
+        entries = []
+        # for entry in stocks_df.T.to_dict().values():
+        for entry in temp_df.to_dict('records'):
+            #print(entry)
+            entries.append(StockDailyInfo(**entry))
+
         if write_to_db:
-            # create the another dataframe from stocks dataframe and save to database
-            temp_df = pandas.DataFrame({
-                "date": stocks_df['date'],
-                "high": stocks_df['high'],
-                "low": stocks_df['low'],
-                "close": stocks_df['close'],
-                "stock": stock_code
-            })
-
-            entries = []
-            # for entry in stocks_df.T.to_dict().values():
-            for entry in temp_df.to_dict('records'):
-                # print(entry)
-                entries.append(StockDailyInfo(**entry))
-
             StockDailyInfo.objects.bulk_create(entries)
 
         return stocks_df.to_json(orient='records')
 
-    def create_kd_data_to_db(self, stock_code, input_type):
+    # use the yahoo api data to create the last data to database for subsequence calculation
+    # only create one record
+    # key: date + stock
+    # table: StockDailyInfo
+    # fields:
+    # - date
+    # - stock
+    # - high
+    # - low
+    # - close
+    def create_last_api_data_to_db(self, write_to_db):
+
+        year = 2019
+        # get the stock_list from database
+        stock_list = self.get_monitor_stock_list()
+
+        # get the latest record
+        for stock_code in stock_list:
+
+            stock_code, db_stocks_df = self.get_stock_dataframe_from_db(stock_code, year)
+
+            if not db_stocks_df.empty:
+                log = "Dataframe ({0}). \n {1}.".format(stock_code, db_stocks_df)
+                Logger.log_trace('L2', 'create_last_api_data_to_db', get_line_number(), log)
+
+                last_db_record_date = db_stocks_df['date'].iloc[-1]
+
+                # get today date from api
+                stock_code, today_api_stocks_df = self.get_stock_dataframe(stock_code,
+                                                                           last_db_record_date)
+
+                if len(today_api_stocks_df.index) == 1:
+                    # if the api record only return 1 record, skip to handle
+                    break
+                else:
+                    last_api_record_date_str = today_api_stocks_df.index[-1].strftime('%Y-%m-%d')
+
+                    # skip the first row, as the first row api record is the last row record in database
+                    today_api_stocks_df = today_api_stocks_df.iloc[1:]
+
+                    log = "Get the toady data from API:\n  " \
+                          "Last record date in database:{0}. \n  " \
+                          "Last record date in api:{1}. \n  " \
+                          "Today:{2}.".format(last_db_record_date,
+                                              last_api_record_date_str,
+                                              datetime.datetime.today().date())
+                    Logger.log_trace('L2', 'create_last_api_data_to_db', get_line_number(), log)
+
+                    if last_db_record_date.strftime('%Y-%m-%d') != last_api_record_date_str:
+
+                        today_api_stocks_df.reset_index(inplace=True)
+
+                        log = "Columns:{0} ".format(today_api_stocks_df.columns)
+                        Logger.log_trace('L2', 'create_last_api_data_to_db', get_line_number(), log)
+
+                        today_api_stocks_df['date'] = today_api_stocks_df['Date'].dt.strftime('%Y-%m-%d')
+                        today_api_stocks_df['high'] = today_api_stocks_df['high'].map('{:.2f}'.format)
+                        today_api_stocks_df['low'] = today_api_stocks_df['low'].map('{:.2f}'.format)
+                        today_api_stocks_df['open'] = today_api_stocks_df['open'].map('{:.2f}'.format)
+                        today_api_stocks_df['close'] = today_api_stocks_df['close'].map('{:.2f}'.format)
+                        today_api_stocks_df['volume'] = today_api_stocks_df['volume'].map('{:.2f}'.format)
+                        today_api_stocks_df['adj close'] = today_api_stocks_df['adj close'].map('{:.2}'.format)
+                        today_api_stocks_df['stock'] = stock_code
+                        # remove useless column
+                        today_api_stocks_df.drop(['Date'], axis=1, inplace=True)
+
+                        # create the another dataframe from stocks dataframe and save to database
+                        temp_df = pandas.DataFrame({
+                            "date": today_api_stocks_df['date'],
+                            "high": today_api_stocks_df['high'],
+                            "low": today_api_stocks_df['low'],
+                            "close": today_api_stocks_df['close'],
+                            "stock": stock_code
+                        })
+
+                        entries = []
+                        # for entry in stocks_df.T.to_dict().values():
+                        for entry in temp_df.to_dict('records'):
+                            print(entry)
+                            entries.append(StockDailyInfo(**entry))
+
+                        if write_to_db:
+                            StockDailyInfo.objects.bulk_create(entries)
+
+    # Use the data from StockDailyInfo table to calculate the RSV, KD value and keep them in StockKDInfo tables
+    # table: StockKDInfo
+    # fields;
+    # - date
+    # - stock
+    # - high
+    # - low
+    # - close
+    # - highest
+    # - lowest
+    # - rsv
+    # - k
+    # - d
+    def create_kd_data_to_db(self, stock_code, start_date, input_type):
         # get the data from db
-        # calculate the KD
-        # save to db
-        # get the stock data from pandas_datareader
-        #   e.g. stock_code = '2800.HK'
-        #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
         stock_code, stocks_df = self.get_stock_dataframe_from_db(stock_code, "", True)
 
         # stocks_df['Date'] = stocks_df['Date'].map('{:%Y-%m-%d}'.format)
         stocks_df.set_index('date', inplace=True)
 
-        reference_data = {
-            'date': [],
-            'high': [],
-            'low': [],
-            'close': [],
-            'highest': [],
-            'lowest': [],
-            'rsv': [],
-            'k': [],
-            'd': []
-        }
-
-        reference_data = self.calculate_kd_with_data(stocks_df, reference_data)
+        reference_data = self.calculate_kd_with_data(stocks_df, self.get_reference_data())
 
         kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
+        kd_df.reset_index(inplace=True)
+        kd_df["stock"] = stock_code
+
+        # start_date = '2019-01-01'
+        kd_df = kd_df[(kd_df['date'] > start_date)]
+
+        # remove useless column
+        kd_df.drop(['index'], axis=1, inplace=True)
+
+        write_to_db = (input_type == "jackie")
+
+        log = "write_to_db:{0} \n  input_type:{1}".format(write_to_db, input_type)
+        Logger.log_trace('L2', 'create_kd_data_to_db', get_line_number(), log)
+
+        # create the another dataframe from stocks dataframe and save to database
+        # temp_df = pandas.DataFrame({
+        #     "date": kd_df['Date'],
+        #     "stock": stock_code,
+        #     "high": kd_df['High'],
+        #     "low": kd_df['Low'],
+        #     "close": kd_df['Close'],
+        #     "highest": kd_df['Highest'],
+        #     "lowest": kd_df['Lowest'],
+        #     "rsv": kd_df['RSV'],
+        #     "k": kd_df['K'],
+        #     "d": kd_df['D'],
+        # })
+
+        entries = []
+        for entry in kd_df.to_dict('records'):
+            #print(entry)
+            entries.append(StockKDInfo(**entry))
+
+        if write_to_db:
+            StockKDInfo.objects.bulk_create(entries)
+
+        return kd_df.to_json(orient='records')
+
+    # Use the data from StockKDInfo table to calculate the RSV, KD value and keep them in StockKDInfo tables
+    # table: StockKDInfo
+    # fields;
+    # - date
+    # - stock
+    # - high
+    # - low
+    # - close
+    # - highest
+    # - lowest
+    # - rsv
+    # - k
+    # - d
+    def create_last_kd_data_to_db(self, write_to_db):
+
+        year = 2019
+        # get the stock_list from database
+        stock_list = self.get_monitor_stock_list()
+
+        # get the latest record
+        for stock_code in stock_list:
+
+            stock_code, stocks_kd_db_df = self.get_kd_dataframe_from_db(stock_code, year)
+
+            if not stocks_kd_db_df.empty:
+                log = "Dataframe ({0}). \n {1}.".format(stock_code, stocks_kd_db_df)
+                Logger.log_trace('L2', 'create_last_kd_data_to_db', get_line_number(), log)
+
+                last_db_record_date = stocks_kd_db_df['date'].iloc[-1]
+
+                # get today date from api
+                stock_code, today_api_stocks_df = self.get_stock_dataframe(stock_code,
+                                                                           last_db_record_date)
+
+                if len(today_api_stocks_df.index) == 1:
+                    # if the api record only return 1 record, skip to handle
+                    break
+                else:
+                    last_api_record_date_str = today_api_stocks_df.index[-1].strftime('%Y-%m-%d')
+
+                    # skip the first row, as the first row api record is the last row record in database
+                    today_api_stocks_df = today_api_stocks_df.iloc[1:]
+
+                    if last_db_record_date != datetime.datetime.today().date():
+
+                        log = "Get the toady data from API:\n  " \
+                              "Last record date in database:{0}. \n  " \
+                              "Last record date in api:{1}. \n  " \
+                              "Today:{2}.".format(last_db_record_date,
+                                                  last_api_record_date_str,
+                                                  datetime.datetime.today().date())
+                        Logger.log_trace('L2', 'create_last_kd_data_to_db', get_line_number(), log)
+
+                        reference_data = self.get_reference_data()
+                        reference_data = self.calculate_kd_with_db_data(stocks_kd_db_df,
+                                                                        today_api_stocks_df,
+                                                                        reference_data)
+                        kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
+                        kd_df.reset_index(inplace=True)
+                        kd_df["stock"] = stock_code
+
+                        # remove useless column
+                        kd_df.drop(['index'], axis=1, inplace=True)
+
+                        entries = []
+                        for entry in kd_df.to_dict('records'):
+                            print(entry)
+                            entries.append(StockKDInfo(**entry))
+
+                        if write_to_db:
+                            StockKDInfo.objects.bulk_create(entries)
+
+    # Use the data from yahoo API to calculate the RSV, KD value and keep them in StockKDInfo tables
+    # table: StockKDInfo
+    # fields;
+    # - date
+    # - stock
+    # - high
+    # - low
+    # - close
+    # - highest
+    # - lowest
+    # - rsv
+    # - k
+    # - d
+    def create_kd_data_to_db_with_api_data(self, stock_code, input_type):
+        # get the data from api
+
+        start = datetime.datetime(2018, 1, 2)
+        stock_code, stocks_df = self.get_stock_dataframe(stock_code, start)
+
+        reference_data = self.calculate_kd_with_data(stocks_df, self.get_reference_data())
+
+        kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
+        display_trading_day = 20
+        kd_df = kd_df.iloc[-display_trading_day:]
         kd_df.reset_index(inplace=True)
         kd_df["stock"] = stock_code
 
@@ -692,20 +961,6 @@ class Stocker:
 
         # write the data to database
         if write_to_db:
-            # create the another dataframe from stocks dataframe and save to database
-            # temp_df = pandas.DataFrame({
-            #     "date": kd_df['Date'],
-            #     "stock": stock_code,
-            #     "high": kd_df['High'],
-            #     "low": kd_df['Low'],
-            #     "close": kd_df['Close'],
-            #     "highest": kd_df['Highest'],
-            #     "lowest": kd_df['Lowest'],
-            #     "rsv": kd_df['RSV'],
-            #     "k": kd_df['K'],
-            #     "d": kd_df['D'],
-            # })
-
             entries = []
             for entry in kd_df.to_dict('records'):
                 # print(entry)

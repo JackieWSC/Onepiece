@@ -90,7 +90,9 @@ def backtesting(request, stock_code="2800.HK"):
 
 def playground(request):
     start_time = time.time()
-    stocker.calculate_stock_list_kd()
+
+    send_to_line = False
+    stocker.get_stock_list_kd(send_to_line)
 
     # calculate the latency
     check_latency('playground', start_time)
@@ -126,13 +128,26 @@ def check_stock_list_kd_index(request):
 
     # main function
     send_to_line = True
-    stocker.calculate_stock_list_kd(send_to_line)
+    stocker.get_stock_list_kd(send_to_line)
 
     # calculate the latency
     check_latency('check_stock_list_kd_index', start_time)
 
     return render(request, "index.html")
 
+
+def daily_update_jobs(request):
+    start_time = time.time()
+
+    # main function
+    save_to_db = True
+    stocker.create_last_api_data_to_db(save_to_db)
+    stocker.create_last_kd_data_to_db(save_to_db)
+
+    # calculate the latency
+    check_latency('check_stock_list_kd_index', start_time)
+
+    return render(request, "index.html")
 
 # RESTFUL API interface
 
@@ -231,13 +246,25 @@ def create_api_data_to_db(request, stock_code="2800.HK", year=2018, input_type="
     return HttpResponse(json)
 
 
-def create_kd_data_to_db(request, stock_code="2800.HK", input_type="default"):
+def create_kd_data_to_db(request, stock_code="2800.HK", start_date="2019-01-01", input_type="default"):
     start_time = time.time()
 
     # main function
-    json = stocker.create_kd_data_to_db(stock_code, input_type)
+    json = stocker.create_kd_data_to_db(stock_code, start_date, input_type)
 
     # calculate the latency
     check_latency('create_kd_data_to_db', start_time)
+
+    return HttpResponse(json)
+
+
+def create_kd_data_to_db_with_api(request, stock_code="2800.HK", input_type="default"):
+    start_time = time.time()
+
+    # main function
+    json = stocker.create_kd_data_to_db_with_api_data(stock_code, input_type)
+
+    # calculate the latency
+    check_latency('create_kd_data_to_db_with_api_data', start_time)
 
     return HttpResponse(json)

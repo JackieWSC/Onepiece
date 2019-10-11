@@ -34,10 +34,12 @@ urlpatterns = [
     path('dbkddata/<stock_code>/<int:year>/', views.get_db_kd_data),
     # MANAGEABILITY
     path('create_api_data_to_db/<stock_code>/<int:year>/<input_type>/', views.create_api_data_to_db),
-    path('create_kd_data_to_db/<stock_code>/<input_type>/', views.create_kd_data_to_db),
+    path('create_kd_data_to_db/<stock_code>/<start_date>/<input_type>/', views.create_kd_data_to_db),
+    path('create_kd_data_to_db_with_api/<stock_code>/<input_type>/', views.create_kd_data_to_db_with_api),
     # Notification
     path('checknextkdindex', views.check_next_kd_index),
     path('checkstocklistkdindex', views.check_stock_list_kd_index),
+    path('dailyupdatejobs', views.daily_update_jobs),
     # Utility
     path('playground/', views.playground),
     path('admin/', admin.site.urls),

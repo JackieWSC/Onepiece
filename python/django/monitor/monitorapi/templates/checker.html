@@ -54,15 +54,15 @@
 </nav>
 
 <div class="jumbotron bg-dark text-center  text-white">
-  <h1>{{stock_name}} ({{stock_code}})</h1>
-  <p>KD Index</p>
+  <h1>Datebase Checker</h1>
 </div>
 
 
 <div class="container">
   <form id="check_data" class="form-inline" action="">
     <label for="stock" class="mr-sm-2">Stock:</label>
-    <input type="text" class="form-control mb-2 mr-sm-2" id="stock" value="2800.HK" readonly>
+    <select class="custom-select orm-control mb-2 mr-sm-2" id="stock">
+    </select>
 
     <label for="bottom_year" class="mr-sm-2">Year :</label>
     <select class="custom-select orm-control mb-2 mr-sm-2" id="bottom_year">
@@ -154,7 +154,7 @@
         // year select
         selectValues = {}
 
-        for (i = 2017; i<=2018; i+=1) {
+        for (i = 2017; i<=2019; i+=1) {
             selectValues[i] = i
         }
 
@@ -167,13 +167,29 @@
         $('#bottom_year').val(default_bottom_year)
     }
 
-    function show_db_data(year)
+    function set_stock_select_option(default_stock) {
+
+        // year select
+        selectValues = {}
+
+        selectValues['2800.HK'] = '2800.HK'
+        selectValues['HSI'] = 'HSI'
+
+        $.each(selectValues, function(key, value) {
+             $('#stock').append($("<option></option>")
+                        .attr("value", key)
+                        .text(value));
+        });
+
+        $('#stock').val(default_stock)
+    }
+
+    function show_db_data(year, stock_code)
     {
         $('.MissingValue tr').remove()
         $('.RawValue tr').remove()
 
-        json_link = "/dbdata/{{stock_code}}/" + year + "/"
-
+        json_link = "/dbdata/"+ stock_code + "/" + year + "/"
         console.log("json_link:" + json_link)
 
         $.getJSON(json_link , function(result) {
@@ -204,7 +220,7 @@
 
         $('.KValue tr').remove()
 
-        json_link = "/dbkddata/{{stock_code}}/" + year
+        json_link = "/dbkddata/"+ stock_code + "/" + year + "/"
         $.getJSON(json_link , function(result) {
             $.each(result, function(i, field) {
                 K = parseFloat(field.k)
@@ -239,19 +255,24 @@
 
     $("#check_data").submit(function(event) {
         year = $("#bottom_year").val()
+        stock = $("#stock").val()
 
-        show_db_data(year)
+        show_db_data(year, stock)
 
         event.preventDefault()
     });
 
     $(document).ready(function() {
         year = {{year}}
+        stock = "2800.HK"
 
         set_year_select_option(year)
+        set_stock_select_option(stock)
 
-        show_db_data(year)
+        show_db_data(year, stock)
     });
+
+
 
 </script>
 
