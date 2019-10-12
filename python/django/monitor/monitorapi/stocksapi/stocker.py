@@ -119,6 +119,7 @@ class Stocker:
         stocks_df.rename(str.lower, axis='columns', inplace=True)
         print(stocks_df.columns)
         num_of_row = len(stocks_df.index)
+        print(stocks_df)
 
         log = "Yahoo API Start Date:{0} Stock:{1} Dataframe Size:{2} ".format(
             start_date.strftime('%Y-%m-%d'),
@@ -307,17 +308,22 @@ class Stocker:
 
         return data
 
-    def create_kd_index(self, stock_code):
+    def create_kd_index_base(self, stock_code):
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
-        stock_code, stocks_df = self.get_stock_dataframe(stock_code)
+        stock_code, stocks_df = self.get_stock_dataframe(stock_code,
+                                                         start_date=datetime.datetime(2019, 1, 2))
 
         reference_data = self.calculate_kd_with_data(stocks_df, self.get_reference_data())
 
         # not show all records in json only create last 20 trading day (display_trading_day)
         kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
 
+        return kd_df
+
+    def create_kd_index(self, stock_code):
+        kd_df = self.create_kd_index_base(stock_code)
         display_trading_day = 20
         kd_df = kd_df.iloc[-display_trading_day:]
 
@@ -443,12 +449,22 @@ class Stocker:
         for i in range(0, len(data['Price'])):
             k_value = format(data['K'][i] * 100, '.0f')
             d_value = format(data['D'][i] * 100, '.0f')
+            net_value = format(data['Net'][i], '.1f')
+            status = data['Status'][i]
 
-            text += '{} ${:>5} KD({}% {}%)\n'.format(
-                data['Stock'][i],
-                data['Price'][i],
-                k_value,
-                d_value)
+            net = data['Net'][i]
+            sign = '+' if net > 0 else '-'
+
+            text += '''
+{stock} ${price} ({s}{net})
+K:{k}% D:{d}%
+Trend:{trend} \n'''.format(stock=data['Stock'][i],
+                           price=data['Price'][i],
+                           k=k_value,
+                           d=d_value,
+                           s=sign,
+                           net=net_value,
+                           trend=status)
 
         log = text
         Logger.log_trace('L2', 'stock_list_notify_line', get_line_number(), log)
@@ -531,11 +547,36 @@ class Stocker:
     def get_monitor_stock_list():
         # read the list from database
         stock_list = [
+            "^HSI",
             "2800.HK",
-            "^HSI"
+            "0700.HK"
         ]
 
         return stock_list
+
+    @staticmethod
+    def get_trend_status(k_value, d_value, previous_k_value, previous_d_value):
+        status = ''
+        # emoji link: https://unicode.org/emoji/charts/full-emoji-list.html
+        if k_value > d_value:
+            status = 'UP'
+            status += u'\U00002197'
+            if k_value > 0.8:
+                status = 'SELL'
+        elif k_value < d_value:
+            status = 'DOWN'
+            status += u'\U00002198'
+            if k_value < 0.2:
+                status = 'BUY'
+
+        if previous_k_value > previous_d_value:
+            if d_value > k_value:
+                status += '(Cross)'
+        else:
+            if k_value > d_value:
+                status += '(Cross)'
+
+        return status
 
     def get_stock_list_kd(self, send_to_line):
         # get the stock_list from database
@@ -545,23 +586,34 @@ class Stocker:
             'Stock': [],
             'Price': [],
             'K': [],
-            'D': []
+            'D': [],
+            'Net': [],
+            'Status': []
         }
 
         # get the latest record
         for stock in stock_list:
-            reference_data = self.calculate_kd_index_with_db_and_api_data(stock)
+            # reference_data = self.calculate_kd_index_with_db_and_api_data(stock)
+            reference_data = self.create_kd_index_base(stock)
+            previous_close_price = float(reference_data['close'][-2])
             close_price = float(reference_data['close'][-1])
             k_value = float(reference_data['k'][-1])
             d_value = float(reference_data['d'][-1])
+            previous_k_value = float(reference_data['k'][-2])
+            previous_d_value = float(reference_data['d'][-2])
+
+            net_price_change = close_price - previous_close_price
+            status = self.get_trend_status(k_value, d_value, previous_k_value, previous_d_value)
 
             result['Stock'].append(stock)
             result['Price'].append(close_price)
             result['K'].append(k_value)
             result['D'].append(d_value)
+            result['Net'].append(net_price_change)
+            result['Status'].append(status)
 
             log = 'Get KD of stock: {}\n' \
-                  '  Price:{}, K:{}, D:{}'.format(stock, close_price, k_value, d_value)
+                  '  Price:{}, K:{}, D:{}, Net:{}'.format(stock, close_price, k_value, d_value, net_price_change)
             Logger.log_trace('L2', 'calculate_stock_list_kd', get_line_number(), log)
 
         # save the kd of each stock to database

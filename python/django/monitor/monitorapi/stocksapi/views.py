@@ -173,7 +173,7 @@ def get_kd_index(request, stock_code="2800.HK"):
     start_time = time.time()
 
     # main function
-    create_session_data, json = get_from_cookie(request, 'kd_index_json', stock_code)
+    create_session_data, json = get_from_cookie(request, 'kd_index_json', stock_code, False)
 
     if create_session_data:
         Logger.log_trace('Info', 'get_kd_index', get_line_number(),
