@@ -1,6 +1,4 @@
 #!/usr/bin/python
-import pandas as pd
-import pandas_datareader as datareader
 from utilities import Logger, get_line_number
 
 
@@ -36,7 +34,8 @@ class KDIndex:
             df_min = stocks_df.iloc[begin:end_date].min()
 
             # calculate the RSV
-            date = stocks_df.index[i]
+            index = stocks_df.index[i]
+            date = stocks_df.iloc[i]['time_key']
             high_price = float(stocks_df.iloc[i]['high'])
             low_price = float(stocks_df.iloc[i]['low'])
             close_price = float(stocks_df.iloc[i]['close'])
@@ -51,9 +50,8 @@ class KDIndex:
             previous_k = today_k
             previous_d = today_d
 
-            # add to lists
-            log += "Date:{0} High:{1:0.2f} Low:{2:0.2f} Close:{3:0.2f} Highest(N):{4:0.2f} Lowest(N):{5:0.2f} " \
-                   "RSV:{6:0.4f} K:{7:0.4f} D:{8:0.4f}\n".format(date.strftime('%Y-%m-%d'),
+            log += "{9} - Date:{0} High:{1:0.2f} Low:{2:0.2f} Close:{3:0.2f} Highest(N):{4:0.2f} Lowest(N):{5:0.2f} " \
+                   "RSV:{6:0.4f} K:{7:0.4f} D:{8:0.4f}\n".format(date[:10],
                                                                  high_price,
                                                                  low_price,
                                                                  close_price,
@@ -61,9 +59,11 @@ class KDIndex:
                                                                  lowest_price,
                                                                  today_rsv,
                                                                  today_k,
-                                                                 today_d)
+                                                                 today_d,
+                                                                 index)
 
-            data['date'].append(date.strftime('%Y-%m-%d'))
+            # add to lists
+            data['date'].append(date[:10])
             data['high'].append(format(high_price, '.2f'))
             data['low'].append(format(low_price, '.2f'))
             data['close'].append(format(close_price, '.2f'))
@@ -73,5 +73,5 @@ class KDIndex:
             data['k'].append(format(today_k, '.4f'))
             data['d'].append(format(today_d, '.4f'))
 
-        Logger.log_trace('L2', 'calculate_kd_with_data', get_line_number(), log)
+        Logger.log_trace('L1', 'calculate_kd_with_data', get_line_number(), log)
         return data
