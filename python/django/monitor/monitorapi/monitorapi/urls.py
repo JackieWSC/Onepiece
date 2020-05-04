@@ -18,7 +18,7 @@ from django.urls import path
 from stocksapi import views
 
 urlpatterns = [
-    path('', views.stock_kd),
+    path('', views.main),
     path('kd', views.stock_kd),
     path('kd/<stock_code>/', views.stock_kd),
     path('history', views.stock_history),

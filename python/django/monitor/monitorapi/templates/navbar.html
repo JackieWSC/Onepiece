@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Monitor</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          KD<span class="sr-only">(current)</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/kd/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/kd/HSI/">HSI</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          History
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/history/2800.HK/">2800.HK</a>
+          <a class="dropdown-item" href="/history/HSI/">HSI</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/backtesting">Backtesting</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" id="search_from" action="/kd">
+      <input class="form-control mr-sm-2" id="search_text" type="search" placeholder="Search Stock" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" id="search_btn" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<script>
+    //$('#search_text').val('2800.HK')
+
+    $(document).ready(function(){
+        $("#search_btn").click(function(){
+            text = $('#search_text').val();
+            link = "/kd/" + text + "/"
+            console.log(link);
+
+            $("#search_from").attr('action', link)
+        });
+    });
+</script>
+
+</body>
+</html>

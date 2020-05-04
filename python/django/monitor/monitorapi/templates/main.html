@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{stock_code}} KD</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<div class="jumbotron bg-dark text-center text-white">
+  <h1>Monitor</h1>
+  <p>KD Index</p>
+</div>
+
+<div class="container">
+  <h3>Latest KD Value of each Stock</h3>
+  <table class="table table-dark table-hover table-striped table-sm table-bordered text-center">
+    <thead>
+      <tr>
+        <th scope="col">Stock</th>
+        <th scope="col">Close Price ($)</th>
+        <th scope="col">K Value (%)</th>
+        <th scope="col">D Value (%)</th>
+      </tr>
+    </thead>
+    <tbody class="KValue">
+  </table>
+</div>
+
+<!-- debug -->
+<!--
+<div class="container">
+  <div class="row">
+      <p class="Testing"></p>1
+  </div>
+</div>
+-->
+
+<script>
+
+    function get_stock_kd(stock_code){
+
+        //console.log(stock_code)
+        request = "/kdindex/" + stock_code + "/"
+
+        $.getJSON(request, function(result) {
+            // just show the last kd value
+            last_row = result[result.length-1]
+
+            //console.log(last_row.k)
+            //console.log(last_row.d)
+
+            K = parseFloat(last_row.k)
+            K = K * 100
+            D = parseFloat(last_row.d)
+            D = D * 100
+            price = parseFloat(last_row.close)
+
+            link = "/kd/" + stock_code + "/"
+            rowString = "<tr class=\"clickable-row\" data-href=\"" + link + "\">"
+
+            if (K>70) {
+              rowString = "<tr class=\"bg-danger clickable-row\" data-href=\"" + link + "\">"
+            } else if (K<25) {
+              rowString = "<tr class=\"bg-success clickable-row\" data-href=\"" + link + "\">"
+            }
+
+            rowString += "<td>" + stock_code + "</td>"
+            rowString += "<td>" + last_row.close + "</td>"
+            rowString += "<td>" + K.toFixed(2) + "</td>"
+            rowString += "<td>" + D.toFixed(2) + "</td>"
+            rowString += "</tr>"
+
+            $('.KValue').append(rowString)
+
+        }).done(function(){
+            console.log("Loaded:" + stock_code);
+            count();
+        });
+    }
+
+
+    function count() {
+        total_stock_count = {{stock_count}}
+        loaded_stock_cnt += 1
+        //console.log(loaded_stock_cnt)
+
+        if ( loaded_stock_cnt == total_stock_count )
+        {
+            $(".clickable-row").click(function(){
+                link = $(this).data("href")
+                console.log(link)
+                window.location = link
+            });
+        }
+    }
+
+
+    function init() {
+        {% for i in stock_list %}
+          stock = "{{i}}"
+          get_stock_kd(stock)
+        {% endfor %}
+    }
+
+
+    // counter
+    loaded_stock_cnt = 0
+
+    // main
+    $(document).ready(function($) {
+        init();
+    });
+
+
+</script>
+
+<style>
+.clickable-row{
+  cursor:pointer;
+}
+</style>
+
+</body>
+</html>

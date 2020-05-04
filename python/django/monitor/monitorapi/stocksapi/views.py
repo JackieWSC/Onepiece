@@ -106,6 +106,25 @@ def checker(request, stock_code="2800.HK", year=2018):
 
     return render(request, "checker.html", context)
 
+
+def main(request):
+    stock_list = ["^HSI",
+                  "2800.HK",
+                  "0700.HK",
+                  "2822.HK",
+                  "2834.HK",
+                  "1810.HK",
+                  "0175.HK"]
+
+    stock_count = len(stock_list)
+
+    context = {
+        'stock_list': stock_list,
+        'stock_count': stock_count
+    }
+
+    return render(request, "main.html", context)
+
 # Line Notification
 
 

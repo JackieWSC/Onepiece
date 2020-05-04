@@ -41,11 +41,27 @@ class Stocker:
 
     @staticmethod
     def get_close_price(stock_code):
+        close_price = 0
         end_date = datetime.date.today()
         start_date = datetime.date.today()
-        stocks_df = datareader.get_data_yahoo(stock_code, start=start_date, end=end_date)
-        stocks_df.rename(str.lower, axis='columns', inplace=True)
-        close_price = stocks_df['close']
+
+        log = 'Start Date  {0}, End Date {1}'.format(start_date, end_date)
+        Logger.log_trace('L2', 'get_close_price', get_line_number(), log)
+
+        log = ''
+
+        try:
+            stocks_df = datareader.get_data_yahoo(stock_code, start=start_date, end=end_date)
+        except ValueError:
+            log += 'ValueError,'
+
+        if len(stocks_df) > 0:
+            stocks_df.rename(str.lower, axis='columns', inplace=True)
+            close_price = stocks_df['close']
+
+        log += 'Close Price {0}, Dataframe {1}'.format(close_price, stocks_df)
+        Logger.log_trace('L2', 'get_close_price', get_line_number(), log)
+
         return close_price
 
     @staticmethod
@@ -312,18 +328,18 @@ class Stocker:
         # get the stock data from pandas_datareader
         #   e.g. stock_code = '2800.HK'
         #   e.g. start = datetime.datetime(2018, 8, 22)get_stock_dataframe
-        stock_code, stocks_df = self.get_stock_dataframe(stock_code,
-                                                         start_date=datetime.datetime(2019, 1, 2))
+        stock_code, stocks_df = self.get_stock_dataframe(stock_code)
 
         reference_data = self.calculate_kd_with_data(stocks_df, self.get_reference_data())
 
-        # not show all records in json only create last 20 trading day (display_trading_day)
         kd_df = pandas.DataFrame(data=reference_data, index=reference_data['date'])
 
         return kd_df
 
     def create_kd_index(self, stock_code):
         kd_df = self.create_kd_index_base(stock_code)
+
+        # not show all records in json only create last 20 trading day (display_trading_day)
         display_trading_day = 20
         kd_df = kd_df.iloc[-display_trading_day:]
 
