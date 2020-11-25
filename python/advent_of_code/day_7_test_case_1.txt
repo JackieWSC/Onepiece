@@ -1,0 +1,8 @@
+xx AND ff -> dd
+xx OR gg -> ee
+xx LSHIFT 2 -> ff
+yy RSHIFT 2 -> gg
+NOT xx -> hh
+NOT yy -> ii
+123 -> xx
+456 -> yy
