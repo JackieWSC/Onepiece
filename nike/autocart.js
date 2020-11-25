@@ -40,15 +40,50 @@ function selectQty() {
 
 function selectSize(size) {
     // click size
-    document.getElementsByClassName("size select-btn")[0].click();
+    // document.getElementsByClassName("size select-btn")[0].click();
 
     // select size
-    var temp = document.getElementsByClassName("select-box-size")[0];
+    var temp = document.getElementsByClassName("content-box2")[0];
+
+    //var temp = document.getElementById("productSize");
+    log("debug", "childElementCount:" + temp.childElementCount)
+
+
+    if (temp.childElementCount > 1) {
+        child_1 = temp.children[1]
+        log("debug","children[1]:" + child_1.childElementCount)
+
+        child_1_2 = child_1.children[1]
+        log("debug","children[1-1]:" + child_1_2.className)
+
+        child_1_2.click()
+        log("debug","children[1-1] first child:" + child_1_2.firstChild.innerHTML)
+    }
+
+    // select size
+    var temp2 = document.getElementsByClassName("content-box2")[0];
+
+    //var temp = document.getElementById("productSize");
+    log("debug", "!!!!childElementCount:" + temp2.childElementCount)
+
+
+    if (temp2.childElementCount > 1) {
+        child_1 = temp2.children[1]
+        log("debug","children[1]:" + child_1.childElementCount)
+
+        child_1_2 = child_1.children[1]
+        log("debug","children[1-1]:" + child_1_2.className)
+
+        child_1_2.click()
+        log("debug","children[1-1] first child:" + child_1_2.firstChild.innerHTML)
+    }
+
     //temp.children[1].click();
     if (temp != undefined) {
         for (var i = 0; i < temp.childElementCount; i++) {
             tempSize = temp.children[i].innerText.trim();
             log("debug","Available size:" + tempSize);
+
             if (tempSize == size || tempSize == defaultSize1 || tempSize == defaultSize2 || tempSize == defaultSize3 ) {
                 temp.children[i].click();
                 addToCart();
@@ -58,8 +93,8 @@ function selectSize(size) {
         }
 
         var newSize = size - 0.5;
-        selectSize(newSize);
-        //console(newSize);
+        //selectSize(newSize);
+        console.log("debug", "Size:" + newSize);
 
     }
     // else {
