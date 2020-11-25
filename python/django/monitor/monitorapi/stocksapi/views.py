@@ -50,10 +50,12 @@ def save_to_cookie(request, function_name, stock_code, json):
     request.session.set_expiry(300)
 
 
-def check_latency(page_name, start_time):
+def check_latency(page_name, start_time, save_to_db=False):
     latency_ms = (time.time() - start_time) * 1000
-    visitor = Visitor(page=page_name, latency=latency_ms)
-    visitor.save()
+
+    if save_to_db:
+        visitor = Visitor(page=page_name, latency=latency_ms)
+        visitor.save()
 
     log = "Latency for {0}: {1}".format(page_name, format(latency_ms, '.2f'))
     Logger.log_trace('Info', 'check_latency', get_line_number(), log)
@@ -86,6 +88,15 @@ def backtesting(request, stock_code="2800.HK"):
     context = dict(stock_name=stock_name, stock_code=stock_code, is_mobile=is_mobile)
 
     return render(request, "backtesting.html", context)
+
+
+def tools(request):
+    start_time = time.time()
+
+    # calculate the latency
+    check_latency('tools', start_time)
+
+    return render(request, "tools.html")
 
 
 def playground(request):

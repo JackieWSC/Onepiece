@@ -23,7 +23,8 @@ urlpatterns = [
     path('kd/<stock_code>/', views.stock_kd),
     path('history', views.stock_history),
     path('history/<stock_code>/', views.stock_history),
-    path('tools', views.playground),
+    path('tools', views.tools),
+    path('playground', views.playground),
     path('backtesting', views.backtesting),
     path('checker', views.checker),
     # RESTFUL API
