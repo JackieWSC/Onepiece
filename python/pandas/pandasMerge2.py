@@ -22,6 +22,10 @@ df2['Test3'] = df2.C.str.extract('(' + pat + ')',
                                  expand=False)
 print('\ndf2:\n', df2)
 
+# df2['Test3'] = df2.C.str.extract('(' + pat + ')',
+#                                  expand=True)
+# print('\ndf2:\n', df2)
+
 result = pd.merge(df1,
                   df2[['D', 'Test3']],
                   left_on='A',

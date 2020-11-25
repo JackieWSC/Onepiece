@@ -48,6 +48,27 @@ def exe_ad_rule_3(ad_report, ad_rule):
     return result
 
 
+def exe_ad_rule_4(ad_report_temp, ad_rule):
+    temp = set()
+    for x in ad_rule.Creative_Size_Delivered:
+        temp.add(x)
+
+    pat = '|'.join(r"{}".format(x) for x in temp)
+    print('pat:{}'.format(pat))
+    ad_report_temp['Creative_Size_Delivered_contains'] = \
+        ad_report_temp.Creative_Size_Delivered.str.extract('(' + pat + ')', expand=False)
+    # print(ad_report.head())
+
+    result = pd.merge(ad_report_temp,
+                      ad_rule,
+                      left_on =['LineItemType', 'Creative_Size_Delivered_contains'],
+                      right_on=['LineItemType', 'Creative_Size_Delivered'],
+                      suffixes=('', '_y')).drop(['Creative_Size_Delivered_contains', 'Creative_Size_Delivered_y', 'Description'], axis=1)
+
+    dump_sumary(ad_report_temp, ad_rule, result)
+
+    return result
+
 # main
 
 # pandas setting
@@ -62,9 +83,10 @@ ad_rule_2 = pd.read_csv("ad_rule_2.csv")
 ad_rule_3 = pd.read_csv("ad_rule_3.csv")
 
 # apply the rule
-ad_rule_1_result = exe_ad_rule_1(ad_report, ad_rule_1)
-ad_rule_2_result = exe_ad_rule_2(ad_report, ad_rule_2)
-ad_rule_3_result = exe_ad_rule_3(ad_report, ad_rule_3)
+ad_rule_1_result = exe_ad_rule_1(ad_report.copy(), ad_rule_1)
+ad_rule_2_result = exe_ad_rule_2(ad_report.copy(), ad_rule_2)
+ad_rule_3_result = exe_ad_rule_3(ad_report.copy(), ad_rule_3)
+
 
 # concat result
 result = pd.concat([ad_rule_1_result,
