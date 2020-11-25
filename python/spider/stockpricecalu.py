@@ -11,13 +11,22 @@ end_date = '2018-08-31'
 
 stock_code = '0700.HK'
 stock_code = '^HSI'
-start = datetime(2016, 1, 1)
+start = datetime(2018, 9, 1)
 end = datetime(2018, 9, 30)
 
 # User pandas_reader.data.DataReader to load the desired data. As simple as that.
 # df = data.get_data_yahoo('2800.hk', start_date, end_date)
 # the early start day is 2007-12-31
 df = data.get_data_yahoo(stock_code, start=start, end=end)
+df.reset_index(inplace=True)
+df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+# df['High'] = df['High'].map('{:.1f}'.format)
+# df['Low'] = df['Low'].map('{:.1f}'.format)
+# df['Open'] = df['Open'].map('{:.1f}'.format)
+# df['Close'] = df['Close'].map('{:.1f}'.format)
+# json_data = df.to_json(orient='records')
+# print(json_data)
+#
 
 print(len(df.columns))
 print(df.columns)
