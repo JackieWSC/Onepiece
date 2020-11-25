@@ -116,7 +116,7 @@ def get_market_data(host,
     sell_count = 0
 
     start_time = datetime.time(9, 0, 0)
-    end_time = datetime.time(16, 0, 0)
+    end_time = datetime.time(23, 0, 0)
     today = datetime.date.today().strftime('%Y-%m-%d')
 
     while True:
@@ -130,8 +130,16 @@ def get_market_data(host,
         # check the K and d with current price
         update_time = current_data.iloc[0]['update_time']
         current_price = current_data.iloc[0]['last_price']
-        last_price = float(current_price)
+
         k, d = helper.check_new_kd_with_price(kd_df, current_price)
+
+        # ETF price
+        ret_code, current_data = get_snapshot_data(host=host,
+                                                   port=port,
+                                                   stock='HK.02800')
+
+        last_price = float(current_data.iloc[0]['last_price'])
+
 
         # when buy
         sell_signal = k > sell_out_k_value
@@ -169,7 +177,7 @@ def get_market_data(host,
             trade_type = "K ({}) value reach, Buy One Unit".format(buy_in_k_value)
 
             chicang_stoke_avg_cost = ((sum_stoke * chicang_stoke_avg_cost) + (stoke * last_price)) / (
-                        sum_stoke + stoke)
+                                       sum_stoke + stoke)
 
             chicang_rate = (last_price - chicang_stoke_avg_cost) / chicang_stoke_avg_cost
 
@@ -185,14 +193,14 @@ def get_market_data(host,
 
             sleep(300)
 
-            ret_code, kline_data = get_stock_data(host=host,
-                                                  port=port,
-                                                  stock=stock,
-                                                  start_date=today,
-                                                  end_date=today)
-
-            if ret_code == ft.RET_OK:
-                kd_df = helper.append_new_data_to_datafrme(kd_df, kline_data)
+            # ret_code, kline_data = get_stock_data(host=host,
+            #                                       port=port,
+            #                                       stock=stock,
+            #                                       start_date=today,
+            #                                       end_date=today)
+            #
+            # if ret_code == ft.RET_OK:
+            #     kd_df = helper.append_new_data_to_datafrme(kd_df, kline_data)
 
             continue
 
@@ -295,7 +303,7 @@ if __name__ == "__main__":
                                         port=11111,
                                         stock=stock,
                                         start_date='2020-01-02',
-                                        end_date='2020-03-04')
+                                        end_date='2020-03-08')
     if ret_code == ft.RET_OK:
         # Main loop to check the strategies
         get_market_data('127.0.0.1',

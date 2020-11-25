@@ -11,6 +11,10 @@ class Logger:
     log_level_on = 'Info Warning'
 
     @classmethod
+    def set_log_level(cls, level):
+        cls.log_level_on = level
+
+    @classmethod
     def log_trace(cls,  log_level, function_name, line_number, log):
         for log_level_type in cls.log_level_type_list:
             if (log_level in log_level_type) and (log_level_type in cls.log_level_on):

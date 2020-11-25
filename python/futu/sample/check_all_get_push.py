@@ -146,7 +146,7 @@ def quote_test():
 
     # sub_codes = ['HK.02800', 'HK_FUTURE.999010']
     sub_codes = ['US.TSLA', 'US.GOOG']
-    code = 'US.GOOG'
+    code_list = ['US.GOOG']
 
     # print("* get_owner_plate : {}\n".format(quote_ctx.get_owner_plate(code_list)))
     # print("* get_referencestock_list : {}\n".format(quote_ctx.get_referencestock_list(
@@ -170,14 +170,14 @@ def quote_test():
         print("* query_subscription : {}\n".format(quote_ctx.query_subscription(True)))
         sleep(1)
     """
-    print("* subscribe : {}\n".format(quote_ctx.subscribe(code, subtype_list)))
+    print("* subscribe : {}\n".format(quote_ctx.subscribe(code_list, subtype_list)))
     print("* query_subscription : {}\n".format(quote_ctx.query_subscription(True)))
     sleep(60.1)
 
     # # """
-    print("* get_stock_quote : {}\n".format(quote_ctx.get_stock_quote(code)))
+    print("* get_stock_quote : {}\n".format(quote_ctx.get_stock_quote(code_list)))
     # print("* get_stock_basicinfo : {}\n".format(quote_ctx.get_stock_basicinfo(Market.HK, SecurityType.ETF)))
-    print("* get_cur_kline : {}\n".format(quote_ctx.get_cur_kline(code, 10, SubType.K_1M, AuType.QFQ)))
+    print("* get_cur_kline : {}\n".format(quote_ctx.get_cur_kline(code_list, 10, SubType.K_1M, AuType.QFQ)))
     #
     # print("* get_rt_data : {}\n".format(quote_ctx.get_rt_data(code_list[0])))
     # print("* get_rt_ticker : {}\n".format(quote_ctx.get_rt_ticker(code_list[0], 10)))
@@ -255,35 +255,45 @@ def trade_hk_test():
     trd_ctx.start()
 
     # 交易请求必须先解锁 !!!
-    pwd_unlock = '979899'
+    pwd_unlock = '840613'
     print("* unlock_trade : {}\n".format(trd_ctx.unlock_trade(pwd_unlock)))
 
     # """
     print("* accinfo_query : {}\n".format(trd_ctx.accinfo_query()))
+    print("* get_acc_list : {}\n".format(trd_ctx.get_acc_list()))
+
     print("* position_list_query : {}\n".format(trd_ctx.position_list_query(pl_ratio_min=-50, pl_ratio_max=50)))
     print("* order_list_query : {}\n".format(trd_ctx.order_list_query(status_filter_list=[OrderStatus.DISABLED])))
-    print("* get_acc_list : {}\n".format(trd_ctx.get_acc_list()))
     print("* order_list_query : {}\n".format(trd_ctx.order_list_query(status_filter_list=[OrderStatus.SUBMITTED])))
 
-    ret_code, ret_data = trd_ctx.place_order(700.0, 100, "HK.00700", TrdSide.SELL)
-    print("* place_order : {}\n".format(ret_data))
+    ret_code, ret_data = trd_ctx.place_order(26.60, 1000, "HK.02800", TrdSide.BUY,
+                                             trd_env=TrdEnv.SIMULATE)
     if ret_code == RET_OK:
-        order_id = ret_data['order_id'][0]
-        print("* modify_order : {}\n".format(trd_ctx.modify_order(ModifyOrderOp.CANCEL, order_id, 0, 0)))
+        print(ret_data)
 
-    print("* deal_list_query : {}\n".format(trd_ctx.deal_list_query(code="00700")))
-    print("* history_order_list_query : {}\n".format(trd_ctx.history_order_list_query(status_filter_list=[OrderStatus.FILLED_ALL, OrderStatus.FILLED_PART],
-                                           code="00700", start="", end="2018-2-1")))
-
-    print("* history_deal_list_query : {}\n".format(trd_ctx.history_deal_list_query(code="", start="", end="2018-6-1")))
+    # ret_code, ret_data = trd_ctx.place_order(700.0, 100, "HK.00700", TrdSide.SELL)
+    # print("* place_order : {}\n".format(ret_data))
+    # if ret_code == RET_OK:
+    #     order_id = ret_data['order_id'][0]
+    #     print("* modify_order : {}\n".format(trd_ctx.modify_order(ModifyOrderOp.CANCEL, order_id, 0, 0)))
+    #
+    # print("* deal_list_query : {}\n".format(trd_ctx.deal_list_query(code="00700")))
+    # print("* history_order_list_query : {}\n".format(trd_ctx.history_order_list_query(status_filter_list=[OrderStatus.FILLED_ALL, OrderStatus.FILLED_PART],
+    #                                        code="00700", start="", end="2018-2-1")))
+    #
+    # print("* history_deal_list_query : {}\n".format(trd_ctx.history_deal_list_query(code="", start="", end="2018-6-1")))
     # """
 
-    sleep(100000)
+    sleep(10)
     trd_ctx.close()
 
 
 if __name__ =="__main__":
     set_futu_debug_model(True)
+
+    pd.set_option('display.max_columns', 100)
+    pd.set_option('display.width', 1000)
+
     '''
     默认rsa密钥在futu.common下的conn_key.txt
     注意同步配置FutuOpenD的FTGateway.xml中的 rsa_private_key 字段
@@ -300,10 +310,10 @@ if __name__ =="__main__":
     # SysConfig.set_client_info('sample', 0)
 
     ''' 行情api测试 '''
-    quote_test()
+    # quote_test()
 
     ''' 交易api测试 '''
-    # trade_hk_test()
+    trade_hk_test()
 
     # trade_hkcc_test()
 

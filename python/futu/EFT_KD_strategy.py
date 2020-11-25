@@ -351,9 +351,19 @@ def append_kd_testing_adv(testing, start, end, step):
 
 if __name__ == "__main__":
 
+    # config item to define fetch data action
+    #   - True, fetch the data from api and dump to the json file
+    #   - False, do not fetch the data from api, load the data from json file
     fetch_data = False
+
+    # config item to run the simulator to do the back test
+    #   - True, use the json file to run the back test
+    #   - False, skip the back test
     simulator = True
-    file_name = '2800_2019_30M_data.json'
+
+    # config item to save/load the data to/from json file
+    file_name = '2800_2018_data.json'
+    # file_name = '2800_2019_data.json'
 
     # fetch the data from futu api to json file
     if fetch_data is True:
@@ -375,19 +385,21 @@ if __name__ == "__main__":
             'sell_out': []
         }
 
-        # append_kd_testing(kd_result, 0.15, 0.85)
-        # append_kd_testing(kd_result, 0.15, 0.80)
-        # append_kd_testing(kd_result, 0.15, 0.75)
-        # append_kd_testing(kd_result, 0.15, 0.70)
-        # append_kd_testing(kd_result, 0.15, 0.65)
-        #
-        # append_kd_testing(kd_result, 0.20, 0.85)
-        # append_kd_testing(kd_result, 0.20, 0.80)
-        # append_kd_testing(kd_result, 0.20, 0.75)
-        # append_kd_testing(kd_result, 0.20, 0.70)
-        # append_kd_testing(kd_result, 0.20, 0.65)
-        #
-        append_kd_testing_adv(kd_result, 10, 95, 10)
+        # define different KD Buy/Sell Indicator
+        append_kd_testing(kd_result, 0.15, 0.85)
+        append_kd_testing(kd_result, 0.15, 0.80)
+        append_kd_testing(kd_result, 0.15, 0.75)
+        append_kd_testing(kd_result, 0.15, 0.70)
+        append_kd_testing(kd_result, 0.15, 0.65)
+
+        append_kd_testing(kd_result, 0.20, 0.85)
+        append_kd_testing(kd_result, 0.20, 0.80)
+        append_kd_testing(kd_result, 0.20, 0.75)
+        append_kd_testing(kd_result, 0.20, 0.70)
+        append_kd_testing(kd_result, 0.20, 0.65)
+
+        # use the adv function to generate the different KD Buy/Sell indicator
+        # append_kd_testing_adv(kd_result, 10, 95, 10)
 
         # go to test different KD combination
         kd_dataframe = pd.DataFrame(kd_result, columns=['buy_in', 'sell_out'])
